@@ -1,0 +1,11 @@
+[versions]
+agp = "8.3.1"
+appcompat = "1.6.1"
+preference = "1.2.1"
+colorpicker = "1.1.0"
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+jaredrummler-colorpicker = { group = "com.jaredrummler", name = "colorpicker", version.ref = "colorpicker" }

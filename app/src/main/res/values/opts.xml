@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="star_count_default">1000</integer>
+    <integer name="star_count_step">100</integer>
+    <integer name="star_count_min">1</integer>
+    <integer name="star_count_max">10000</integer>
+    <integer name="min_v_default">1</integer>
+    <integer name="min_v_min">1</integer>
+    <integer name="min_v_max">200</integer>
+    <integer name="max_v_default">20</integer>
+    <integer name="max_v_min">1</integer>
+    <integer name="max_v_max">200</integer>
+    <integer name="star_size_default">20</integer>
+    <integer name="star_size_min">10</integer>
+    <integer name="star_size_max">100</integer>
+    <integer name="depth_default">20</integer>
+    <integer name="depth_min">10</integer>
+    <integer name="depth_max">40</integer>
+    <integer name="fps_default">60</integer>
+    <integer name="fps_step">10</integer>
+    <integer name="fps_min">10</integer>
+    <integer name="fps_max">120</integer>
+    <bool name="star_round_default">true</bool>
+    <bool name="star_trail_default">true</bool>
+    <bool name="follow_screen_default">true</bool>
+    <bool name="follow_restore_default">true</bool>
+</resources>

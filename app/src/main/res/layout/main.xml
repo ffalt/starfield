@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <io.github.ffalt.starfield.service.StarfieldView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:minWidth="200dp"
+            android:text="@string/app_name_long"
+            android:textSize="9pt"
+            android:textColor="@color/star_color_default"
+            />
+
+        <TextView
+            android:id="@+id/text_version_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:minWidth="200dp"
+            android:textSize="8pt"
+            android:textColor="@color/star_color_default"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:minWidth="200dp"
+            android:textSize="8pt"
+            android:text="@string/credits"
+            android:autoLink="web"
+            android:textColor="@color/star_color_default"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_states"
+            android:minWidth="200dp"
+            android:onClick="setStarfieldWallpaper"
+            android:text="@string/set_wallpaper"
+            android:theme="@style/Theme.AppCompat.DayNight" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_states"
+            android:minWidth="200dp"
+            android:onClick="openSettings"
+            android:text="@string/settings" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_states"
+            android:minWidth="200dp"
+            android:onClick="close"
+            android:text="@string/close" />
+    </LinearLayout>
+</merge>

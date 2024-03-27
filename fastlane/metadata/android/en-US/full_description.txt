@@ -1,0 +1,5 @@
+Starfield is hardware accelerated live wallpaper for background and lockscreen that displays flying into a starfield.
+
+Features:
+
+ - Adjust a lot of aspects, e.g. star count, color, speed

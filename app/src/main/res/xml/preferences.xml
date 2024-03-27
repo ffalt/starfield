@@ -1,0 +1,165 @@
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="stars_category"
+        app:title="@string/settings_group_stars">
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/star_count_default"
+            android:key="star_count"
+            android:max="@integer/star_count_max"
+            android:persistent="true"
+            android:summary="@string/settings_nr_stars_summary"
+            android:title="@string/settings_nr_stars"
+            app:iconSpaceReserved="false"
+            app:min="@integer/star_count_min"
+            app:seekBarIncrement="@integer/star_count_step"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/min_v_default"
+            android:key="min_v"
+            android:max="@integer/min_v_max"
+            android:summary="@string/settings_min_speed_summary"
+            android:title="@string/settings_min_speed"
+            app:iconSpaceReserved="false"
+            app:min="@integer/min_v_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/max_v_default"
+            android:key="max_v"
+            android:max="@integer/max_v_max"
+            android:summary="@string/settings_max_speed_summary"
+            android:title="@string/settings_max_speed"
+            app:iconSpaceReserved="false"
+            app:min="@integer/max_v_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+    </androidx.preference.PreferenceCategory>
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="star_category"
+        app:title="@string/settings_group_star">
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/star_color_default"
+            android:key="star_color"
+            android:summary="@string/settings_star_color_summary"
+            android:title="@string/settings_star_color"
+            app:iconSpaceReserved="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/star_size_default"
+            android:key="star_size"
+            android:max="@integer/star_size_max"
+            android:summary="@string/settings_star_size_summary"
+            android:title="@string/settings_star_size"
+            app:iconSpaceReserved="false"
+            app:min="@integer/star_size_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/star_round_default"
+            app:iconSpaceReserved="false"
+            app:key="star_circle"
+            app:summary="@string/settings_round_summary"
+            app:title="@string/settings_round" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="trail_category"
+        app:title="@string/settings_group_trails">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/star_trail_default"
+            app:iconSpaceReserved="false"
+            app:key="star_trail"
+            app:summary="@string/settings_trails_summary"
+            app:title="@string/settings_trails_enable" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/trail_color_start_default"
+            android:key="trail_color_start"
+            android:summary="@string/settings_trail_color_start_summary"
+            android:title="@string/settings_trail_color_start"
+            app:dependency="star_trail"
+            app:iconSpaceReserved="false" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/trail_color_end_default"
+            android:key="trail_color_end"
+            android:summary="@string/settings_trail_color_end_summary"
+            android:title="@string/settings_trail_color_end"
+            app:dependency="star_trail"
+            app:iconSpaceReserved="false" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="screen_category"
+        app:title="@string/settings_group_screen">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/follow_screen_default"
+            app:iconSpaceReserved="false"
+            app:key="follow_screen"
+            app:summary="@string/settings_follow_screen_summary"
+            app:title="@string/settings_follow_screen_enable" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/follow_restore_default"
+            app:dependency="follow_screen"
+            app:iconSpaceReserved="false"
+            app:key="follow_restore"
+            app:summary="@string/settings_follow_restore_summary"
+            app:title="@string/settings_follow_restore_enable" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="expert_category"
+        app:title="@string/settings_group_expert">
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/depth_default"
+            android:key="depth"
+            android:max="@integer/depth_max"
+            android:summary="@string/settings_max_speed_summary"
+            android:title="@string/settings_depth"
+            app:iconSpaceReserved="false"
+            app:min="@integer/depth_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/fps_default"
+            android:key="fps"
+            android:max="@integer/fps_max"
+            app:iconSpaceReserved="false"
+            app:min="@integer/fps_min"
+            app:seekBarIncrement="@integer/fps_step"
+            app:showSeekBarValue="true"
+            app:summary="@string/settings_fps_summary"
+            app:title="@string/settings_fps"
+            app:updatesContinuously="false" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory>
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="reset"
+            app:summary="@string/settings_reset_summary"
+            app:title="@string/settings_reset" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

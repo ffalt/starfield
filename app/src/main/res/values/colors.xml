@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="star_color_default">#FFFFFF</color>
+    <color name="trail_color_start_default">#FFFFFF</color>
+    <color name="trail_color_end_default">#B3B3B3</color>
+</resources>
