@@ -27,7 +27,7 @@ jobs:
           echo $ENCODED_STRING | base64 -di > app/starfield_keystore.jks
 
       - name: Build Release Notes
-        run: ./gradlew gitReleaseNotesTask
+        run: ./gradlew --no-daemon gitReleaseNotesTask
 
       - name: Build Starfield
         if: startsWith(github.ref, 'refs/tags/')

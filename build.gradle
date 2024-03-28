@@ -7,11 +7,43 @@ plugins {
     alias(libs.plugins.gitChangelog)
 }
 
+def getGitVersion = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    def commitId = stdout.toString().replace("\n", "").replace("\r", "").trim()
+    stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'tag', '--points-at', commitId
+        standardOutput = stdout
+    }
+    def tagName = stdout.toString().replace("\n", "").replace("\r", "").trim()
+    def versionName = 'git-' + commitId
+    if (tagName != null && "" != tagName) {
+        versionName = tagName
+    }
+    return versionName
+}
+
+def getPrevGitVersion = { tag ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags', '--abbrev=1', tag+'^'
+        standardOutput = stdout
+    }
+    def versionName = tag
+    def tagName = stdout.toString().replace("\n", "").replace("\r", "").trim()
+    if (tagName != null && "" != tagName) {
+        versionName = tagName
+    }
+    return versionName
+}
+
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    String revision = 'git tag'.execute().text
-    def versions = revision.split('\n')
-    def version = versions[versions.size() - 1]
-    def prev_version = versions[versions.size() - 2]
+    def version = getGitVersion()
+    def prev_version = getPrevGitVersion(version)
     fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
     fromRevision = prev_version
     toRevision = version
@@ -41,7 +73,7 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
 
 ## All Changes
 
-[Compare](https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}))
+[Compare](https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}})
 {{/tags}}
 """.replace("PREVIOUS", prev_version)
 }
