@@ -1,7 +1,12 @@
 name: test
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - 'README.md'
 
 jobs:
   test:
