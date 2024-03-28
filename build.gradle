@@ -30,7 +30,7 @@ def getGitVersion = { ->
 def getPrevGitVersion = { tag ->
     def stdout = new ByteArrayOutputStream()
     exec {
-        commandLine 'git', 'describe', '--tags', '--abbrev=1', tag+'^'
+        commandLine 'git', 'describe', '--tags', '--abbrev=0', tag + '^'
         standardOutput = stdout
     }
     def versionName = tag
@@ -43,7 +43,9 @@ def getPrevGitVersion = { tag ->
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     def version = getGitVersion()
+    println "Generating Release notes for " + version
     def prev_version = getPrevGitVersion(version)
+    println "Compare to previous " + prev_version
     fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
     fromRevision = prev_version
     toRevision = version
