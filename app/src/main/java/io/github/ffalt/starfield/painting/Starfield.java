@@ -108,14 +108,6 @@ public class Starfield {
         }
     }
 
-//    private static float mapNumberToRange(float input, float inputRangeMin, float inputRangeMax, float outputRangeMin, float outputRangeMax) {
-//        return (
-//                (input - inputRangeMin) * (outputRangeMax - outputRangeMin) /
-//                        (inputRangeMax - inputRangeMin) +
-//                        outputRangeMin
-//        );
-//    }
-
     private static float mapNumberToRange(float input, float inputRangeMax, float outputRangeMax) {
         return (input * outputRangeMax / inputRangeMax);
     }

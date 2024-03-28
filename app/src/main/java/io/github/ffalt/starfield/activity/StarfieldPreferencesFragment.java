@@ -101,8 +101,8 @@ public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
                 .setTitle(R.string.reset_settings_title)
                 .setMessage(R.string.reset_settings_confirmation)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> resetPreference())
-                .setNegativeButton(android.R.string.no, null).show();
+                .setPositiveButton(R.string.yes, (dialog, whichButton) -> resetPreference())
+                .setNegativeButton(R.string.no, null).show();
     }
 
     public void resetPreference() {

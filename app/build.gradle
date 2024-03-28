@@ -14,13 +14,13 @@ android {
         versionName = "1.0"
     }
     signingConfigs {
-        getByName("debug") {
+        debug {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
             storeFile = file("debug.keystore")
             storePassword = "android"
         }
-        create("release") {
+        release {
             keyAlias = System.getenv("SIGNING_KEY_ALIAS")
             keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
             storeFile = file("starfield_keystore.jks")
@@ -29,17 +29,16 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {
+        debug {
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
-            isMinifyEnabled = false
-            isShrinkResources = false
+            minifyEnabled = false
+            shrinkResources = false
         }
-        getByName("release") {
+        release {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = true
-            isShrinkResources = true
-            isMinifyEnabled = true
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

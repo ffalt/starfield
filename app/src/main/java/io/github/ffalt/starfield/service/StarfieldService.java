@@ -84,10 +84,8 @@ public class StarfieldService extends WallpaperService {
             if (scene.visible && scene.opts.followScreen) {
                 float diff = (screenXOffset - xOffset) * (screenDesiredWidth / 4);
                 scene.onUpdateOffset(-diff, 0);
-                screenXOffset = xOffset;
-            } else {
-                screenXOffset = xOffset;
             }
+            screenXOffset = xOffset;
         }
     }
 }
