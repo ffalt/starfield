@@ -1,4 +1,103 @@
+import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     alias(libs.plugins.androidApplication) apply false
+    id 'se.bjurr.gitchangelog.git-changelog-gradle-plugin' version '2.1.0'
+    id 'com.gladed.androidgitversion' version '0.4.14'
+}
+
+tasks.register('gitReleaseNotesTask', GitChangelogTask) {
+    String revision = 'git rev-list --tags --max-count=2'.execute().text
+    def sout = new StringBuilder(), serr = new StringBuilder()
+    def proc = "git describe --tags ${revision}".execute()
+    proc.consumeProcessOutput(sout, serr)
+    proc.waitForOrKill(1000)
+    def versions = "$sout".split('\n')
+    fromRevision = versions[1]
+    toRevision = versions[0]
+    println versions[1]
+    println versions[0]
+
+    println "out> $sout\nerr> $serr"
+
+    file = new File("${rootDir}/RELEASE_NOTES.md")
+    prependToFile = false // false will replace the file, true will prepend content
+    templateContent = """{{#tags}}# Release {{name}}
+
+  {{#ifContainsType commits type='feat'}}
+### Features
+
+    {{#commits}}
+      {{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://gitlab.com/html-validate/html-validate/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+  {{#ifContainsType commits type='fix'}}
+### Bug Fixes
+
+    {{#commits}}
+      {{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://gitlab.com/html-validate/html-validate/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+## [{{name}}](https://github.com/ffalt/starfield/compare/v{{previous}}...{{name}}))
+
+{{/tags}}
+
+"""
+}
+
+tasks.register('gitChangelogTask', GitChangelogTask) {
+    fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
+    toRevision = "HEAD"
+    templateContent = """
+# Changelog Starfield Live Wallpaper
+
+{{#tags}}
+{{#ifReleaseTag .}}
+## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
+
+  {{#ifContainsType commits type='feat'}}
+### Features
+
+    {{#commits}}
+      {{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://gitlab.com/html-validate/html-validate/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+  {{#ifContainsType commits type='fix'}}
+### Bug Fixes
+
+    {{#commits}}
+      {{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://gitlab.com/html-validate/html-validate/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+{{/ifReleaseTag}}
+{{/tags}}
+
+
+{{#issues}}
+ {{#hasLink}}
+## {{name}} [{{issue}}]({{link}}) {{title}}
+ {{/hasLink}}
+ {{^hasLink}}
+## {{name}}
+ {{/hasLink}}
+ {{#commits}}
+  {{{hash}}}
+  {{{message}}}
+ {{/commits}}
+{{/issues}}
+
+ """
 }
