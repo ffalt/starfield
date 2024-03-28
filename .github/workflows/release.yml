@@ -13,7 +13,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - Checkout with history
+      - name: Checkout With History
         uses: actions/checkout@v4
         with:
           ref: main
@@ -47,7 +47,7 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
-      - name: Rename Apk
+      - name: Rename APK
         run: |
           mv app/build/outputs/apk/release/app-release.apk starfield-${{ env.RELEASE_VERSION }}.apk
 
