@@ -73,9 +73,9 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     {{/commits}}
   {{/ifContainsType}}
 
-## All Changes
+## Full Changelog
 
-[Compare](https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}})
+https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}
 {{/tags}}
 """.replace("PREVIOUS", prev_version)
 }
@@ -84,9 +84,13 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
     fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
     toRevision = "HEAD"
     templateContent = """# Changelog Starfield Live Wallpaper
-
 {{#tags}}
+
+{{#ifEquals name "Unreleased"}}
+## Unreleased
+{{else}}
 ## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
+{{/ifEquals}}
 
   {{#ifContainsType commits type='feat'}}
 ### Features
