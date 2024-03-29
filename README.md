@@ -7,7 +7,9 @@
 </p>
 
 <h3 align="center">Starfield: Android Live Wallpaper</h3>
- 
+<br>
+<hr>
+
 ## Description
 Starfield is an Android live wallpaper that simulates a flight into a starfield.
 
