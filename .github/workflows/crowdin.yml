@@ -12,7 +12,8 @@ jobs:
   crowdin:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Crowdin
         uses: crowdin/github-action@v1
         with:
@@ -22,10 +23,11 @@ jobs:
           config: .crowdin.yml
           create_pull_request: true
           push_translations: false
-          localization_branch_name: update-translations-from-crowdin
+          localization_branch_name: updat_translations_from_crowdin
           commit_message: "Update translations"
           pull_request_title: "Update Translations"
           pull_request_body: "Updated translations"
+          pull_request_base_branch_name: "main"
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
