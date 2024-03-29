@@ -6,7 +6,7 @@
     </a>
 </p>
 
-<h3 align="center">Starfield: Android Live Wallpaper</h3>
+<h1 align="center">Starfield: Android Live Wallpaper</h1>
 <br>
 <hr>
 
