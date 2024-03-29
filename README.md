@@ -2,12 +2,12 @@
 <br/>
 <p align="center">
     <a href="https://ffalt.github.io" target="_blank">
-        <img  src="./fastlane/metadata/android/en-US/images/icon.png" alt="Starfield logo">
+        <img height="80" width="80" src="./fastlane/metadata/android/en-US/images/icon.png" alt="Starfield logo">
     </a>
 </p>
 
-# Starfield: Android Live Wallpaper
-
+<h3 align="center">Starfield: Android Live Wallpaper</h3>
+ 
 ## Description
 Starfield is an Android live wallpaper that simulates a flight into a starfield.
 
