@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Starfield</string>
-    <string name="app_version">v %1$s</string>
     <string name="app_name_long">Starfield Live-Hintergrund</string>
-    <string name="credits">https://github.com/ffalt/starfield</string>
     <string name="description">Ein Sternenhimmelfeld, das den Nachthimmel überdeckt.</string>
     <string name="close">Schließen</string>
     <string name="yes">Ja</string>
