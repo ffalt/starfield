@@ -20,9 +20,8 @@ jobs:
           upload_sources: true
           upload_translations: false
           download_translations: true
-          config: .crowdin.yml
+          config: crowdin.yml
           create_pull_request: true
-          push_translations: false
           localization_branch_name: updat_translations_from_crowdin
           commit_message: "Update translations"
           pull_request_title: "Update Translations"
