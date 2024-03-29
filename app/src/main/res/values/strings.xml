@@ -1,8 +1,5 @@
 <resources>
-    <string name="app_name">Starfield</string>
-    <string name="app_version">v %1$s</string>
     <string name="app_name_long">Starfield Live Wallpaper</string>
-    <string name="credits">https://github.com/ffalt/starfield</string>
     <string name="description">A starsie field, covering the night sky.</string>
     <string name="close">Close</string>
     <string name="yes">Yes</string>
