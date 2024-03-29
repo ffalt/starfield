@@ -1,3 +1,10 @@
+
+<br/>
+<p align="center">
+    <a href="https://ffalt.github.io" target="_blank">
+        <img  src="fastlane/metadata/en-US/icon.png" alt="Starfield logo">
+    </a>
+</p>
 # Starfield: Android Live Wallpaper
 
 ## Description
