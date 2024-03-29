@@ -13,7 +13,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout With History
+        uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
@@ -33,7 +34,7 @@ jobs:
         run: |
           echo $ENCODED_STRING | base64 -di > app/starfield_keystore.jks
 
-      - name: Get release version
+      - name: Get Release Version Number
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Build Release Notes
@@ -46,7 +47,7 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
-      - name: Rename Apk
+      - name: Rename APK
         run: |
           mv app/build/outputs/apk/release/app-release.apk starfield-${{ env.RELEASE_VERSION }}.apk
 
