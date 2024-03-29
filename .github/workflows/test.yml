@@ -34,7 +34,6 @@ jobs:
           echo $ENCODED_STRING | base64 -di > app/starfield_keystore.jks
 
       - name: Build Starfield
-        if: startsWith(github.ref, 'refs/tags/')
         run: ./gradlew --no-daemon build
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
