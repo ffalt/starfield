@@ -16,7 +16,7 @@ Starfield is an Android live wallpaper that simulates a flight into a starfield.
 
 ## Screenshots
 
-<img width="300" src="./fastlane/metadata/android/en-US/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">
+<img width="300" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">
 
 ## Features
 
