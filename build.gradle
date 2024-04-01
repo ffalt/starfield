@@ -24,7 +24,7 @@ release {
     snapshotSuffix = '-SNAPSHOT'
 
     versionPropertyFile = 'gradle.properties'
-    buildTasks = ["build"]
+    buildTasks = ["gitChangelogTask"]
 
     git {
         requireBranch.set('main')
