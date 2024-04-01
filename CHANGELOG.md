@@ -4,7 +4,7 @@
 
 
 
-## [v0.0.4](https://github.com/ffalt/starfield/compare/v0.0.4) (2024-04-01)
+## [v0.0.3](https://github.com/ffalt/starfield/compare/v0.0.3) (2024-04-01)
 
 
 
