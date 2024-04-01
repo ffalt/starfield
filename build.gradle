@@ -20,7 +20,7 @@ release {
     preCommitText = ''
     preTagCommitMessage = 'Release '
     tagCommitMessage = 'Tag: '
-    newVersionCommitMessage = 'Bump version to unrelease '
+    newVersionCommitMessage = 'Bump version to unreleased '
     snapshotSuffix = '-SNAPSHOT'
 
     versionPropertyFile = 'gradle.properties'
