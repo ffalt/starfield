@@ -5,7 +5,6 @@ import se.bjurr.gitchangelog.api.InclusivenessStrategy
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.gitChangelog)
-    id 'pl.allegro.tech.build.axion-release' version '1.15.1'
 }
 
 scmVersion {
