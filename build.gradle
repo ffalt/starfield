@@ -41,9 +41,8 @@ release {
 apply from: 'version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    def tag = getCurrentGitRevision()
-    println "Generating Release notes for " + tag
-    def prev_tag = getCurrentPrevGitVersion(tag)
+    println "Generating Release notes for " + project.version
+    def prev_tag = getCurrentPrevGitVersion(project.version)
     println "Compare to previous " + prev_tag
 
     toRevision = "HEAD"
