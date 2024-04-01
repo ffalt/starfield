@@ -16,7 +16,7 @@ release {
     failOnUpdateNeeded = true
     revertOnFail = true
     pushReleaseVersionBranch = "main"
-    tagTemplate = 'v${version}'
+    tagTemplate = '${version}'
     preCommitText = ''
     preTagCommitMessage = '[Gradle Release Plugin] - pre tag commit: '
     tagCommitMessage = '[Gradle Release Plugin] - creating tag: '
