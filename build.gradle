@@ -127,3 +127,9 @@ tasks.register('releaseInfo') {
             "\n"
     println(info);
 }
+
+tasks.register('preProcess') {
+    println "preProcess"
+}
+
+beforeReleaseBuild.dependsOn preProcess
