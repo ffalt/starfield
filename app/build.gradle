@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
-apply from: 'version.gradle'
+def props = new Properties()
+file("build.properties").withInputStream { props.load(it) }
 
 android {
     namespace = "io.github.ffalt.starfield"
@@ -12,8 +13,8 @@ android {
         applicationId = "io.github.ffalt.starfield"
         minSdk = 26
         targetSdk = 34
-        versionCode = getAndroidVersionCode()
-        versionName = getAndroidVersionName()
+        versionCode = props.getProperty("applicationAndroidVersionCode").toInteger()
+        versionName = props.getProperty("applicationAndroidVersionName")
     }
     signingConfigs {
         debug {

@@ -5,9 +5,40 @@ import se.bjurr.gitchangelog.api.InclusivenessStrategy
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.gitChangelog)
+    id 'net.researchgate.release' version '3.0.2'
 }
 
-apply from: 'app/version.gradle'
+release {
+    failOnCommitNeeded = true
+    failOnPublishNeeded = true
+    failOnSnapshotDependencies = true
+    failOnUnversionedFiles = true
+    failOnUpdateNeeded = true
+    revertOnFail = true
+    pushReleaseVersionBranch = "main"
+    tagTemplate = 'v${version}'
+    preCommitText = ''
+    preTagCommitMessage = '[Gradle Release Plugin] - pre tag commit: '
+    tagCommitMessage = '[Gradle Release Plugin] - creating tag: '
+    newVersionCommitMessage = '[Gradle Release Plugin] - new version commit: '
+    snapshotSuffix = '-SNAPSHOT'
+
+    versionPropertyFile = 'gradle.properties'
+    versionProperties = []
+    buildTasks = []
+    ignoredSnapshotDependencies = []
+
+    git {
+        requireBranch.set('main')
+        pushToRemote.set('origin')
+        pushToBranchPrefix.set('')
+        commitVersionFileOnly.set(false)
+        signTag.set(true)
+    }
+
+}
+
+apply from: 'version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     def tag = getCurrentGitRevision()
@@ -84,16 +115,16 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
  """
 }
 
-tasks.register('gitShowVersionTask') {
+tasks.register('releaseInfo') {
     def info = "\nVERSION INFO:\n\tFull version name: " + getFullVersionName() +
-           "\n\tAndroid version name: " + getAndroidVersionName() +
+            "\n\tAndroid version name: " + getAndroidVersionName() +
             "\n\tAndroid version code: " + getAndroidVersionCode() +
             "\n\tAndroid Git branch: " + getGitBranch() +
             "\n\tAndroid Git describe: " + getAndroidGitDescribe() +
             "\n\tGit SHA: " + getGitSha() +
             "\n\tBuild Time: " + getBuildTime() +
-            "\n\tLatest Git Tag: " + getGitVersion() +
-            "\n\tPrevious Git Tag: " + getPrevGitVersion() +
+            "\n\tLatest Git Tag: " + getCurrentGitRevision() +
+            "\n\tPrevious Git Tag: " + getCurrentPrevGitVersion(getCurrentGitRevision()) +
             "\n"
     println(info);
 }
