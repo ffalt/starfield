@@ -1,6 +1,6 @@
 # Changelog Starfield Live Wallpaper
 
-## Unreleased
+## [v0.3.0](https://github.com/ffalt/starfield/compare/v0.3.0) (2024-04-01)
 
 ### Features
 

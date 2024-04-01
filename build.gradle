@@ -11,15 +11,11 @@ apply from: 'app/version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     def tag = getCurrentGitRevision()
-    if (tag == "") {
-        toRevision = "HEAD"
-    } else {
-        toRevision = tag
-    }
-    println "Generating Release notes for " + toRevision
+    println "Generating Release notes for " + tag
     def prev_tag = getCurrentPrevGitVersion(tag)
     println "Compare to previous " + prev_tag
 
+    toRevision = "HEAD"
     fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
     fromRevision = prev_tag
     file = new File("${rootDir}/RELEASE_NOTES.md")

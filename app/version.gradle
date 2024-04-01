@@ -74,13 +74,11 @@ def getCurrentGitRevision() {
  */
 def getCurrentPrevGitVersion(tagName) {
     if (tagName == "") {
-        println(getLatestGitTagName())
-        def (tag, buildNumber, gitSha) = getAndroidGitDescribe().tokenize('-')
-        return tag
+        return getLatestGitTagName()
     }
     def revTagName = getPreviousTagByTagName(tagName)
-    if (revTagName != null && "" != revTagName) {
-        return tagName
+    if (revTagName == null) {
+        return ""
     }
     return revTagName
 }
@@ -92,6 +90,7 @@ ext {
     getFullVersionName = this.&getFullVersionName
     getGitBranch = this.&getGitBranch
     getAndroidGitDescribe = this.&getAndroidGitDescribe
+    getCurrentCommitId = this.&getCurrentCommitId
     getGitSha = this.&getGitSha
     getBuildTime = this.&getBuildTime
     getCurrentGitRevision = this.&getCurrentGitRevision
