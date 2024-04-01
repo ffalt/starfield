@@ -15,12 +15,12 @@ release {
     failOnUnversionedFiles = true
     failOnUpdateNeeded = true
     revertOnFail = true
-    pushReleaseVersionBranch = null
+    pushReleaseVersionBranch = 'main'
     tagTemplate = '${version}'
     preCommitText = ''
-    preTagCommitMessage = '[Gradle Release Plugin] - pre tag commit: '
-    tagCommitMessage = '[Gradle Release Plugin] - creating tag: '
-    newVersionCommitMessage = '[Gradle Release Plugin] - new version commit: '
+    preTagCommitMessage = 'Release '
+    tagCommitMessage = 'Tag: '
+    newVersionCommitMessage = 'Bump version to unrelease '
     snapshotSuffix = '-SNAPSHOT'
 
     versionPropertyFile = 'gradle.properties'
