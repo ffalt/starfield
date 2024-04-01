@@ -19,12 +19,14 @@ release {
     tagTemplate = '${version}'
     preCommitText = ''
     preTagCommitMessage = 'Release '
-    tagCommitMessage = 'Tag: '
+    tagCommitMessage = 'Tag '
     newVersionCommitMessage = 'Bump version to unreleased '
     snapshotSuffix = '-SNAPSHOT'
 
     versionPropertyFile = 'gradle.properties'
+    versionProperties = []
     buildTasks = ["gitChangelogTask"]
+    ignoredSnapshotDependencies = []
 
     git {
         requireBranch.set('main')
