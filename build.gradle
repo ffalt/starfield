@@ -18,7 +18,7 @@ release {
     pushReleaseVersionBranch = 'main'
     tagTemplate = '${version}'
     preCommitText = ''
-    preTagCommitMessage = 'Release '
+    preTagCommitMessage = 'Pre Tag '
     tagCommitMessage = 'Tag '
     newVersionCommitMessage = 'Bump version to unreleased '
     snapshotSuffix = '-SNAPSHOT'
@@ -30,7 +30,7 @@ release {
 
     git {
         requireBranch.set('main')
-        pushToRemote.set('origin')
+        pushToRemote.set(false) //'origin')
         pushToBranchPrefix.set('')
         commitVersionFileOnly.set(false)
         signTag.set(true)
