@@ -24,6 +24,14 @@ def getTagByCommitId(commitId) {
     return "git tag --points-at ${commitId}".execute().text.replace("\n", "").replace("\r", "").trim()
 }
 
+def gitTag(tag) {
+    return "git tag -a ${tag}".execute().text.trim()
+}
+
+def gitUntag(tag) {
+    return "git tag -d ${tag}".execute().text.trim()
+}
+
 def getPreviousTagByTagName(tagName) {
     return "git describe --tags --abbrev=0 ${tagName}^".execute().text.replace("\n", "").replace("\r", "").trim()
 }
@@ -103,5 +111,7 @@ ext {
     getCurrentGitRevision = this.&getCurrentGitRevision
     getCurrentPrevGitVersion = this.&getCurrentPrevGitVersion
     isGitDirty = this.&isGitDirty
+    gitTag = this.&gitTag
+    gitUntag = this.&gitUntag
 }
 

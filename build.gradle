@@ -1,5 +1,6 @@
 import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 import se.bjurr.gitchangelog.api.InclusivenessStrategy
+import se.bjurr.gitchangelog.api.GitChangelogApi
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -97,11 +98,48 @@ tasks.register('releaseInfo') {
     println(info);
 }
 
+def templateChangelogContent = """# Changelog Starfield Live Wallpaper
+{{#tags}}
+
+{{#ifEquals name "Unreleased"}}
+## Unreleased
+{{else}}
+## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
+{{/ifEquals}}
+
+  {{#ifContainsType commits type='feat'}}
+### Features
+
+    {{#commits}}
+      {{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+  {{#ifContainsType commits type='fix'}}
+### Bug Fixes
+
+    {{#commits}}
+      {{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+{{/tags}}
+ """
 
 tasks.register('release') {
-   if (isGitDirty()) {
-       throw new GradleException('Git repository is dirty. Commit your changes first!')
-   }
-
-
+/*    if (isGitDirty()) {
+        throw new GradleException('Git repository is dirty. Commit your changes first!')
+    }*/
+    println("Releasing ${project.version}")
+    println(gitTag(project.version))
+    def cl = new GitChangelogApi()
+    cl
+            .withFromRevision("440bdfdf94c09ef4edf1885b25852078a66d6332")
+            .withToRevision("HEAD").withTemplateContent(templateChangelogContent)
+            .withFromRepo(System.getProperty("user.dir"))
+            .toFile(new File('CHANGELOG.md'))
+    println(gitUntag(project.version))
 }
