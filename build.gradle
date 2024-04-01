@@ -10,7 +10,7 @@ plugins {
 
 release {
     failOnCommitNeeded = true
-    failOnPublishNeeded = true
+    failOnPublishNeeded = false
     failOnSnapshotDependencies = true
     failOnUnversionedFiles = true
     failOnUpdateNeeded = true
