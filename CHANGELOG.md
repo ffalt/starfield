@@ -13,7 +13,7 @@
 
  -  must fetch full repository to generate release notes ([3ee152dbaa3826b](https://github.com/ffalt/starfield/commit/3ee152dbaa3826b8d64663a0fe861ff5d320a44b))
 
-## [v0.1](https://github.com/ffalt/starfield/compare/v0.1) (2024-03-27)
+## [v0.1.0](https://github.com/ffalt/starfield/compare/v0.1.0) (2024-03-27)
 
 
  

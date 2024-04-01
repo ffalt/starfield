@@ -7,48 +7,21 @@ plugins {
     alias(libs.plugins.gitChangelog)
 }
 
-def getGitVersion = { ->
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--short', 'HEAD'
-        standardOutput = stdout
-    }
-    def commitId = stdout.toString().replace("\n", "").replace("\r", "").trim()
-    stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'tag', '--points-at', commitId
-        standardOutput = stdout
-    }
-    def tagName = stdout.toString().replace("\n", "").replace("\r", "").trim()
-    def versionName = 'git-' + commitId
-    if (tagName != null && "" != tagName) {
-        versionName = tagName
-    }
-    return versionName
-}
-
-def getPrevGitVersion = { tag ->
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'describe', '--tags', '--abbrev=0', tag + '^'
-        standardOutput = stdout
-    }
-    def versionName = tag
-    def tagName = stdout.toString().replace("\n", "").replace("\r", "").trim()
-    if (tagName != null && "" != tagName) {
-        versionName = tagName
-    }
-    return versionName
-}
+apply from: 'app/version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    def version = getGitVersion()
-    println "Generating Release notes for " + version
-    def prev_version = getPrevGitVersion(version)
-    println "Compare to previous " + prev_version
+    def tag = getCurrentGitRevision()
+    if (tag == "") {
+        toRevision = "HEAD"
+    } else {
+        toRevision = tag
+    }
+    println "Generating Release notes for " + toRevision
+    def prev_tag = getCurrentPrevGitVersion(tag)
+    println "Compare to previous " + prev_tag
+
     fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
-    fromRevision = prev_version
-    toRevision = version
+    fromRevision = prev_tag
     file = new File("${rootDir}/RELEASE_NOTES.md")
     prependToFile = false // false will replace the file, true will prepend content
     templateContent = """{{#tags}}# Release {{name}} ({{tagDate}})
@@ -58,7 +31,7 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
 
     {{#commits}}
       {{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://gitlab.com/html-validate/html-validate/commit/{{hashFull}}))
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
       {{/ifCommitType}}
     {{/commits}}
   {{/ifContainsType}}
@@ -68,7 +41,7 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
 
     {{#commits}}
       {{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://gitlab.com/html-validate/html-validate/commit/{{hashFull}}))
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
       {{/ifCommitType}}
     {{/commits}}
   {{/ifContainsType}}
@@ -77,7 +50,7 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
 
 https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}
 {{/tags}}
-""".replace("PREVIOUS", prev_version)
+""".replace("PREVIOUS", prev_tag)
 }
 
 tasks.register('gitChangelogTask', GitChangelogTask) {
@@ -113,4 +86,18 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
   {{/ifContainsType}}
 {{/tags}}
  """
+}
+
+tasks.register('gitShowVersionTask') {
+    def info = "\nVERSION INFO:\n\tFull version name: " + getFullVersionName() +
+           "\n\tAndroid version name: " + getAndroidVersionName() +
+            "\n\tAndroid version code: " + getAndroidVersionCode() +
+            "\n\tAndroid Git branch: " + getGitBranch() +
+            "\n\tAndroid Git describe: " + getAndroidGitDescribe() +
+            "\n\tGit SHA: " + getGitSha() +
+            "\n\tBuild Time: " + getBuildTime() +
+            "\n\tLatest Git Tag: " + getGitVersion() +
+            "\n\tPrevious Git Tag: " + getPrevGitVersion() +
+            "\n"
+    println(info);
 }

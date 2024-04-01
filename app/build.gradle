@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
+apply from: 'version.gradle'
+
 android {
     namespace = "io.github.ffalt.starfield"
     compileSdk = 34
@@ -10,8 +12,8 @@ android {
         applicationId = "io.github.ffalt.starfield"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = getAndroidVersionCode()
+        versionName = getAndroidVersionName()
     }
     signingConfigs {
         debug {
