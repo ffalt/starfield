@@ -1,5 +1,9 @@
 import java.text.SimpleDateFormat
 
+def getGitStatusChanged() {
+    return 'git status --porcelain'.execute().text.trim()
+}
+
 def getGitSha() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
 }
@@ -83,6 +87,9 @@ def getCurrentPrevGitVersion(tagName) {
     return revTagName
 }
 
+def isGitDirty() {
+    return getGitStatusChanged() != ""
+}
 
 ext {
     getAndroidVersionCode = this.&getAndroidVersionCode
@@ -95,5 +102,6 @@ ext {
     getBuildTime = this.&getBuildTime
     getCurrentGitRevision = this.&getCurrentGitRevision
     getCurrentPrevGitVersion = this.&getCurrentPrevGitVersion
+    isGitDirty = this.&isGitDirty
 }
 

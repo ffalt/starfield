@@ -5,17 +5,8 @@ import se.bjurr.gitchangelog.api.InclusivenessStrategy
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.gitChangelog)
-    id 'pl.allegro.tech.build.axion-release' version '1.15.1'
 }
 
-scmVersion {
-    versionCreator("versionWithBranch")
-
-    hooks {
-        pre("fileUpdate", [file: "README.md", pattern: {v,p -> /(version.) $v/}, replacement: {v, p -> "\$1 $v"}])
-        pre("commit")
-    }
-}
 apply from: 'version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
@@ -104,4 +95,13 @@ tasks.register('releaseInfo') {
             "\n\tPrevious Git Tag: " + getCurrentPrevGitVersion(getCurrentGitRevision()) +
             "\n"
     println(info);
+}
+
+
+tasks.register('release') {
+   if (isGitDirty()) {
+       throw new GradleException('Git repository is dirty. Commit your changes first!')
+   }
+
+
 }
