@@ -5,39 +5,17 @@ import se.bjurr.gitchangelog.api.InclusivenessStrategy
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.gitChangelog)
-    id 'net.researchgate.release' version '3.0.2'
+    id 'pl.allegro.tech.build.axion-release' version '1.15.1'
 }
 
-release {
-    failOnCommitNeeded = true
-    failOnPublishNeeded = false
-    failOnSnapshotDependencies = true
-    failOnUnversionedFiles = true
-    failOnUpdateNeeded = true
-    revertOnFail = true
-    pushReleaseVersionBranch = 'main'
-    tagTemplate = '${version}'
-    preCommitText = ''
-    preTagCommitMessage = 'Pre Tag '
-    tagCommitMessage = 'Tag '
-    newVersionCommitMessage = 'Bump version to unreleased '
-    snapshotSuffix = '-SNAPSHOT'
+scmVersion {
+    versionCreator("versionWithBranch")
 
-    versionPropertyFile = 'gradle.properties'
-    versionProperties = []
-    buildTasks = ["gitChangelogTask"]
-    ignoredSnapshotDependencies = []
-
-    git {
-        requireBranch.set('main')
-        pushToRemote.set(false) //'origin')
-        pushToBranchPrefix.set('')
-        commitVersionFileOnly.set(false)
-        signTag.set(true)
+    hooks {
+        pre("fileUpdate", [file: "README.md", pattern: {v,p -> /(version.) $v/}, replacement: {v, p -> "\$1 $v"}])
+        pre("commit")
     }
-
 }
-
 apply from: 'version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
@@ -127,9 +105,3 @@ tasks.register('releaseInfo') {
             "\n"
     println(info);
 }
-
-tasks.register('preProcess') {
-    println "preProcess"
-}
-
-beforeReleaseBuild.dependsOn preProcess
