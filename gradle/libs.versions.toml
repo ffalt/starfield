@@ -4,9 +4,13 @@ appcompat = "1.6.1"
 preference = "1.2.1"
 colorpicker = "1.1.0"
 gitchangelog = "2.1.0"
+grgit = "5.2.2"
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 gitChangelog = { id = "se.bjurr.gitchangelog.git-changelog-gradle-plugin", version.ref = "gitchangelog" }
+grGit = { id = "org.ajoberstar.grgit", version.ref = "grgit" }
+
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }

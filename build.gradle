@@ -6,7 +6,7 @@ import se.bjurr.gitchangelog.api.GitChangelogApi
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.gitChangelog)
-    id 'org.ajoberstar.grgit' version '5.2.2'
+    alias(libs.plugins.grGit)
 }
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
