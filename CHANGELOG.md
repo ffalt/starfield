@@ -6,6 +6,9 @@
 
  -  **build**  release task ([0bd75d19ee7e476](https://github.com/ffalt/starfield/commit/0bd75d19ee7e4768e73d0e127a8894d5bcea651d))
 
+### Bug Fixes
+
+ -  **build**  sign release commit ([b5e1cf50cff7959](https://github.com/ffalt/starfield/commit/b5e1cf50cff7959bf43b8f27652f57c7838ae8dc))
 
 ## [v0.0.2](https://github.com/ffalt/starfield/compare/v0.0.2) (2024-04-01)
 
