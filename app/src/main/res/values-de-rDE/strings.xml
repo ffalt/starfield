@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name_long">Starfield Live-Hintergrund</string>
+    <string name="app_name_long">Starfield Live Wallpaper</string>
     <string name="description">Ein Sternenhimmelfeld, das den Nachthimmel überdeckt.</string>
     <string name="close">Schließen</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="settings">Einstellungen</string>
-    <string name="set_wallpaper">Als Hintergrund setzen</string>
+    <string name="set_wallpaper">Wallpaper festlegen</string>
     <string name="settings_group_stars">Sterne</string>
     <string name="settings_group_star">Stern</string>
     <string name="settings_group_expert">Erweiterte Optionen</string>
