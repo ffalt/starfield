@@ -16,15 +16,12 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
         prev_tag = project.version
     }
     println "Compare to previous " + prev_tag
-    toRevision = "HEAD"
+    toRevision = project.version
     fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
     fromRevision = prev_tag
     file = new File("${rootDir}/RELEASE_NOTES.md")
     prependToFile = false // false will replace the file, true will prepend content
-    templateContent = """{{#tags}}# Release {{name}} ({{tagDate}})
-
-  {{#ifContainsType commits type='feat'}}
-## Features
+    templateContent = """{{#tags}}{{#ifContainsType commits type='feat'}}## Features
 
     {{#commits}}
       {{#ifCommitType . type='feat'}}
