@@ -6,15 +6,16 @@ import se.bjurr.gitchangelog.api.GitChangelogApi
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.gitChangelog)
+    id 'org.ajoberstar.grgit' version '5.2.2'
 }
-
-apply from: 'version.gradle'
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     println "Generating Release notes for " + project.version
-    def prev_tag = getCurrentPrevGitVersion(project.version)
+    def prev_tag = "git describe --tags --abbrev=0 ${project.version}^".execute().text.replace("\n", "").replace("\r", "").trim()
+    if (prev_tag == "") {
+        prev_tag = project.version
+    }
     println "Compare to previous " + prev_tag
-
     toRevision = "HEAD"
     fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
     fromRevision = prev_tag
@@ -49,55 +50,6 @@ https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}
 """.replace("PREVIOUS", prev_tag)
 }
 
-tasks.register('gitChangelogTask', GitChangelogTask) {
-    fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
-    toRevision = "HEAD"
-    templateContent = """# Changelog Starfield Live Wallpaper
-{{#tags}}
-
-{{#ifEquals name "Unreleased"}}
-## Unreleased
-{{else}}
-## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
-{{/ifEquals}}
-
-  {{#ifContainsType commits type='feat'}}
-### Features
-
-    {{#commits}}
-      {{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-
-  {{#ifContainsType commits type='fix'}}
-### Bug Fixes
-
-    {{#commits}}
-      {{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-{{/tags}}
- """
-}
-
-tasks.register('releaseInfo') {
-    def info = "\nVERSION INFO:\n\tFull version name: " + getFullVersionName() +
-            "\n\tAndroid version name: " + getAndroidVersionName() +
-            "\n\tAndroid version code: " + getAndroidVersionCode() +
-            "\n\tAndroid Git branch: " + getGitBranch() +
-            "\n\tAndroid Git describe: " + getAndroidGitDescribe() +
-            "\n\tGit SHA: " + getGitSha() +
-            "\n\tBuild Time: " + getBuildTime() +
-            "\n\tLatest Git Tag: " + getCurrentGitRevision() +
-            "\n\tPrevious Git Tag: " + getCurrentPrevGitVersion(getCurrentGitRevision()) +
-            "\n"
-    println(info);
-}
-
 def templateChangelogContent = """# Changelog Starfield Live Wallpaper
 {{#tags}}
 
@@ -129,17 +81,32 @@ def templateChangelogContent = """# Changelog Starfield Live Wallpaper
 {{/tags}}
  """
 
+tasks.register('gitChangelogTask', GitChangelogTask) {
+    fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
+    toRevision = "HEAD"
+    templateContent = templateChangelogContent
+}
+
 tasks.register('release') {
-/*    if (isGitDirty()) {
+    if (!grgit.status().clean) {
         throw new GradleException('Git repository is dirty. Commit your changes first!')
-    }*/
+    }
     println("Releasing ${project.version}")
-    println(gitTag(project.version))
-    def cl = new GitChangelogApi()
-    cl
+    // temp tag, so GitChangelogApi writes the right tag in the changelog
+    grgit.tag.add(name: project.version)
+    // write changelog
+    (new GitChangelogApi())
             .withFromRevision("440bdfdf94c09ef4edf1885b25852078a66d6332")
-            .withToRevision("HEAD").withTemplateContent(templateChangelogContent)
+            .withToRevision("HEAD")
+            .withTemplateContent(templateChangelogContent)
             .withFromRepo(System.getProperty("user.dir"))
-            .toFile(new File('CHANGELOG.md'))
-    println(gitUntag(project.version))
+            .toFile(new File("CHANGELOG.md"))
+    // remove temp tag
+    grgit.tag.remove(names: [project.version])
+    // commit changelog
+    grgit.commit(message: "Release ${project.version}", all: true, sign: false)
+    // sign commit
+    'git commit -S --amend'.execute() // sign commit
+    // add release tag
+    grgit.tag.add(name: project.version)
 }

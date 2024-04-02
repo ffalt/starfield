@@ -2,6 +2,12 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
+def calculateAndroidVersionCode() {
+    def (major, minor, patch) = project.version.replace("v", "").tokenize('.')
+    (major, minor, patch) = [major, minor, patch].collect { it.toInteger() }
+    return (major * 1000000) + (minor * 10000) + (patch * 100)
+}
+
 android {
     namespace = "io.github.ffalt.starfield"
     compileSdk = 34
@@ -10,7 +16,7 @@ android {
         applicationId = "io.github.ffalt.starfield"
         minSdk = 26
         targetSdk = 34
-        versionCode = project.versionCode.toInteger()
+        versionCode = calculateAndroidVersionCode()
         versionName = project.version
     }
     signingConfigs {
@@ -40,8 +46,8 @@ android {
             minifyEnabled = true
             shrinkResources = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
     }
