@@ -22,7 +22,7 @@ Starfield is an Android live wallpaper that simulates a flight into a starfield.
 
 ## Features
 
-Adjust a lot of aspects, e.g. star count, color, speed
+Adjust a lot of aspects, e.g. star count, color, size, speed, trails, framerate
 
 ## License
 
