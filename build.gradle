@@ -106,7 +106,7 @@ tasks.register('release') {
     // commit changelog
     grgit.commit(message: "Release ${project.version}", all: true, sign: false)
     // sign commit
-    'git commit -S --amend'.execute() // sign commit
+    'git commit --amend --no-edit --allow-empty -s'.execute() // sign commit
     // add release tag
     grgit.tag.add(name: project.version)
 }
