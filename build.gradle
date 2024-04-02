@@ -107,7 +107,7 @@ tasks.register('bumpReleaseVersion') {
 
     // commit
     grgit.add(patterns: ['gradle.properties'])
-    grgit.commit(message: "Bump version")
+    grgit.commit(message: "Bump version", sign: false)
     // sign commit
     'git commit --amend --no-edit --allow-empty -s'.execute() // sign commit
 }
