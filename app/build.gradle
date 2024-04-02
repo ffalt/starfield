@@ -5,7 +5,7 @@ plugins {
 def calculateAndroidVersionCode(versionName) {
     def (major, minor, patch, build) = versionName.replace("v", "").tokenize('.')
     (major, minor, patch, build) = [major, minor, patch, build].collect { it == null ? 0 : it.toInteger() }
-    return (major * 1000000) + (minor * 10000) + (patch * 100) + build
+    return (major * 1000 * 1000 * 1000) + (minor * 1000 * 1000) + (patch * 1000) + build
 }
 
 android {

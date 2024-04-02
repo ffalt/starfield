@@ -9,44 +9,6 @@ plugins {
     alias(libs.plugins.grGit)
 }
 
-tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    println "Generating Release notes for " + project.version
-    def prev_tag = "git describe --tags --abbrev=0 ${project.version}^".execute().text.replace("\n", "").replace("\r", "").trim()
-    if (prev_tag == "") {
-        prev_tag = project.version
-    }
-    println "Compare to previous " + prev_tag
-    toRevision = project.version
-    fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
-    fromRevision = prev_tag
-    file = new File("${rootDir}/RELEASE_NOTES.md")
-    prependToFile = false // false will replace the file, true will prepend content
-    templateContent = """{{#tags}}{{#ifContainsType commits type='feat'}}## Features
-
-    {{#commits}}
-      {{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-  {{#ifContainsType commits type='fix'}}
-
-## Bug Fixes
-
-    {{#commits}}
-      {{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-
-## Full Changelog
-
-https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}
-{{/tags}}
-""".replace("PREVIOUS", prev_tag)
-}
-
 def templateChangelogContent = """# Changelog Starfield Live Wallpaper
 {{#tags}}
 
@@ -78,16 +40,71 @@ def templateChangelogContent = """# Changelog Starfield Live Wallpaper
 {{/tags}}
  """
 
-tasks.register('gitChangelogTask', GitChangelogTask) {
-    fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
-    toRevision = "HEAD"
-    templateContent = templateChangelogContent
-}
+def templateReleaseLogContent = """{{#tags}}{{#ifContainsType commits type='feat'}}## Features
+
+    {{#commits}}
+      {{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+  {{#ifContainsType commits type='fix'}}
+
+## Bug Fixes
+
+    {{#commits}}
+      {{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+## Full Changelog
+
+https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}
+{{/tags}}
+"""
+
+def templateFdroidChangelogContent = """{{#tags}}
+    {{#commits}}
+{{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}}
+{{/ifCommitType}}{{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}}
+{{/ifCommitType}}{{/commits}}
+{{/tags}}
+"""
 
 def checkCleanGit() {
     if (!grgit.status().clean) {
         throw new GradleException('Git repository is dirty. Commit your changes first!')
     }
+}
+
+def calculateAndroidVersionCode(versionName) {
+    def (major, minor, patch, build) = versionName.replace("v", "").tokenize('.')
+    (major, minor, patch, build) = [major, minor, patch, build].collect { it == null ? 0 : it.toInteger() }
+    return (major * 1000 * 1000 * 1000) + (minor * 1000 * 1000) + (patch * 1000) + build
+}
+
+tasks.register('gitReleaseNotesTask', GitChangelogTask) {
+    def prev_tag = "git describe --tags --abbrev=0 ${project.version}^".execute().text.replace("\n", "").replace("\r", "").trim()
+    if (prev_tag == "") {
+        prev_tag = project.version
+    }
+    println "Generating Release notes for ${project.version} compared to ${prev_tag}"
+    toRevision = project.version
+    fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
+    fromRevision = prev_tag
+    file = new File("${rootDir}/RELEASE_NOTES.md")
+    prependToFile = false // false will replace the file, true will prepend content
+    templateContent = templateReleaseLogContent.replace("PREVIOUS", prev_tag)
+}
+
+tasks.register('gitChangelogTask', GitChangelogTask) {
+    fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
+    toRevision = "HEAD"
+    templateContent = templateChangelogContent
 }
 
 tasks.register('bumpReleaseVersion') {
@@ -133,4 +150,23 @@ tasks.register('release') {
     // add release tag
     grgit.tag.add(name: project.version)
     println("To publish the commit and tag: git push --atomic origin main ${project.version}")
+}
+
+tasks.register('gitFdroidChangelogTask') {
+    println("Update Fdroid changelogs ${project.version}")
+    def tags = grgit.tag.list()
+    tags.each { tag ->
+        println tag.name
+        def versionCode = calculateAndroidVersionCode(tag.name)
+        def file = new File("fastlane/metadata/android/en-US/changelogs/${versionCode}.txt")
+        if (!file.exists()) {
+            def prev_tag = "git describe --tags --abbrev=0 ${tag.name}^".execute().text.replace("\n", "").replace("\r", "").trim()
+            (new GitChangelogApi())
+                    .withFromRevision(prev_tag, InclusivenessStrategy.INCLUSIVE)
+                    .withToRevision(tag.name)
+                    .withTemplateContent(templateFdroidChangelogContent)
+                    .withFromRepo(System.getProperty("user.dir"))
+                    .toFile(file)
+        }
+    }
 }
