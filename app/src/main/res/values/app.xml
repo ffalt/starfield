@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Starfield</string>
-    <string name="app_version">v%1$s</string>
+    <string name="app_version">%1$s</string>
     <string name="credits">https://github.com/ffalt/starfield</string>
 </resources>
