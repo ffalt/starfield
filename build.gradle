@@ -106,5 +106,5 @@ tasks.register('release') {
     'git commit --amend --no-edit --allow-empty -s'.execute() // sign commit
     // add release tag
     grgit.tag.add(name: project.version)
-    println("Call > git push --tags < to publish the commit and tag")
+    println("To publish the commit and tag: git push --atomic origin main ${project.version}")
 }
