@@ -1,7 +1,10 @@
 # Changelog Starfield Live Wallpaper
 
-## Unreleased
+## [v0.0.3](https://github.com/ffalt/starfield/compare/v0.0.3) (2024-04-02)
 
+### Features
+
+ -  **build**  release task ([0bd75d19ee7e476](https://github.com/ffalt/starfield/commit/0bd75d19ee7e4768e73d0e127a8894d5bcea651d))
 
 
 ## [v0.0.2](https://github.com/ffalt/starfield/compare/v0.0.2) (2024-04-01)
