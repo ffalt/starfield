@@ -88,7 +88,6 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
 }
 
 tasks.register('release') {
-    grgit.fetch()
     if (!grgit.status().clean) {
         throw new GradleException('Git repository is dirty. Commit your changes first!')
     }
