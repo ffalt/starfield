@@ -88,6 +88,7 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
 }
 
 tasks.register('release') {
+    grgit.fetch()
     if (!grgit.status().clean) {
         throw new GradleException('Git repository is dirty. Commit your changes first!')
     }
@@ -109,4 +110,5 @@ tasks.register('release') {
     'git commit --amend --no-edit --allow-empty -s'.execute() // sign commit
     // add release tag
     grgit.tag.add(name: project.version)
+    println("Call > git push --tags < to publish the commit and tag")
 }
