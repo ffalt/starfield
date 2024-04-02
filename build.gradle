@@ -84,11 +84,37 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
     templateContent = templateChangelogContent
 }
 
-tasks.register('release') {
+def checkCleanGit() {
     if (!grgit.status().clean) {
         throw new GradleException('Git repository is dirty. Commit your changes first!')
     }
+}
+
+tasks.register('bumpReleaseVersion') {
+    checkCleanGit()
+
+    // get next version
+    def (major, minor, patch) = project.version.replace("v", "").tokenize('.')
+    (major, minor, patch) = [major, minor, patch].collect { it.toInteger() }
+    nextVersion = "v${major}.${minor}.${patch}"
+
+    println("Bumping ${project.version} => ${nextVersion}")
+
+    // update file
+    def propsFile = file("${rootDir}/gradle.properties")
+    def propsText = propsFile.text.replace(project.version, nextVersion)
+    propsFile.text = propsText
+
+    // commit
+    grgit.add(patterns: ['gradle.properties'])
+    grgit.commit(message: "Bump version")
+    // sign commit
+    'git commit --amend --no-edit --allow-empty -s'.execute() // sign commit
+}
+
+tasks.register('release') {
     println("Releasing ${project.version}")
+    checkCleanGit()
     // temp tag, so GitChangelogApi writes the right tag in the changelog
     grgit.tag.add(name: project.version)
     // write changelog
