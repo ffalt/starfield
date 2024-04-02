@@ -96,7 +96,7 @@ tasks.register('bumpReleaseVersion') {
     // get next version
     def (major, minor, patch) = project.version.replace("v", "").tokenize('.')
     (major, minor, patch) = [major, minor, patch].collect { it.toInteger() }
-    nextVersion = "v${major}.${minor}.${patch}"
+    def nextVersion = "v${major}.${minor}.${patch}"
 
     println("Bumping ${project.version} => ${nextVersion}")
 
