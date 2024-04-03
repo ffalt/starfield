@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Starfield</string>
     <string name="app_name_long">Starfield Live Wallpaper</string>
     <string name="description">Ein Sternenhimmelfeld, das den Nachthimmel überdeckt.</string>
     <string name="close">Schließen</string>
