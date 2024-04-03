@@ -8,7 +8,15 @@
 
 <h1 align="center">Starfield: Android Live Wallpaper</h1>
 <br>
+
+<p align="center">
+    <a href="https://opensource.org/license/gpl-3-0" target="_blank"><img src="https://img.shields.io/github/license/ffalt/starfield.svg" alt="License: GPL 3.0"></a>
+    <img src="https://github.com/ffalt/starfield/workflows/test/badge.svg" alt="Latest test run">
+</p>
+
 <hr>
+Want to help translate Starfield? Please use https://crowdin.com/project/starfield-wallpaper
+<br>
 
 ## Description
 
