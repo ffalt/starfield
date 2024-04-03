@@ -5,18 +5,23 @@
 ### Features
 
  -  **translations**  add Russian thanks to https://crowdin.com/profile/ronner231 ([20d601262163a3e](https://github.com/ffalt/starfield/commit/20d601262163a3e539c472f3cb61e73937bd1ee1))
- -  **build**  automatic version code ([804c2e70d88074e](https://github.com/ffalt/starfield/commit/804c2e70d88074e8bf1bbaa84d0df75bc083fadc))
- -  **build**  add build to version code ([76488d5700c6123](https://github.com/ffalt/starfield/commit/76488d5700c61238e5011045a3f32b9ff6ae4584))
- -  **build**  add bump version task ([46e464647d42882](https://github.com/ffalt/starfield/commit/46e464647d42882bae51151211837fc3504b7638))
- -  **build**  add bump version task ([ca1a9cde98a5b32](https://github.com/ffalt/starfield/commit/ca1a9cde98a5b32db71b8c3d4d5f272c1c08e447))
- -  **build**  add bump version task ([8d8818612973a84](https://github.com/ffalt/starfield/commit/8d8818612973a8410b58133be74761d9981fdcf0))
- -  **build**  add bump version task ([cdb0d5a8835d639](https://github.com/ffalt/starfield/commit/cdb0d5a8835d639ca7584562ce33585b83f9bea4))
- -  **build**  release task ([0bd75d19ee7e476](https://github.com/ffalt/starfield/commit/0bd75d19ee7e4768e73d0e127a8894d5bcea651d))
+
+## [v0.0.3](https://github.com/ffalt/starfield/compare/v0.0.3) (2024-04-02)
+
+### Features
+
+-  **build**  automatic version code ([804c2e70d88074e](https://github.com/ffalt/starfield/commit/804c2e70d88074e8bf1bbaa84d0df75bc083fadc))
+-  **build**  add build to version code ([76488d5700c6123](https://github.com/ffalt/starfield/commit/76488d5700c61238e5011045a3f32b9ff6ae4584))
+-  **build**  add bump version task ([46e464647d42882](https://github.com/ffalt/starfield/commit/46e464647d42882bae51151211837fc3504b7638))
+-  **build**  add bump version task ([ca1a9cde98a5b32](https://github.com/ffalt/starfield/commit/ca1a9cde98a5b32db71b8c3d4d5f272c1c08e447))
+-  **build**  add bump version task ([8d8818612973a84](https://github.com/ffalt/starfield/commit/8d8818612973a8410b58133be74761d9981fdcf0))
+-  **build**  add bump version task ([cdb0d5a8835d639](https://github.com/ffalt/starfield/commit/cdb0d5a8835d639ca7584562ce33585b83f9bea4))
+-  **build**  release task ([0bd75d19ee7e476](https://github.com/ffalt/starfield/commit/0bd75d19ee7e4768e73d0e127a8894d5bcea651d))
 
 ### Bug Fixes
 
- -  (main activity): version number display ([b5504062f31a244](https://github.com/ffalt/starfield/commit/b5504062f31a244aed9d556a8d877612db1b1a85))
- -  **build**  sign release commit ([b5e1cf50cff7959](https://github.com/ffalt/starfield/commit/b5e1cf50cff7959bf43b8f27652f57c7838ae8dc))
+-  (main activity): version number display ([b5504062f31a244](https://github.com/ffalt/starfield/commit/b5504062f31a244aed9d556a8d877612db1b1a85))
+-  **build**  sign release commit ([b5e1cf50cff7959](https://github.com/ffalt/starfield/commit/b5e1cf50cff7959bf43b8f27652f57c7838ae8dc))
 
 ## [v0.0.2](https://github.com/ffalt/starfield/compare/v0.0.2) (2024-04-01)
 
