@@ -1,0 +1,5 @@
+Starfield ist ein hardwarebeschleunigtes Live-Wallpaper für Hintergrund und Sperrbildschirm, das einen Flug durch ein Sternenfeld anzeigt.
+
+Features:
+
+ - Einstellen vieler Aspekte wie z.B. Anzahl der Sterne, Farbe, Geschwindigkeit
