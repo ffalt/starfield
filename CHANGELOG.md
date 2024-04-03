@@ -1,9 +1,10 @@
 # Changelog Starfield Live Wallpaper
 
-## [v0.0.3](https://github.com/ffalt/starfield/compare/v0.0.3) (2024-04-02)
+## [v0.0.4](https://github.com/ffalt/starfield/compare/v0.0.4) (2024-04-03)
 
 ### Features
 
+ -  **translations**  add Russian thanks to https://crowdin.com/profile/ronner231 ([20d601262163a3e](https://github.com/ffalt/starfield/commit/20d601262163a3e539c472f3cb61e73937bd1ee1))
  -  **build**  automatic version code ([804c2e70d88074e](https://github.com/ffalt/starfield/commit/804c2e70d88074e8bf1bbaa84d0df75bc083fadc))
  -  **build**  add build to version code ([76488d5700c6123](https://github.com/ffalt/starfield/commit/76488d5700c61238e5011045a3f32b9ff6ae4584))
  -  **build**  add bump version task ([46e464647d42882](https://github.com/ffalt/starfield/commit/46e464647d42882bae51151211837fc3504b7638))
