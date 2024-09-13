@@ -5,6 +5,7 @@ preference = "1.2.1"
 colorpicker = "1.1.0"
 gitchangelog = "2.1.2"
 grgit = "5.2.2"
+kotlin = "1.9.20"
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -15,3 +16,4 @@ grGit = { id = "org.ajoberstar.grgit", version.ref = "grgit" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 jaredrummler-colorpicker = { group = "com.jaredrummler", name = "colorpicker", version.ref = "colorpicker" }
+jetbrains-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
