@@ -3,7 +3,7 @@ agp = "8.6.0"
 appcompat = "1.7.0"
 preference = "1.2.1"
 colorpicker = "1.1.0"
-gitchangelog = "2.1.2"
+gitchangelog = "2.4.1"
 grgit = "5.2.2"
 kotlin = "2.0.20"
 
