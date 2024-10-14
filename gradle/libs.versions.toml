@@ -5,7 +5,7 @@ preference = "1.2.1"
 colorpicker = "1.1.0"
 gitchangelog = "2.1.2"
 grgit = "5.2.2"
-kotlin = "2.0.20"
+kotlin = "2.0.21"
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
