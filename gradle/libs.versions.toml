@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.0"
+agp = "8.9.1"
 appcompat = "1.7.0"
 preference = "1.2.1"
 colorpicker = "1.1.0"
