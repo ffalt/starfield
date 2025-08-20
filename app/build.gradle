@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
-def calculateAndroidVersionCode(versionName) {
+static def calculateAndroidVersionCode(versionName) {
     def (major, minor, patch, build) = versionName.replace("v", "").tokenize('.')
     (major, minor, patch, build) = [major, minor, patch, build].collect { it == null ? 0 : it.toInteger() }
     return (major * 1000 * 1000 * 1000) + (minor * 1000 * 1000) + (patch * 1000) + build
@@ -10,12 +10,12 @@ def calculateAndroidVersionCode(versionName) {
 
 android {
     namespace = "io.github.ffalt.starfield"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "io.github.ffalt.starfield"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 36
         versionCode = calculateAndroidVersionCode(project.version)
         versionName = project.version
     }

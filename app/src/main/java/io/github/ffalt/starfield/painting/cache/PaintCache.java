@@ -35,11 +35,9 @@ import io.github.ffalt.starfield.StarfieldOpts;
 public class PaintCache {
     protected final Paint[] cache;
     protected final StarfieldOpts opts;
-    protected final int length;
 
     public PaintCache(StarfieldOpts opts, int length) {
         this.opts = opts;
-        this.length = length;
         cache = new Paint[length + 1];
         for (int i = 0; i <= length; i++) {
             cache[i] = build(i);

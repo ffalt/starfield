@@ -75,13 +75,7 @@ def templateFdroidChangelogContent = """{{#tags}}
 {{/tags}}
 """
 
-def checkCleanGit() {
-    if (!grgit.status().clean) {
-        throw new GradleException('Git repository is dirty. Commit your changes first!')
-    }
-}
-
-def calculateAndroidVersionCode(versionName) {
+static def calculateAndroidVersionCode(versionName) {
     def (major, minor, patch, build) = versionName.replace("v", "").tokenize('.')
     (major, minor, patch, build) = [major, minor, patch, build].collect { it == null ? 0 : it.toInteger() }
     return (major * 1000 * 1000 * 1000) + (minor * 1000 * 1000) + (patch * 1000) + build
@@ -108,7 +102,9 @@ tasks.register('gitChangelogTask', GitChangelogTask) {
 }
 
 tasks.register('bumpReleaseVersion') {
-    checkCleanGit()
+    if (!grgit.status().clean) {
+        throw new GradleException('Git repository is dirty. Commit your changes first!')
+    }
 
     // get next version
     def (major, minor, patch) = project.version.replace("v", "").tokenize('.')
