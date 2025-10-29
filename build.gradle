@@ -95,7 +95,7 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     templateContent = templateReleaseLogContent.replace("PREVIOUS", prev_tag)
 }
 
-##tasks.register('gitChangelogTask', GitChangelogTask) {
+tasks.register('gitChangelogTask', GitChangelogTask) {
     fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
     toRevision = "HEAD"
     templateContent = templateChangelogContent
