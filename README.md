@@ -2,7 +2,7 @@
 <br/>
 <p align="center">
     <a href="https://ffalt.github.io" target="_blank">
-        <img height="80" width="80" src="./fastlane/metadata/android/en-US/images/icon.png" alt="Starfield logo">
+        <img height="80" width="80" src="./icon.svg" alt="Starfield logo">
     </a>
 </p>
 
