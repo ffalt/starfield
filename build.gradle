@@ -82,7 +82,7 @@ static def calculateAndroidVersionCode(versionName) {
 }
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    def prev_tag = "git describe --tags --abbrev=0 ${project.version}^".execute().text.replace("\n", "").replace("\r", "").trim()
+    def prev_tag = "git tag --sort=-creatordate | head -n 2 | tail -n 1".execute().text.replace("\n", "").replace("\r", "").trim()
     if (prev_tag == "") {
         prev_tag = project.version
     }
@@ -95,7 +95,7 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
     templateContent = templateReleaseLogContent.replace("PREVIOUS", prev_tag)
 }
 
-tasks.register('gitChangelogTask', GitChangelogTask) {
+##tasks.register('gitChangelogTask', GitChangelogTask) {
     fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
     toRevision = "HEAD"
     templateContent = templateChangelogContent
