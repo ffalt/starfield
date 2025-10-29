@@ -26,20 +26,20 @@
     <string name="settings_round">Круг</string>
     <string name="settings_round_summary">Вы можете получить производительность, если звезды прорисованы не по кругу.</string>
     <string name="settings_star_size">Размер</string>
-    <string name="settings_star_size_summary"></string>
+    <string name="settings_star_size_summary" />
     <string name="settings_trail_color_start">Внутренний цвет</string>
-    <string name="settings_trail_color_start_summary"></string>
+    <string name="settings_trail_color_start_summary" />
     <string name="settings_trail_color_end">Внешний цвет</string>
-    <string name="settings_trail_color_end_summary"></string>
+    <string name="settings_trail_color_end_summary" />
     <string name="settings_star_color">Цвет</string>
-    <string name="settings_star_color_summary"></string>
+    <string name="settings_star_color_summary" />
     <string name="settings_reset">Сброс настроек</string>
     <string name="settings_reset_summary">Вернуть все настройки к значениям по умолчанию.</string>
     <string name="settings_min_speed">Минимальная скорость</string>
-    <string name="settings_min_speed_summary"></string>
+    <string name="settings_min_speed_summary" />
     <string name="settings_max_speed">Максимальная скорость</string>
     <string name="settings_depth">Глубина резкости</string>
-    <string name="settings_max_speed_summary"></string>
+    <string name="settings_max_speed_summary" />
     <string name="reset_settings_title">Сбросить настройки?</string>
     <string name="reset_settings_confirmation">Вы уверены, что хотите вернуть все настройки к значениям по умолчанию?</string>
 </resources>

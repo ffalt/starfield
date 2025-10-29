@@ -22,7 +22,7 @@ jobs:
           download_translations: true
           config: crowdin.yml
           create_pull_request: true
-          localization_branch_name: updat_translations_from_crowdin
+          localization_branch_name: update_translations_from_crowdin
           commit_message: "Update translations"
           pull_request_title: "Update Translations"
           pull_request_body: "Updated translations"

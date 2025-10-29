@@ -26,20 +26,20 @@
     <string name="settings_round">Rund</string>
     <string name="settings_round_summary">Sie können Leistung gewinnen, wenn Sterne nicht rund gezeichnet werden.</string>
     <string name="settings_star_size">Größe</string>
-    <string name="settings_star_size_summary"></string>
+    <string name="settings_star_size_summary" />
     <string name="settings_trail_color_start">Innere Farbe</string>
-    <string name="settings_trail_color_start_summary"></string>
+    <string name="settings_trail_color_start_summary" />
     <string name="settings_trail_color_end">Äußere Farbe</string>
-    <string name="settings_trail_color_end_summary"></string>
+    <string name="settings_trail_color_end_summary" />
     <string name="settings_star_color">Farbe</string>
-    <string name="settings_star_color_summary"></string>
+    <string name="settings_star_color_summary" />
     <string name="settings_reset">Einstellungen zurücksetzen</string>
     <string name="settings_reset_summary">Alle Einstellungen auf ihre Standardwerte zurücksetzen.</string>
     <string name="settings_min_speed">Mindestgeschwindigkeit</string>
-    <string name="settings_min_speed_summary"></string>
+    <string name="settings_min_speed_summary" />
     <string name="settings_max_speed">Maximale Geschwindigkeit</string>
     <string name="settings_depth">Tiefenfeld</string>
-    <string name="settings_max_speed_summary"></string>
+    <string name="settings_max_speed_summary" />
     <string name="reset_settings_title">Einstellungen zurücksetzen?</string>
     <string name="reset_settings_confirmation">Wollen sie wirklich alle Einstellungen auf Standardwerte zurücksetzen?</string>
 </resources>

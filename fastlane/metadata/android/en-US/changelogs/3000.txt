@@ -1,1 +1,1 @@
- -  **build**  add tasks for release, changelogs, releaselog
+ -  **build**  add tasks for release, change logs, release log
