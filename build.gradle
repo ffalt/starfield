@@ -1,6 +1,6 @@
-import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 import se.bjurr.gitchangelog.api.InclusivenessStrategy
 import se.bjurr.gitchangelog.api.GitChangelogApi
+import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -82,23 +82,21 @@ static def calculateAndroidVersionCode(versionName) {
 }
 
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    def prev_tag = "git tag --sort=-creatordate | head -n 2 | tail -n 1".execute().text.replace("\n", "").replace("\r", "").trim()
-    if (prev_tag == "") {
-        prev_tag = project.version
-    }
+    def prev_tag = ['bash', '-lc', 'git tag --sort=-creatordate | head -n 2 | tail -n 1'].execute().text.trim()
     println "Generating Release notes for ${project.version} compared to ${prev_tag}"
-    toRevision = project.version
-    fromRevisionStrategy = InclusivenessStrategy.EXCLUSIVE
-    fromRevision = prev_tag
-    file = new File("${rootDir}/RELEASE_NOTES.md")
-    prependToFile = false // false will replace the file, true will prepend content
-    templateContent = templateReleaseLogContent.replace("PREVIOUS", prev_tag)
+
+    toRevision.set(project.version)
+    fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
+    fromRevision.set(prev_tag)
+    file.set(new File("${rootDir}/RELEASE_NOTES.md"))
+    prependToFile.set(false) // false will replace the file, true will prepend content
+    templateContent.set(templateReleaseLogContent.replace("PREVIOUS", prev_tag))
 }
 
 tasks.register('gitChangelogTask', GitChangelogTask) {
-    fromRevision = "440bdfdf94c09ef4edf1885b25852078a66d6332"
-    toRevision = "HEAD"
-    templateContent = templateChangelogContent
+    fromRevision.set("440bdfdf94c09ef4edf1885b25852078a66d6332")
+    toRevision.set("HEAD")
+    templateContent.set(templateChangelogContent)
 }
 
 tasks.register('bumpReleaseVersion') {
