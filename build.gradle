@@ -127,7 +127,6 @@ tasks.register('bumpReleaseVersion') {
 
 tasks.register('release') {
     println("Releasing ${project.version}")
-    checkCleanGit()
     // temp tag, so GitChangelogApi writes the right tag in the changelog
     grgit.tag.add(name: project.version)
     // write changelog
