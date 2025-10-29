@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="20 20 340 340">
+    <rect fill="#000" x="50" y="50" rx="20" ry="20" width="280" height="280"/>
+    <path fill="#FFFFFF" d="M222,122m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_0"/>
+    <path fill="#FFFFFF" d="M242,102m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_1"/>
+    <path fill="#FFFFFF" d="M122,222m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_2"/>
+    <path fill="#FFFFFF" d="M172,122m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_3"/>
+    <path fill="#FFFFFF" d="M210,172m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_4"/>
+    <path fill="#FFFFFF" d="M180,200m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_5"/>
+    <path fill="#FFFFFF" d="M190,220m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_6"/>
+    <path fill="#FFFFFF" d="M120,120m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_7"/>
+    <path fill="#FFFFFF" d="M240,240m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_8"/>
+    <path fill="#FFFFFF" d="M265,270m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_9"/>
+    <path fill="#FFFFFF" d="M140,280m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" id="path_10"/>
+</svg>
