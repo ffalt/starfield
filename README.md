@@ -22,6 +22,16 @@ Want to help translate Starfield? Please use https://crowdin.com/project/starfie
 
 Starfield is an Android live wallpaper that simulates a flight into a starfield.
 
+## Screenshots
+
+<p align="middle">
+<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2_wallpaper.jpg" alt="Wallpaper">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4_settings.jpg" alt="Settings">
+</p>
+
+## Features
+
+Adjust a lot of aspects, e.g. star count, color, size, speed, trails, framerate
+
 ## Installation
 
 <a href="https://github.com/ffalt/starfield/releases" target="_blank">
@@ -33,19 +43,6 @@ Starfield is an Android live wallpaper that simulates a flight into a starfield.
     Install with Obtainium<br>
     <img height="80" src="./badge-obtainium.png" alt="Github badge">
 </a>
-
-
-Starfield is an Android live wallpaper that simulates a flight into a starfield.
-
-## Screenshots
-
-<p align="middle">
-<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2_wallpaper.jpg" alt="Wallpaper">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4_settings.jpg" alt="Settings">
-</p>
-
-## Features
-
-Adjust a lot of aspects, e.g. star count, color, size, speed, trails, framerate
 
 ## License
 
