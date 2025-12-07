@@ -13,3 +13,4 @@ local.properties
 starfield_keystore.*
 RELEASE_NOTES.md
 local
+/build/reports/*
