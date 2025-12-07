@@ -13,7 +13,7 @@ gitChangelog = { id = "se.bjurr.gitchangelog.git-changelog-gradle-plugin", versi
 grGit = { id = "org.ajoberstar.grgit", version.ref = "grgit" }
 
 [libraries]
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
-jaredrummler-colorpicker = { group = "com.jaredrummler", name = "colorpicker", version.ref = "colorpicker" }
-jetbrains-kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-preference = { module = "androidx.preference:preference", version.ref = "preference" }
+jaredrummler-colorpicker = { module = "com.jaredrummler:colorpicker", version.ref = "colorpicker" }
+jetbrains-kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
