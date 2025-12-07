@@ -1,8 +1,12 @@
 # Changelog Starfield Live Wallpaper
 
-## [v0.0.6](https://github.com/ffalt/starfield/compare/v0.0.6) (2025-12-07)
+## [v0.0.7](https://github.com/ffalt/starfield/compare/v0.0.7) (2025-12-07)
 
-### Features
+### Bug Fixes
+
+ -  **settings**  ensure window is not behind status bar ([069d8daf7f94f22](https://github.com/ffalt/starfield/commit/069d8daf7f94f22ce38cf40acbca8876bcc889a9))
+
+## [v0.0.6](https://github.com/ffalt/starfield/compare/v0.0.6) (2025-12-07)
 
 - **sensor**: tilt stars based on device gyroscope
 
