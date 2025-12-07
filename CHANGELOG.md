@@ -1,5 +1,11 @@
 # Changelog Starfield Live Wallpaper
 
+## [v0.0.6](https://github.com/ffalt/starfield/compare/v0.0.6) (2025-12-07)
+
+### Features
+
+- **sensor**: tilt stars based on device gyroscope
+
 ## [v0.0.5](https://github.com/ffalt/starfield/compare/v0.0.5) (2025-10-29)
 
 ### Features
