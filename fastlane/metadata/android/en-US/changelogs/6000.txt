@@ -1,0 +1,1 @@
+- **sensor**: tilt stars based on device gyroscope
