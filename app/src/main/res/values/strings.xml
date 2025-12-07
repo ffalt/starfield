@@ -13,6 +13,11 @@
     <string name="settings_nr_stars">Number of stars</string>
     <string name="settings_nr_stars_summary">Choose less stars to avoid experience battery drain or performance problems</string>
     <string name="settings_group_trails">Star trails</string>
+    <string name="settings_group_sensor">Sensor</string>
+    <string name="settings_follow_sensor_enable">Follow sensor</string>
+    <string name="settings_follow_sensor_summary">Tilt stars according to gyroscope\n(if sensor is available)</string>
+    <string name="settings_follow_sensor_intensity">Intensity</string>
+    <string name="settings_follow_sensor_intensity_summary" />
     <string name="settings_group_screen">Home screens</string>
     <string name="settings_follow_screen_enable">Follow swiping</string>
     <string name="settings_follow_screen_summary">Follow changing home screens</string>

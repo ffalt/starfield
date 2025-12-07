@@ -36,6 +36,8 @@ public class StarfieldPrefs {
     public static final String SHARED_PREFS_STAR_CIRCLE = "star_circle";
     public static final String SHARED_PREFS_FOLLOW_SCREEN = "follow_screen";
     public static final String SHARED_PREFS_FOLLOW_RESTORE = "follow_restore";
+    public static final String SHARED_PREFS_FOLLOW_SENSOR = "follow_sensor";
+    public static final String SHARED_PREFS_FOLLOW_SENSOR_INTENSITY = "follow_sensor_intensity";
     public static final String SHARED_PREFS_STAR_SIZE = "star_size";
     public static final String SHARED_PREFS_DEPTH = "depth";
     public static final String SHARED_PREFS_STAR_COLOR = "star_color";

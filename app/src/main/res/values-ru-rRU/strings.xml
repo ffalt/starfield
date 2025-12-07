@@ -14,6 +14,11 @@
     <string name="settings_nr_stars">Количество звезд</string>
     <string name="settings_nr_stars_summary">Выберите меньшее количество звезд, чтобы избежать разрядки батареи или проблем с производительностью</string>
     <string name="settings_group_trails">Звездные маршруты</string>
+    <string name="settings_group_sensor">датчик</string>
+    <string name="settings_follow_sensor_enable">Следующий датчик</string>
+    <string name="settings_follow_sensor_summary">Наклон звезд в соответствии с гироскопом\n(если датчик доступен)</string>
+    <string name="settings_follow_sensor_intensity">Интенсивность</string>
+    <string name="settings_follow_sensor_intensity_summary" />
     <string name="settings_group_screen">Домашние экраны</string>
     <string name="settings_follow_screen_enable">Следить за проведением</string>
     <string name="settings_follow_screen_summary">Следить за сменой домашних экранов</string>

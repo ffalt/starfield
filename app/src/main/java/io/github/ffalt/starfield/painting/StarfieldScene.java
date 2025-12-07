@@ -35,17 +35,24 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.SurfaceHolder;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
 import io.github.ffalt.starfield.StarfieldOpts;
 import io.github.ffalt.starfield.StarfieldPrefs;
 
-public abstract class StarfieldScene implements SurfaceHolderParent, SharedPreferences.OnSharedPreferenceChangeListener {
+public abstract class StarfieldScene implements SurfaceHolderParent, SharedPreferences.OnSharedPreferenceChangeListener, SensorEventListener {
     private Starfield starfield;
     private final Paint mPaintFill = new Paint();
     public final StarfieldOpts opts = new StarfieldOpts();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final Runnable mDrawThread = this::drawFrame;
     public boolean visible = false;
+    public boolean isSensorAvailable = false;
+    private Sensor sensor;
+    private SensorManager sensorManager;
 
     public StarfieldScene() {
         mPaintFill.setStyle(Paint.Style.FILL);
@@ -70,6 +77,17 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         SharedPreferences prefs = StarfieldOpts.getPreferences(context);
         prefs.registerOnSharedPreferenceChangeListener(this);
         onSharedPreferenceChanged(prefs, null);
+    }
+
+
+    public void initSensor(Context context) {
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+            isSensorAvailable = true;
+        } else {
+            isSensorAvailable = false;
+        }
     }
 
     public void unregisterOnSharedPreferenceChanged(Context context) {
@@ -107,6 +125,14 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         boolean follow_screen = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN, opts.followScreen);
         if (follow_screen != opts.followScreen) {
             opts.followScreen = follow_screen;
+        }
+        boolean follow_sensor = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR, opts.followSensor);
+        if (follow_sensor != opts.followSensor) {
+            opts.followSensor = follow_sensor;
+        }
+        int follow_sensor_intensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR_INTENSITY, opts.followSensorIntensity);
+        if (follow_sensor_intensity != opts.followSensorIntensity) {
+            opts.followSensorIntensity = follow_sensor_intensity;
         }
         boolean follow_restore = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_RESTORE, opts.followRestore);
         if (follow_restore != opts.followRestore) {
@@ -147,6 +173,15 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        starfield.setTilt(event.values[0], event.values[1]);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
     public void reset() {
         starfield = new Starfield(opts);
     }
@@ -157,6 +192,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     public void onCreate(Context context) {
         registerOnSharedPreferenceChanged(context);
+        initSensor(context);
     }
 
     public void onVisibilityChanged(boolean visible) {
@@ -165,6 +201,14 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         mHandler.removeCallbacks(mDrawThread);
         if (visible) {
             drawFrame();
+            if (isSensorAvailable && opts.followSensor) {
+                sensorManager.unregisterListener(this);
+                sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            }
+        } else {
+            if (isSensorAvailable) {
+                sensorManager.unregisterListener(this);
+            }
         }
     }
 
@@ -172,6 +216,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         visible = false;
         mHandler.removeCallbacks(mDrawThread);
         unregisterOnSharedPreferenceChanged(context);
+        if (isSensorAvailable) {
+            sensorManager.unregisterListener(this);
+        }
     }
 
     private void drawFrame() {

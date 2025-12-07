@@ -39,6 +39,11 @@ public class Starfield {
     private float offsetY = 0;
     private float offsetTX = 0;
     private float offsetTY = 0;
+    private float tiltOffsetX = 0;
+    private float tiltOffsetY = 0;
+    private float tiltTargetX = 0;
+    private float tiltTargetY = 0;
+    private final float maxTiltAngle = (float) Math.toRadians(50.0);
     private final StarPaintCache starPaints;
     private final StarTrailPaintCache starTrailPaints;
     private final StarfieldOpts opts;
@@ -76,9 +81,21 @@ public class Starfield {
     }
 
     public void move() {
-        if (opts.followScreen && Math.abs(offsetX - offsetTX) > 0.1) {
-            offsetX += (float) ((offsetTX - offsetX) * 0.1);
-            offsetY += (float) ((offsetTY - offsetY) * 0.1);
+        if (opts.followScreen) {
+            if (Math.abs(offsetX - offsetTX) > 0.1f) {
+                offsetX += ((offsetTX - offsetX) * 0.1f);
+            }
+            if (Math.abs(offsetX - offsetTY) > 0.1f) {
+                offsetY += ((offsetTY - offsetY) * 0.1f);
+            }
+        }
+        if (opts.followSensor) {
+            if (Math.abs(tiltOffsetX - tiltTargetX) > 0.01f) {
+                tiltOffsetX += (tiltTargetX - tiltOffsetX) * 0.01f;
+            }
+            if (Math.abs(tiltOffsetY - tiltTargetY) > 0.01f) {
+                tiltOffsetY += (tiltTargetY - tiltOffsetY) * 0.01f;
+            }
         }
         for (int i = 0, l = stars.length; i < l; i++) {
             moveStar(i);
@@ -96,6 +113,20 @@ public class Starfield {
         offsetX = 0;
         offsetTY = 0;
         offsetY = 0;
+        tiltTargetX = 0;
+        tiltTargetY = 0;
+    }
+
+    public void setTilt(float tiltX, float tiltY) {
+        float clampedPitch = Math.max(-maxTiltAngle, Math.min(maxTiltAngle, tiltX));
+        float clampedRoll = Math.max(-maxTiltAngle, Math.min(maxTiltAngle, tiltY));
+        float nPitch = clampedPitch / maxTiltAngle;
+        float nRoll = clampedRoll / maxTiltAngle;
+        float targetX = -nRoll * opts.W;
+        float targetY = nPitch * opts.H;
+        float intensity = opts.followSensorIntensity / 100f;
+        tiltTargetX += (targetX - tiltTargetX) * intensity;
+        tiltTargetY += (targetY - tiltTargetY) * intensity;
     }
 
     public void setOffsets(float diffX, float diffY) {
@@ -129,8 +160,10 @@ public class Starfield {
             star[INDEX_v] += 0.001f;
         }
         // Update x and y
-        star[INDEX_currentX] = opts.hW + (opts.W * (star[INDEX_x] / star[INDEX_z]) - offsetX);
-        star[INDEX_currentY] = opts.hH + (opts.H * (star[INDEX_y] / star[INDEX_z]) - offsetY);
+        float totalOffsetX = offsetX + tiltOffsetX;
+        float totalOffsetY = offsetY + tiltOffsetY;
+        star[INDEX_currentX] = opts.hW + (opts.W * (star[INDEX_x] / star[INDEX_z]) - totalOffsetX);
+        star[INDEX_currentY] = opts.hH + (opts.H * (star[INDEX_y] / star[INDEX_z]) - totalOffsetY);
         // Calculate a new radius based on Z
         star[INDEX_currentRadius] =
                 (1 - mapNumberToRange(star[INDEX_z], opts.initialZ, 1))

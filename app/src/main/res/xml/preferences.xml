@@ -127,6 +127,32 @@
 
     <androidx.preference.PreferenceCategory
         app:iconSpaceReserved="false"
+        app:key="sensor_category"
+        app:title="@string/settings_group_sensor">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/follow_sensor_default"
+            app:iconSpaceReserved="false"
+            app:key="follow_sensor"
+            app:summary="@string/settings_follow_sensor_summary"
+            app:title="@string/settings_follow_sensor_enable" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/follow_sensor_intensity_default"
+            android:key="follow_sensor_intensity"
+            android:max="@integer/follow_sensor_intensity_max"
+            android:summary="@string/settings_follow_sensor_intensity_summary"
+            android:title="@string/settings_follow_sensor_intensity"
+            app:dependency="follow_sensor"
+            app:iconSpaceReserved="false"
+            app:min="@integer/follow_sensor_intensity_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
         app:key="expert_category"
         app:title="@string/settings_group_expert">
 
