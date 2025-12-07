@@ -22,6 +22,21 @@ Want to help translate Starfield? Please use https://crowdin.com/project/starfie
 
 Starfield is an Android live wallpaper that simulates a flight into a starfield.
 
+## Installation
+
+<a href="https://github.com/ffalt/starfield/releases" target="_blank">
+    Download on Github<br>
+    <img height="80" src="./badge-github.png" alt="Github badge">
+</a>
+
+<a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22:%20%22io.github.ffalt.starfield%22,%22url%22:%22https://github.com/ffalt/starfield%22,%22author%22:%22ffalt%22,%22name%22:%22Starfield%22,%22preferredApkIndex%22:%200%7D"  target="_blank">
+    Install with Obtainium<br>
+    <img height="80" src="./badge-obtainium.png" alt="Github badge">
+</a>
+
+
+Starfield is an Android live wallpaper that simulates a flight into a starfield.
+
 ## Screenshots
 
 <p align="middle">
