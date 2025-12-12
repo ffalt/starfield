@@ -1,5 +1,13 @@
 # Changelog Starfield Live Wallpaper
 
+## [v0.0.8](https://github.com/ffalt/starfield/compare/v0.0.8) (2025-12-12)
+
+### Features
+
+ -  **space**  option for rare meteors ([677c4d78ca5fec9](https://github.com/ffalt/starfield/commit/677c4d78ca5fec9daa6b9984f0fa5c677f90fe31))
+ -  **sensors**  option to adjust speed to battery level ([3bfd772f19afed2](https://github.com/ffalt/starfield/commit/3bfd772f19afed2d96f337a0b111ef27c509e3a7))
+
+
 ## [v0.0.7](https://github.com/ffalt/starfield/compare/v0.0.7) (2025-12-07)
 
 ### Bug Fixes
