@@ -6,19 +6,19 @@ files:
     translation: /app/src/main/res/values-%android_code%/%original_file_name%
     skip_untranslated_strings: false
     skip_untranslated_files: true
-    export_only_approved: true
+    export_only_approved: false
   - source: /fastlane/metadata/android/en-US/full_description.txt
     translation: /fastlane/metadata/android/%locale%/%original_file_name%
     skip_untranslated_strings: false
     skip_untranslated_files: true
-    export_only_approved: true
+    export_only_approved: false
   - source: /fastlane/metadata/android/en-US/short_description.txt
     translation: /fastlane/metadata/android/%locale%/%original_file_name%
     skip_untranslated_strings: false
     skip_untranslated_files: true
-    export_only_approved: true
+    export_only_approved: false
   - source: /fastlane/metadata/android/en-US/title.txt
     translation: /fastlane/metadata/android/%locale%/%original_file_name%
     skip_untranslated_strings: false
     skip_untranslated_files: true
-    export_only_approved: true
+    export_only_approved: false
