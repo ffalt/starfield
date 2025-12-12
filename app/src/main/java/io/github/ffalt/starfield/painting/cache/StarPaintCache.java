@@ -33,7 +33,7 @@ import io.github.ffalt.starfield.StarfieldOpts;
 
 public class StarPaintCache extends PaintCache {
     public StarPaintCache(StarfieldOpts opts) {
-        super(opts, 100);
+        super(opts, 101);
     }
 
     public Paint build(int index) {

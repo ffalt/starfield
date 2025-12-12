@@ -35,13 +35,21 @@ import io.github.ffalt.starfield.StarfieldOpts;
 
 public class StarTrailPaintCache extends PaintCache {
     private Shader sharedShader = null;
+    private int shaderW = -1;
+    private int shaderH = -1;
 
     public StarTrailPaintCache(StarfieldOpts opts) {
-        super(opts, 256);
+        // cache size - brightness is 0..100 in Starfield
+        super(opts, 101);
     }
 
     private Shader getSharedShader() {
-        if (sharedShader == null) {
+        // recreate shader if bounds changed
+        int w = Math.max(1, Math.round(opts.W));
+        int h = Math.max(1, Math.round(opts.H));
+        if (sharedShader == null || shaderW != w || shaderH != h) {
+            shaderW = w;
+            shaderH = h;
             sharedShader = new RadialGradient(opts.hW, opts.hH, Math.min(opts.H, opts.W), opts.trailColorStart, opts.trailColorEnd, Shader.TileMode.CLAMP);
         }
         return sharedShader;
