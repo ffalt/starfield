@@ -1,0 +1,1 @@
+ - **translation** add spanish translation, thanks to https://crowdin.com/profile/gjostin769
