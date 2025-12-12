@@ -149,6 +149,13 @@
             app:showSeekBarValue="true"
             app:updatesContinuously="false" />
 
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/battery_speed_default"
+            app:iconSpaceReserved="false"
+            app:key="battery_speed"
+            app:summary="@string/settings_battery_speed_summary"
+            app:title="@string/settings_battery_speed_enable" />
+
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

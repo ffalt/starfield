@@ -47,6 +47,7 @@ public class Starfield {
     private final StarPaintCache starPaints;
     private final StarTrailPaintCache starTrailPaints;
     private final StarfieldOpts opts;
+    private float speedModifier = 1.0f;
     // we don't use objects for the stars to save some memory
     private float[][] stars = new float[0][11];
     public static final int INDEX_x = 0;
@@ -139,6 +140,10 @@ public class Starfield {
         }
     }
 
+    public void setSpeedModifier(float mod) {
+        this.speedModifier = mod;
+    }
+
     private static float mapNumberToRange(float input, float inputRangeMax, float outputRangeMax) {
         return (input * outputRangeMax / inputRangeMax);
     }
@@ -149,8 +154,7 @@ public class Starfield {
 
     public void moveStar(int i) {
         float[] star = stars[i];
-        final float speedModifier = 0.1f;
-        star[INDEX_z] -= (star[INDEX_v] * speedModifier);
+        star[INDEX_z] -= (star[INDEX_v] * 0.1f * speedModifier);
         if (star[INDEX_z] <= 0) {
             resetStar(i);
         } else {

@@ -28,4 +28,5 @@
     <integer name="follow_sensor_intensity_max">100</integer>
     <integer name="follow_sensor_intensity_min">1</integer>
     <integer name="follow_sensor_intensity_default">10</integer>
+    <bool name="battery_speed_default">false</bool>
 </resources>

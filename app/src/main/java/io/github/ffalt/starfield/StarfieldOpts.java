@@ -46,6 +46,7 @@ public class StarfieldOpts {
     public static final int defaultTrailColorStart = Color.WHITE;
     public static final int defaultTrailColorEnd = Color.parseColor("#B3B3B3");
     public static final float defaultDepth = 2f;
+    public static final boolean defaultBatterySpeed = false;
     public float W = 100f;
     public float H = 100f;
     public float hW = 50f;
@@ -65,6 +66,7 @@ public class StarfieldOpts {
     public boolean trails = StarfieldOpts.defaultStarsTrail;
     public boolean circle = StarfieldOpts.defaultStarsCircle;
     public float depth = StarfieldOpts.defaultDepth;
+    public boolean batterySpeed = StarfieldOpts.defaultBatterySpeed;
     public int fps = 60;
     public long drawTime = 1000 / 60;
 

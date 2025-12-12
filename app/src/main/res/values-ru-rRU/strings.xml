@@ -17,6 +17,8 @@
     <string name="settings_group_sensor">датчик</string>
     <string name="settings_follow_sensor_enable">Следующий датчик</string>
     <string name="settings_follow_sensor_summary">Наклон звезд в соответствии с гироскопом\n(если датчик доступен)</string>
+    <string name="settings_battery_speed_enable">Регулировать скорость в зависимости от уровня заряда батареи</string>
+    <string name="settings_battery_speed_summary">Замедлять движение звёзд при низком заряде батареи</string>
     <string name="settings_follow_sensor_intensity">Интенсивность</string>
     <string name="settings_follow_sensor_intensity_summary" />
     <string name="settings_group_screen">Домашние экраны</string>
