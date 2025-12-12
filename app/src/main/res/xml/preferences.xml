@@ -41,6 +41,7 @@
             app:updatesContinuously="false" />
 
     </androidx.preference.PreferenceCategory>
+
     <androidx.preference.PreferenceCategory
         app:iconSpaceReserved="false"
         app:key="star_category"
@@ -99,6 +100,49 @@
             android:summary="@string/settings_trail_color_end_summary"
             android:title="@string/settings_trail_color_end"
             app:dependency="star_trail"
+            app:iconSpaceReserved="false" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="meteor_category"
+        app:title="@string/settings_group_meteors">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/meteors_enabled_default"
+            app:iconSpaceReserved="false"
+            app:key="meteors_enabled"
+            app:summary="@string/settings_meteors_enable_summary"
+            app:title="@string/settings_meteors_enable" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/meteor_spawn_probability_default"
+            android:key="meteors_probability"
+            android:max="@integer/meteor_spawn_probability_max"
+            app:iconSpaceReserved="false"
+            app:min="@integer/meteor_spawn_probability_min"
+            app:seekBarIncrement="@integer/meteor_spawn_probability_step"
+            app:showSeekBarValue="true"
+            app:dependency="meteors_enabled"
+            app:summary="@string/settings_meteor_spawn_probability_summary"
+            app:title="@string/settings_meteor_spawn_probability"
+            app:updatesContinuously="false" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/meteor_color_start_default"
+            android:key="meteor_color_start"
+            android:summary="@string/settings_meteor_color_start_summary"
+            android:title="@string/settings_meteor_color_start"
+            app:dependency="meteors_enabled"
+            app:iconSpaceReserved="false" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/meteor_color_end_default"
+            android:key="meteor_color_end"
+            android:summary="@string/settings_meteor_color_end_summary"
+            android:title="@string/settings_meteor_color_end"
+            app:dependency="meteors_enabled"
             app:iconSpaceReserved="false" />
 
     </androidx.preference.PreferenceCategory>

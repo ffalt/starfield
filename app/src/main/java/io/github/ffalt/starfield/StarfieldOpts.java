@@ -45,6 +45,11 @@ public class StarfieldOpts {
     public static final int defaultStarColor = Color.WHITE;
     public static final int defaultTrailColorStart = Color.WHITE;
     public static final int defaultTrailColorEnd = Color.parseColor("#B3B3B3");
+    public static final boolean defaultMeteorsEnabled = true;
+    public static final int defaultMeteorColorStart = Color.parseColor("#FFEB3B");
+    public static final int defaultMeteorColorEnd = Color.parseColor("#E98E1E");
+    public static final float defaultMeteorSpawnProb = 0.0005f; // per-frame
+    public static final int meteorMaxCount = 3;
     public static final float defaultDepth = 2f;
     public static final boolean defaultBatterySpeed = false;
     public float W = 100f;
@@ -59,6 +64,10 @@ public class StarfieldOpts {
     public int starColor = StarfieldOpts.defaultStarColor;
     public int trailColorStart = StarfieldOpts.defaultTrailColorStart;
     public int trailColorEnd = StarfieldOpts.defaultTrailColorEnd;
+    public boolean meteorsEnabled = StarfieldOpts.defaultMeteorsEnabled;
+    public float meteorSpawnProb = StarfieldOpts.defaultMeteorSpawnProb;
+    public int meteorColorStart = StarfieldOpts.defaultMeteorColorStart;
+    public int meteorColorEnd = StarfieldOpts.defaultMeteorColorEnd;
     public boolean followScreen = StarfieldOpts.defaultFollowScreen;
     public boolean followRestore = StarfieldOpts.defaultFollowRestore;
     public boolean followSensor = StarfieldOpts.defaultFollowSensor;

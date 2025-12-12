@@ -174,6 +174,25 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.trailColorEnd = trail_color_end;
             update = true;
         }
+        boolean meteors_enabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_METEORS_ENABLED, opts.meteorsEnabled);
+        if (meteors_enabled != opts.meteorsEnabled) {
+            opts.meteorsEnabled = meteors_enabled;
+            update = true;
+        }
+        int meteor_color_start = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_START, opts.meteorColorStart);
+        if (meteor_color_start != opts.meteorColorStart) {
+            opts.meteorColorStart = meteor_color_start;
+            update = true;
+        }
+        int meteor_color_end = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_END, opts.meteorColorEnd);
+        if (meteor_color_end != opts.meteorColorEnd) {
+            opts.meteorColorEnd = meteor_color_end;
+            update = true;
+        }
+        float meteor_spawn_prob = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEORS_PROBABILITY, Math.round(opts.meteorSpawnProb * 10000)) / 10000f;
+        if (meteor_spawn_prob != opts.meteorSpawnProb) {
+            opts.meteorSpawnProb = meteor_spawn_prob;
+        }
         int fps = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FPS, opts.fps);
         if (fps != opts.fps) {
             opts.updateFPS(fps);

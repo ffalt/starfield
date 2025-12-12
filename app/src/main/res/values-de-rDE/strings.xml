@@ -15,8 +15,8 @@
     <string name="settings_nr_stars_summary">Wählen Sie weniger Sterne, um einen Batterieverbrauch oder Leistungsprobleme zu vermeiden</string>
     <string name="settings_group_trails">Sternspuren</string>
     <string name="settings_group_sensor">Sensor</string>
-    <string name="settings_follow_sensor_enable">Sensor folgen</string>
-    <string name="settings_follow_sensor_summary">Sterne entsprechend dem Gyroskop neigen\n(sofern Sensor verfügbar ist)</string>
+    <string name="settings_follow_sensor_enable">Dem Gyroskop folgen</string>
+    <string name="settings_follow_sensor_summary">Sterne durch Kippen des Geräts bewegen\n- falls Sensor verfügbar</string>
     <string name="settings_battery_speed_enable">Geschwindigkeit an den Akkustand anpassen</string>
     <string name="settings_battery_speed_summary">Sterne bei niedrigem Akkustand verlangsamen</string>
     <string name="settings_follow_sensor_intensity">Intensität</string>
@@ -49,4 +49,13 @@
     <string name="settings_max_speed_summary" />
     <string name="reset_settings_title">Einstellungen zurücksetzen?</string>
     <string name="reset_settings_confirmation">Wollen sie wirklich alle Einstellungen auf Standardwerte zurücksetzen?</string>
+    <string name="settings_group_meteors">Meteore</string>
+    <string name="settings_meteors_enable">Meteore aktivieren</string>
+    <string name="settings_meteors_enable_summary">Gelegentliche Meteoreffekte anzeigen</string>
+    <string name="settings_meteor_color_start">Kopffarbe</string>
+    <string name="settings_meteor_color_start_summary" />
+    <string name="settings_meteor_color_end">Spurfarbe</string>
+    <string name="settings_meteor_color_end_summary" />
+    <string name="settings_meteor_spawn_probability">Wahrscheinlichkeit für Meteore</string>
+    <string name="settings_meteor_spawn_probability_summary">Wahrscheinlichkeit, dass pro Frame ein Meteorit erscheint</string>
 </resources>

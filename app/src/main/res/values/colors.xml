@@ -3,4 +3,6 @@
     <color name="star_color_default">#FFFFFF</color>
     <color name="trail_color_start_default">#FFFFFF</color>
     <color name="trail_color_end_default">#B3B3B3</color>
+    <color name="meteor_color_start_default">#FFEB3B</color>
+    <color name="meteor_color_end_default">#E98E1E</color>
 </resources>

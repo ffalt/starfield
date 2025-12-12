@@ -34,9 +34,17 @@ import android.graphics.Shader;
 import io.github.ffalt.starfield.StarfieldOpts;
 
 public class StarTrailPaintCache extends PaintCache {
+    private Shader sharedShader = null;
 
     public StarTrailPaintCache(StarfieldOpts opts) {
         super(opts, 256);
+    }
+
+    private Shader getSharedShader() {
+        if (sharedShader == null) {
+            sharedShader = new RadialGradient(opts.hW, opts.hH, Math.min(opts.H, opts.W), opts.trailColorStart, opts.trailColorEnd, Shader.TileMode.CLAMP);
+        }
+        return sharedShader;
     }
 
     public Paint build(int index) {
@@ -45,8 +53,7 @@ public class StarTrailPaintCache extends PaintCache {
         result.setColor(adjustBrightness(opts.trailColorStart, index));
         result.setAntiAlias(true);
         result.setStrokeWidth(1f);
-        RadialGradient shader = new RadialGradient(opts.hW, opts.hH, Math.min(opts.H, opts.W), opts.trailColorStart, opts.trailColorEnd, Shader.TileMode.CLAMP);
-        result.setShader(shader);
+        result.setShader(getSharedShader());
         return result;
     }
 }

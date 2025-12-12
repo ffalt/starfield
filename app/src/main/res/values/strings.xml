@@ -14,8 +14,8 @@
     <string name="settings_nr_stars_summary">Choose less stars to avoid experience battery drain or performance problems</string>
     <string name="settings_group_trails">Star trails</string>
     <string name="settings_group_sensor">Sensor</string>
-    <string name="settings_follow_sensor_enable">Follow sensor</string>
-    <string name="settings_follow_sensor_summary">Tilt stars according to gyroscope\n(if sensor is available)</string>
+    <string name="settings_follow_sensor_enable">Follow gyroscope</string>
+    <string name="settings_follow_sensor_summary">Move stars by tilting your device\n- if sensor is available</string>
     <string name="settings_battery_speed_enable">Adjust speed based on battery level</string>
     <string name="settings_battery_speed_summary">Slow down stars for lower battery levels</string>
     <string name="settings_follow_sensor_intensity">Intensity</string>
@@ -28,7 +28,7 @@
     <string name="settings_trails_enable">Show</string>
     <string name="settings_trails_summary">You may gain performance if stars trails are not drawn.</string>
     <string name="settings_fps">Frames per second</string>
-    <string name="settings_fps_summary">Lower values will lead to jumping stars.</string>
+    <string name="settings_fps_summary">Lower values result in jumping stars.</string>
     <string name="settings_round">Round</string>
     <string name="settings_round_summary">You may gain performance if stars are not drawn round.</string>
     <string name="settings_star_size">Size</string>
@@ -48,4 +48,13 @@
     <string name="settings_max_speed_summary" />
     <string name="reset_settings_title">Reset settings?</string>
     <string name="reset_settings_confirmation">Are you sure you want to revert all settings to their default values?</string>
+    <string name="settings_group_meteors">Meteors</string>
+    <string name="settings_meteors_enable">Enable meteors</string>
+    <string name="settings_meteors_enable_summary">Show occasional meteor effects</string>
+    <string name="settings_meteor_color_start">Meteor head color</string>
+    <string name="settings_meteor_color_start_summary" />
+    <string name="settings_meteor_color_end">Meteor tail color</string>
+    <string name="settings_meteor_color_end_summary" />
+    <string name="settings_meteor_spawn_probability">Meteor spawn probability</string>
+    <string name="settings_meteor_spawn_probability_summary">The probability a meteor is appearing (per frame)</string>
 </resources>

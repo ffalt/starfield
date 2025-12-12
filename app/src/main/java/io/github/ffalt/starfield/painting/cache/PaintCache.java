@@ -35,6 +35,7 @@ import io.github.ffalt.starfield.StarfieldOpts;
 public class PaintCache {
     protected final Paint[] cache;
     protected final StarfieldOpts opts;
+    private final float[] hsv = new float[3];
 
     public PaintCache(StarfieldOpts opts, int length) {
         this.opts = opts;
@@ -45,7 +46,6 @@ public class PaintCache {
     }
 
     protected int adjustBrightness(int color, int index) {
-        float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
         hsv[2] = 0.01f * index;
         return Color.HSVToColor(hsv);
@@ -59,4 +59,3 @@ public class PaintCache {
         return cache[index];
     }
 }
-

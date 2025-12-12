@@ -17,16 +17,21 @@
     <integer name="depth_min">10</integer>
     <integer name="depth_max">40</integer>
     <integer name="fps_default">60</integer>
+    <integer name="meteor_spawn_probability_default">5</integer>
+    <integer name="meteor_spawn_probability_min">1</integer>
+    <integer name="meteor_spawn_probability_step">1</integer>
+    <integer name="meteor_spawn_probability_max">200</integer>
     <integer name="fps_step">10</integer>
     <integer name="fps_min">10</integer>
     <integer name="fps_max">120</integer>
+    <integer name="follow_sensor_intensity_max">100</integer>
+    <integer name="follow_sensor_intensity_min">1</integer>
+    <integer name="follow_sensor_intensity_default">10</integer>
     <bool name="star_round_default">true</bool>
     <bool name="star_trail_default">true</bool>
     <bool name="follow_screen_default">true</bool>
     <bool name="follow_restore_default">true</bool>
     <bool name="follow_sensor_default">false</bool>
-    <integer name="follow_sensor_intensity_max">100</integer>
-    <integer name="follow_sensor_intensity_min">1</integer>
-    <integer name="follow_sensor_intensity_default">10</integer>
     <bool name="battery_speed_default">false</bool>
+    <bool name="meteors_enabled_default">false</bool>
 </resources>
