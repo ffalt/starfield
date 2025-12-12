@@ -1,0 +1,5 @@
+Starfield es un fondo de pantalla en vivo acelerado por hardware para el fondo y la pantalla de bloqueo que muestra volando en un campo de estrellas.
+
+Características:
+
+ - Ajuste un montón de aspectos, ej. cantidad de estrellas, color, velocidad
