@@ -40,6 +40,37 @@ def templateChangelogContent = """# Changelog Starfield Live Wallpaper
 {{/tags}}
  """
 
+// Template only for a single entry append (no global header)
+def templateChangelogEntryContent = """{{#tags}}
+
+{{#ifEquals name "Unreleased"}}
+## Unreleased
+{{else}}
+## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
+{{/ifEquals}}
+
+  {{#ifContainsType commits type='feat'}}
+### Features
+
+    {{#commits}}
+      {{#ifCommitType . type='feat'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+
+  {{#ifContainsType commits type='fix'}}
+### Bug Fixes
+
+    {{#commits}}
+      {{#ifCommitType . type='fix'}}
+ - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
+      {{/ifCommitType}}
+    {{/commits}}
+  {{/ifContainsType}}
+{{/tags}}
+"""
+
 def templateReleaseLogContent = """{{#tags}}{{#ifContainsType commits type='feat'}}## Features
 
     {{#commits}}
@@ -94,9 +125,20 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
 }
 
 tasks.register('gitChangelogTask', GitChangelogTask) {
-    fromRevision.set("440bdfdf94c09ef4edf1885b25852078a66d6332")
+    // Append only the new changes since the latest tag to the top of CHANGELOG.md
+    def prev_tag = ['bash', '-lc', 'git tag --sort=-creatordate | head -n 1'].execute().text.trim()
+    if (!prev_tag) {
+        // Fallback to initial commit if no tag exists
+        fromRevision.set("440bdfdf94c09ef4edf1885b25852078a66d6332")
+        fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
+    } else {
+        fromRevision.set(prev_tag)
+        fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
+    }
     toRevision.set("HEAD")
-    templateContent.set(templateChangelogContent)
+    file.set(new File("${rootDir}/CHANGELOG.md"))
+    prependToFile.set(true)
+    templateContent.set(templateChangelogEntryContent)
 }
 
 tasks.register('bumpReleaseVersion') {
