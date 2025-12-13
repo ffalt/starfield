@@ -1,7 +1,7 @@
 
 # Changelog Starfield Live Wallpaper
 
-## [v0.0.9](https://github.com/ffalt/starfield/compare/v0.0.8) (2025-12-12)
+## [v0.0.9](https://github.com/ffalt/starfield/compare/v0.0.9) (2025-12-12)
 
  - **translation** add spanish translation, thanks to https://crowdin.com/profile/gjostin769
 
