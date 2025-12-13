@@ -1,3 +1,10 @@
+
+## Unreleased
+
+### Features
+
+ -  **swiping**  smooth star movement on homescreen changing ([24250d9af374d35](https://github.com/ffalt/starfield/commit/24250d9af374d3543e8b80053de4c2344470a5dd))
+
 ## [v0.0.9](https://github.com/ffalt/starfield/compare/v0.0.9) (2025-12-12)
 
  - **translation** add spanish translation, thanks to https://crowdin.com/profile/gjostin769
