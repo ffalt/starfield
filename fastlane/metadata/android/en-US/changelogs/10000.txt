@@ -1,0 +1,1 @@
+ -  **swiping**  smooth star movement on homescreen changing
