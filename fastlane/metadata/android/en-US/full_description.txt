@@ -1,5 +1,21 @@
-Starfield is hardware accelerated live wallpaper for background and lockscreen that displays flying into a starfield.
+Starfield is a lightweight, hardware accelerated, highly configurable live wallpaper that simulates a flight through a starfield.
 
 Features:
 
- - Adjust a lot of aspects, e.g. star count, color, speed
+- Highly configurable starfield
+  - Adjustable star count, size and color
+  - Min/max star speeds for varied motion
+- Motion & visual effects
+  - Star trails with configurable gradient colors
+  - Meteors (occasional streaks) with spawn probability and trail colors
+- Screen & sensor interaction
+  - Follow home screen swiping with optional restore behavior
+  - Sensor-based movement with adjustable intensity
+  - Battery-aware speed reduction option
+- Performance & expert controls
+  - Adjustable framerate (FPS) for performance tuning
+  - Depth setting to control perceived 3D effect
+- Usability
+  - Color pickers for star, trail and meteor colors
+  - Persistent settings and a Reset-to-defaults option
+
