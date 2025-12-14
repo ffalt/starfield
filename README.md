@@ -56,7 +56,7 @@ Starfield focuses on smooth visuals and configurability without compromising bat
 Contributions are welcome. Small ways to help:
 - Open issues for bugs or feature requests.
 - Send pull requests with small, focused changes.
-- Help translate: this project uses Crowdin
+- Help translate: this project uses Crowdin  
   contribute translations at https://crowdin.com/project/starfield-wallpaper
 
 
