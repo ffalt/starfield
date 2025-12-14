@@ -1,5 +1,4 @@
 import se.bjurr.gitchangelog.api.InclusivenessStrategy
-import se.bjurr.gitchangelog.api.GitChangelogApi
 import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
