@@ -253,9 +253,13 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (starfield != null) {
-            starfield.setTilt(event.values[0], event.values[1]);
-        }
+        final float tiltX = event.values[0];
+        final float tiltY = event.values[1];
+        mHandler.post(() -> {
+            if (starfield != null) {
+                starfield.setTilt(tiltX, tiltY);
+            }
+        });
     }
 
     @Override
