@@ -79,11 +79,11 @@ public class StarfieldOpts {
     public float depth = StarfieldOpts.defaultDepth;
     public boolean batterySpeed = StarfieldOpts.defaultBatterySpeed;
     public int fps = 60;
-    public long drawTime = 1000 / 60;
+    public long drawTime = Math.round(1000.0 / 60);
 
     public void updateFPS(int fps) {
-        this.fps = fps;
-        this.drawTime = 1000 / fps;
+        this.fps = Math.max(1, fps);
+        this.drawTime = Math.round(1000.0 / this.fps);
     }
 
     public void updateDepth() {
