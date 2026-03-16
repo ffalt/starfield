@@ -38,6 +38,7 @@ import android.graphics.Paint;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.view.SurfaceHolder;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -365,7 +366,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     private void drawFrame() {
         if (starfield == null || !sizeInitialized) return;
 
-        final long start = System.currentTimeMillis();
+        final long start = SystemClock.elapsedRealtime();
         mHandler.removeCallbacks(mDrawThread);
         final SurfaceHolder holder = getSurface();
         Canvas c = null;
@@ -380,7 +381,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
         if (visible) {
             starfield.move();
-            final long duration = System.currentTimeMillis() - start;
+            final long duration = SystemClock.elapsedRealtime() - start;
             mHandler.postDelayed(mDrawThread, Math.max(0, opts.drawTime - duration));
         }
     }
