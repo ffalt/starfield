@@ -50,7 +50,12 @@ import io.github.ffalt.starfield.StarfieldPrefs;
 
 public abstract class StarfieldScene implements SurfaceHolderParent, SharedPreferences.OnSharedPreferenceChangeListener, SensorEventListener {
     private Starfield starfield;
-    private final Paint mPaintFill = new Paint();
+    private static final Paint mPaintFill;
+    static {
+        mPaintFill = new Paint();
+        mPaintFill.setStyle(Paint.Style.FILL);
+        mPaintFill.setColor(Color.BLACK);
+    }
     public final StarfieldOpts opts = new StarfieldOpts();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final Runnable mDrawThread = this::drawFrame;
@@ -72,8 +77,6 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     };
 
     public StarfieldScene() {
-        mPaintFill.setStyle(Paint.Style.FILL);
-        mPaintFill.setColor(Color.BLACK);
     }
 
     public void onUpdateOffset(float offsetX, float offsetY) {
