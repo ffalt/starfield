@@ -165,12 +165,13 @@ public class StarsPaint {
     }
 
     public void setOffsets(float diffX, float diffY) {
-        float scale = 1.5f;
+        float scale = 0.25f;
         if (opts.followRestore) {
-            scale = 5f;
+            scale = 1f;
         }
-        offsetTX += diffX * scale;
-        offsetTY += diffY * scale;
+        float intensity = opts.followScreenIntensity / 10f;
+        offsetTX += diffX * scale * intensity;
+        offsetTY += diffY * scale * intensity;
     }
 
     public void setSpeedModifier(float mod) {

@@ -23,6 +23,8 @@
     <string name="settings_group_screen">Home screens</string>
     <string name="settings_follow_screen_enable">Follow swiping</string>
     <string name="settings_follow_screen_summary">Follow changing home screens</string>
+    <string name="settings_follow_screen_intensity">Intensity</string>
+    <string name="settings_follow_screen_intensity_summary" />
     <string name="settings_follow_restore_enable">Always forward</string>
     <string name="settings_follow_restore_summary">On side screen do restore forward direction</string>
     <string name="settings_trails_enable">Show</string>

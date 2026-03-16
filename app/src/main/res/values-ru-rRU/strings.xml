@@ -24,6 +24,8 @@
     <string name="settings_group_screen">Домашние экраны</string>
     <string name="settings_follow_screen_enable">Следить за проведением</string>
     <string name="settings_follow_screen_summary">Следить за сменой домашних экранов</string>
+    <string name="settings_follow_screen_intensity">Интенсивность</string>
+    <string name="settings_follow_screen_intensity_summary"></string>
     <string name="settings_follow_restore_enable">Всегда вперед</string>
     <string name="settings_follow_restore_summary">На боковом экране восстанавливать направление вперед</string>
     <string name="settings_trails_enable">Показать</string>

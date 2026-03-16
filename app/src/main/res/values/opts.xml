@@ -27,6 +27,9 @@
     <integer name="follow_sensor_intensity_max">100</integer>
     <integer name="follow_sensor_intensity_min">1</integer>
     <integer name="follow_sensor_intensity_default">10</integer>
+    <integer name="follow_screen_intensity_max">100</integer>
+    <integer name="follow_screen_intensity_min">1</integer>
+    <integer name="follow_screen_intensity_default">10</integer>
     <bool name="star_round_default">true</bool>
     <bool name="star_trail_default">true</bool>
     <bool name="follow_screen_default">true</bool>

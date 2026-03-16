@@ -159,6 +159,18 @@
             app:summary="@string/settings_follow_screen_summary"
             app:title="@string/settings_follow_screen_enable" />
 
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/follow_screen_intensity_default"
+            android:key="follow_screen_intensity"
+            android:max="@integer/follow_screen_intensity_max"
+            android:summary="@string/settings_follow_screen_intensity_summary"
+            android:title="@string/settings_follow_screen_intensity"
+            app:dependency="follow_screen"
+            app:iconSpaceReserved="false"
+            app:min="@integer/follow_screen_intensity_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="@bool/follow_restore_default"
             app:dependency="follow_screen"

@@ -24,6 +24,8 @@
     <string name="settings_group_screen">Pantalla de inicio</string>
     <string name="settings_follow_screen_enable">Seguir deslizamiento</string>
     <string name="settings_follow_screen_summary">Seguir el cambio de pantallas de inicio</string>
+    <string name="settings_follow_screen_intensity">Intensidad</string>
+    <string name="settings_follow_screen_intensity_summary"></string>
     <string name="settings_follow_restore_enable">Siempre adelante</string>
     <string name="settings_follow_restore_summary">En la pantalla lateral restaurar la dirección hacia adelante</string>
     <string name="settings_trails_enable">Mostrar</string>

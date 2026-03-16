@@ -39,6 +39,7 @@ public class StarfieldOpts {
     public static final boolean defaultStarsCircle = true;
     public static final boolean defaultStarsTrail = true;
     public static final boolean defaultFollowScreen = true;
+    public static final int defaultFollowScreenIntensity = 10;
     public static final boolean defaultFollowSensor = false;
     public static final int defaultFollowSensorIntensity = 10;
     public static final boolean defaultFollowRestore = true;
@@ -69,6 +70,7 @@ public class StarfieldOpts {
     public int meteorColorStart = StarfieldOpts.defaultMeteorColorStart;
     public int meteorColorEnd = StarfieldOpts.defaultMeteorColorEnd;
     public boolean followScreen = StarfieldOpts.defaultFollowScreen;
+    public int followScreenIntensity = StarfieldOpts.defaultFollowScreenIntensity;
     public boolean followRestore = StarfieldOpts.defaultFollowRestore;
     public boolean followSensor = StarfieldOpts.defaultFollowSensor;
     public int followSensorIntensity = StarfieldOpts.defaultFollowSensorIntensity;

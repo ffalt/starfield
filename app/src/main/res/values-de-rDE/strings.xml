@@ -24,6 +24,8 @@
     <string name="settings_group_screen">Startbildschirme</string>
     <string name="settings_follow_screen_enable">Wischen folgen</string>
     <string name="settings_follow_screen_summary">Folge wechselnden Startbildschirmen</string>
+    <string name="settings_follow_screen_intensity">Intensität</string>
+    <string name="settings_follow_screen_intensity_summary"></string>
     <string name="settings_follow_restore_enable">Immer vorwärts</string>
     <string name="settings_follow_restore_summary">Auf Seitenbildschirmen die Richtung nach vorne wiederherstellen</string>
     <string name="settings_trails_enable">Anzeigen</string>

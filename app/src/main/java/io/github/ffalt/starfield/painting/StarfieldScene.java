@@ -135,6 +135,10 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         if (follow_screen != opts.followScreen) {
             opts.followScreen = follow_screen;
         }
+        int follow_screen_intensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN_INTENSITY, opts.followScreenIntensity);
+        if (follow_screen_intensity != opts.followScreenIntensity) {
+            opts.followScreenIntensity = follow_screen_intensity;
+        }
         boolean follow_sensor = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR, opts.followSensor);
         if (follow_sensor != opts.followSensor) {
             opts.followSensor = follow_sensor;
