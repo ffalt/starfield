@@ -59,4 +59,5 @@
     <string name="settings_meteor_color_end_summary" />
     <string name="settings_meteor_spawn_probability">Meteor spawn probability</string>
     <string name="settings_meteor_spawn_probability_summary">The probability a meteor is appearing (per frame)</string>
+    <string name="error_wallpaper_picker_not_found">Unable to open wallpaper picker. Please set the wallpaper manually from your device settings.</string>
 </resources>

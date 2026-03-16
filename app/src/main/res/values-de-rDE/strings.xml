@@ -60,4 +60,5 @@
     <string name="settings_meteor_color_end_summary"></string>
     <string name="settings_meteor_spawn_probability">Wahrscheinlichkeit für Meteore</string>
     <string name="settings_meteor_spawn_probability_summary">Wahrscheinlichkeit, dass pro Frame ein Meteorit erscheint</string>
+    <string name="error_wallpaper_picker_not_found">Hintergrundbild-Auswahl konnte nicht geöffnet werden. Bitte legen Sie das Hintergrundbild manuell in den Geräteeinstellungen fest.</string>
 </resources>

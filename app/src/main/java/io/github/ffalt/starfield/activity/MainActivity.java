@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             close(v);
         } catch (ActivityNotFoundException e) {
-            //
+            android.widget.Toast.makeText(this, 
+                R.string.error_wallpaper_picker_not_found, 
+                android.widget.Toast.LENGTH_LONG).show();
         }
     }
 }

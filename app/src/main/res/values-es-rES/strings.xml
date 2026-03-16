@@ -60,4 +60,5 @@
     <string name="settings_meteor_color_end_summary"></string>
     <string name="settings_meteor_spawn_probability">Probabilidad de aparición de meteoros</string>
     <string name="settings_meteor_spawn_probability_summary">La probabilidad que aparece un meteoro (por fotograma)</string>
+    <string name="error_wallpaper_picker_not_found">No se pudo abrir el selector de fondos de pantalla. Configure el fondo de pantalla manualmente desde la configuración de su dispositivo.</string>
 </resources>
