@@ -1,0 +1,12 @@
+ -  **StarfieldOpts**  implement double-checked locking for SharedPreferences initialization
+ -  **starfield**  change stars_current_brightness from float to int for improved performance
+ -  **starfield**  replace System.currentTimeMillis() with SystemClock.elapsedRealtime() for accurate frame timing
+ -  **starfield**  optimize tilt handling in sensor changes for better performance
+ -  **MainActivity**  add error message for wallpaper picker not found
+ -  **starfield**  add null checks for preference change listeners
+ -  **starfield**  improve drawTime calculation for better precision
+ -  **startrail**  replace setColor with setAlpha to restore trail brightness
+ -  **meteors**  correct speedBase calculation for meteor spawning
+ -  **sensor**  fix race condition by posting sensor updates to main thread
+ -  **starfield**  improve null safety and size initialization
+ -  **settings**  add follow screen intensity
