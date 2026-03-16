@@ -54,6 +54,8 @@ public class MeteorsPaint {
     private float speedModifier = 1.0f;
     private static final float DEG_TO_RAD = (float) (Math.PI / 180.0);
     private final Random rng = new Random();
+    private int cachedARStart, cachedAGStart, cachedABStart;
+    private int cachedAREnd, cachedAGEnd, cachedABEnd;
 
     static {
         for (int s = 0; s < METEOR_SEGMENTS; s++) {
@@ -98,6 +100,16 @@ public class MeteorsPaint {
             meteors_init_life[i] = 0f;
             meteors_length[i] = 0f;
         }
+        this.refreshColors();
+    }
+
+    public void refreshColors() {
+        cachedARStart = (opts.meteorColorStart >> 16) & 0xFF;
+        cachedAGStart = (opts.meteorColorStart >> 8) & 0xFF;
+        cachedABStart = opts.meteorColorStart & 0xFF;
+        cachedAREnd = (opts.meteorColorEnd >> 16) & 0xFF;
+        cachedAGEnd = (opts.meteorColorEnd >> 8) & 0xFF;
+        cachedABEnd = opts.meteorColorEnd & 0xFF;
     }
 
     public void move() {
@@ -154,14 +166,6 @@ public class MeteorsPaint {
         if (baseStroke < 1f) baseStroke = 1f;
         else if (baseStroke > 16f) baseStroke = 16f;
 
-        // Precompute meteor color channels to avoid repeated bit ops in the inner loop
-        int arStart = (opts.meteorColorStart >> 16) & 0xFF;
-        int agStart = (opts.meteorColorStart >> 8) & 0xFF;
-        int abStart = opts.meteorColorStart & 0xFF;
-        int arEnd = (opts.meteorColorEnd >> 16) & 0xFF;
-        int agEnd = (opts.meteorColorEnd >> 8) & 0xFF;
-        int abEnd = opts.meteorColorEnd & 0xFF;
-
         // Use the precomputed segment lookup arrays to avoid Math.pow per-frame
         for (int s = 0; s < METEOR_SEGMENTS; s++) {
             float f0 = SEG_F0[s];
@@ -177,9 +181,9 @@ public class MeteorsPaint {
             int a = (int) (segAlpha * 255f);
             float tColor = SEG_TMID_POW_07[s];
             float inv = 1f - tColor;
-            int rr = (int) (arStart * inv + arEnd * tColor);
-            int rg = (int) (agStart * inv + agEnd * tColor);
-            int rb = (int) (abStart * inv + abEnd * tColor);
+            int rr = (int) (this.cachedARStart * inv + this.cachedAREnd * tColor);
+            int rg = (int) (this.cachedAGStart * inv + this.cachedAGEnd * tColor);
+            int rb = (int) (this.cachedABStart * inv + this.cachedABEnd * tColor);
             int segColor = (rr << 16) | (rg << 8) | rb;
             meteorPaint.setColor((segColor & 0x00FFFFFF) | (a << 24));
             float stroke = baseStroke * (0.95f * (1f - SEG_TMID_POW_09[s]) + 0.05f);
