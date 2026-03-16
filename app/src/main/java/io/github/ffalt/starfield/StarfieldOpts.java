@@ -98,8 +98,17 @@ public class StarfieldOpts {
         updateDepth();
     }
 
+    private static volatile SharedPreferences sPreferences;
+
     public static SharedPreferences getPreferences(Context context) {
-        Context directBootContext = context.createDeviceProtectedStorageContext();
-        return directBootContext.getSharedPreferences(StarfieldPrefs.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        if (sPreferences == null) {
+            synchronized (StarfieldOpts.class) {
+                if (sPreferences == null) {
+                    Context directBootContext = context.createDeviceProtectedStorageContext();
+                    sPreferences = directBootContext.getSharedPreferences(StarfieldPrefs.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+                }
+            }
+        }
+        return sPreferences;
     }
 }
