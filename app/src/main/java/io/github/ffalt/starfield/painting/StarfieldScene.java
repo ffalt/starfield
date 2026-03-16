@@ -61,6 +61,14 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     private BroadcastReceiver batteryReceiver;
     private float batteryLevel = 1.0f;
     private Context mContext;
+    private volatile float pendingTiltX;
+    private volatile float pendingTiltY;
+    private boolean tiltPending = false;
+
+    private final Runnable applyTilt = () -> {
+        tiltPending = false;
+        if (starfield != null) starfield.setTilt(pendingTiltX, pendingTiltY);
+    };
 
     public StarfieldScene() {
         mPaintFill.setStyle(Paint.Style.FILL);
@@ -253,13 +261,12 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        final float tiltX = event.values[0];
-        final float tiltY = event.values[1];
-        mHandler.post(() -> {
-            if (starfield != null) {
-                starfield.setTilt(tiltX, tiltY);
-            }
-        });
+        pendingTiltX = event.values[0];
+        pendingTiltY = event.values[1];
+        if (!tiltPending) {
+            tiltPending = true;
+            mHandler.post(applyTilt);
+        }
     }
 
     @Override
