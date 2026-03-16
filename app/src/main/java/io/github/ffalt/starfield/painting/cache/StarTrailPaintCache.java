@@ -58,9 +58,9 @@ public class StarTrailPaintCache extends PaintCache {
     public Paint build(int index) {
         Paint result = new Paint();
         result.setStyle(Paint.Style.STROKE);
-        result.setColor(adjustBrightness(opts.trailColorStart, index));
         result.setAntiAlias(true);
         result.setStrokeWidth(1f);
+        result.setAlpha(index * 255 / 100);
         result.setShader(getSharedShader());
         return result;
     }
