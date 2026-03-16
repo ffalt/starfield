@@ -3,6 +3,26 @@
 
 ### Features
 
+ -  **starfield**  improve null safety and size initialization ([3634e18815ccfb7](https://github.com/ffalt/starfield/commit/3634e18815ccfb7e0b0484a9cdc3a5e1ed5b1978))
+ -  **settings**  add follow screen intensity ([2a7cbe7d5c5698a](https://github.com/ffalt/starfield/commit/2a7cbe7d5c5698a009440af2a1a4b578ccef1993))
+
+### Bug Fixes
+
+ -  **StarfieldOpts**  implement double-checked locking for SharedPreferences initialization ([a6f29cfb8818077](https://github.com/ffalt/starfield/commit/a6f29cfb881807796c3a047a42611d2e8e035aba))
+ -  **starfield**  change stars_current_brightness from float to int for improved performance ([596bdc70ef819be](https://github.com/ffalt/starfield/commit/596bdc70ef819be8853a03e3c5913e89178d301d))
+ -  **starfield**  replace System.currentTimeMillis() with SystemClock.elapsedRealtime() for accurate frame timing ([1616ff315da35db](https://github.com/ffalt/starfield/commit/1616ff315da35db7eb68e010f8726684db9f38f1))
+ -  **starfield**  optimize tilt handling in sensor changes for better performance ([0272308e4d02e27](https://github.com/ffalt/starfield/commit/0272308e4d02e27a3a68edf23079908061f40f78))
+ -  **MainActivity**  add error message for wallpaper picker not found ([896f6a664b0a99a](https://github.com/ffalt/starfield/commit/896f6a664b0a99a099e14ec9c9bbb81b9bce22ea))
+ -  **starfield**  add null checks for preference change listeners ([a8199a13e33f221](https://github.com/ffalt/starfield/commit/a8199a13e33f22108c43b3482fc867fc4d9eeac9))
+ -  **starfield**  improve drawTime calculation for better precision ([788b93e0296a9c7](https://github.com/ffalt/starfield/commit/788b93e0296a9c72bfe192163a2e87e3ced45fd2))
+ -  **startrail**  replace setColor with setAlpha to restore trail brightness ([e5642445f472326](https://github.com/ffalt/starfield/commit/e5642445f4723262baa3d1a4361bfd518dd7b3a1))
+ -  **meteors**  correct speedBase calculation for meteor spawning ([61f127b4d5a6e4c](https://github.com/ffalt/starfield/commit/61f127b4d5a6e4c099ef62376e0d45fa0e52a8ea))
+ -  **sensor**  fix race condition by posting sensor updates to main thread ([04fee2f2a8b0908](https://github.com/ffalt/starfield/commit/04fee2f2a8b09084ace63d5d323584f61c449580))
+
+## Unreleased
+
+### Features
+
  -  **swiping**  smooth star movement on homescreen changing ([24250d9af374d35](https://github.com/ffalt/starfield/commit/24250d9af374d3543e8b80053de4c2344470a5dd))
 
 ## [v0.0.9](https://github.com/ffalt/starfield/compare/v0.0.9) (2025-12-12)
