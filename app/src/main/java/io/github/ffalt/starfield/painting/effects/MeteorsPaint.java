@@ -222,7 +222,7 @@ public class MeteorsPaint {
     }
 
     private void spawnMeteor(int i) {
-        float speedBase = rng.nextFloat() * 26f + 10f * speedModifier;
+        float speedBase = (rng.nextFloat() * 26f + 10f) * speedModifier;
         float angle;
         int edge = rng.nextInt(4);
         switch (edge) {
