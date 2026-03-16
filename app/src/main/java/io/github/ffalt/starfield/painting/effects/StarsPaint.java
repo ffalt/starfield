@@ -49,7 +49,7 @@ public class StarsPaint {
     private float[] stars_current_x = new float[0];
     private float[] stars_current_y = new float[0];
     private float[] stars_current_radius = new float[0];
-    private float[] stars_current_brightness = new float[0];
+    private int[] stars_current_brightness = new int[0];
     private final StarPaintCache starPaints;
     private final StarTrailPaintCache starTrailPaints;
     private float offsetX = 0;
@@ -81,12 +81,12 @@ public class StarsPaint {
         stars_current_x = new float[n];
         stars_current_y = new float[n];
         stars_current_radius = new float[n];
-        stars_current_brightness = new float[n];
+        stars_current_brightness = new int[n];
 
         for (int i = 0; i < n; i++) {
             stars_z[i] = 0f;
             stars_current_radius[i] = 0f;
-            stars_current_brightness[i] = 0f;
+            stars_current_brightness[i] = 0;
             randomStarPosition(i);
             stars_z[i] = rng.nextFloat() * opts.initialZ;
         }
@@ -221,21 +221,20 @@ public class StarsPaint {
         }
         float currentX = stars_current_x[i];
         float currentY = stars_current_y[i];
-        float currentBrightness = stars_current_brightness[i];
+        int currentBrightness = stars_current_brightness[i];
         float currentRadius = stars_current_radius[i];
-        int bri = (int) currentBrightness; // reuse the integer brightness index
         if (opts.trails) {
             float dx = lastX - currentX;
             float dy = lastY - currentY;
             float distanceSquared = dx * dx + dy * dy;
             // avoid costly sqrt by comparing squared distance
             if (distanceSquared > 16f) { // equivalent to distance > 4f
-                Paint trailPaint = starTrailPaints.get(bri);
+                Paint trailPaint = starTrailPaints.get(currentBrightness);
                 trailPaint.setStrokeWidth(currentRadius);
                 c.drawLine(lastX, lastY, currentX, currentY, trailPaint);
             }
         }
-        Paint starPaint = starPaints.get(bri);
+        Paint starPaint = starPaints.get(currentBrightness);
         if (opts.circle) {
             c.drawCircle(currentX, currentY, currentRadius, starPaint);
         } else {
