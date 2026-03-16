@@ -58,18 +58,22 @@ public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
         Activity parent = getActivity();
         if (parent != null) {
             SharedPreferences prefs = StarfieldOpts.getPreferences(parent);
-            min_v_pref.setOnPreferenceChangeListener((preference, newValue) -> {
-                int min_v = (int) newValue;
-                int max_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(StarfieldOpts.defaultMaxV));
-                updateVLabels(min_v, max_v);
-                return true;
-            });
-            max_v_pref.setOnPreferenceChangeListener((preference, newValue) -> {
-                int min_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(StarfieldOpts.defaultMinV));
-                int max_v = (int) newValue;
-                updateVLabels(min_v, max_v);
-                return true;
-            });
+            if (min_v_pref != null) {
+                min_v_pref.setOnPreferenceChangeListener((preference, newValue) -> {
+                    int min_v = (int) newValue;
+                    int max_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(StarfieldOpts.defaultMaxV));
+                    updateVLabels(min_v, max_v);
+                    return true;
+                });
+            }
+            if (max_v_pref != null) {
+                max_v_pref.setOnPreferenceChangeListener((preference, newValue) -> {
+                    int min_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(StarfieldOpts.defaultMinV));
+                    int max_v = (int) newValue;
+                    updateVLabels(min_v, max_v);
+                    return true;
+                });
+            }
         }
     }
 
