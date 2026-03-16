@@ -55,6 +55,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     private final Runnable mDrawThread = this::drawFrame;
     public boolean visible = false;
     public boolean isSensorAvailable = false;
+    private boolean sizeInitialized = false;
     private Sensor sensor;
     private SensorManager sensorManager;
     private BroadcastReceiver batteryReceiver;
@@ -67,11 +68,14 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     public void onUpdateOffset(float offsetX, float offsetY) {
-        starfield.setOffsets(offsetX, offsetY);
+        if (starfield != null) {
+            starfield.setOffsets(offsetX, offsetY);
+        }
     }
 
     public void onUpdateSize(int width, int height) {
         opts.updateBounds(width, height);
+        sizeInitialized = true;
         reset();
     }
 
@@ -289,7 +293,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     public void onVisibilityChanged(boolean visible) {
         this.visible = visible;
-        starfield.clearOffsets();
+        if (starfield != null) {
+            starfield.clearOffsets();
+        }
         mHandler.removeCallbacks(mDrawThread);
         if (visible) {
             drawFrame();
@@ -346,6 +352,8 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     private void drawFrame() {
+        if (starfield == null || !sizeInitialized) return;
+
         final long start = System.currentTimeMillis();
         mHandler.removeCallbacks(mDrawThread);
         final SurfaceHolder holder = getSurface();
