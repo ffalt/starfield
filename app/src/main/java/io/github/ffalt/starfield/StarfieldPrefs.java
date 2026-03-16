@@ -42,8 +42,8 @@ public class StarfieldPrefs {
     public static final String SHARED_PREFS_STAR_SIZE = "star_size";
     public static final String SHARED_PREFS_DEPTH = "depth";
     public static final String SHARED_PREFS_STAR_COLOR = "star_color";
-    public static final String SHARED_PREFS_TRIAL_COLOR_START = "trail_color_start";
-    public static final String SHARED_PREFS_TRIAL_COLOR_END = "trail_color_end";
+    public static final String SHARED_PREFS_TRAIL_COLOR_START = "trail_color_start";
+    public static final String SHARED_PREFS_TRAIL_COLOR_END = "trail_color_end";
     public static final String SHARED_PREFS_FPS = "fps";
     public static final String SHARED_PREFS_BATTERY_SPEED = "battery_speed";
     public static final String SHARED_PREFS_METEORS_ENABLED = "meteors_enabled";

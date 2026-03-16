@@ -172,12 +172,12 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.starColor = star_color;
             update = true;
         }
-        int trail_color_start = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRIAL_COLOR_START, opts.trailColorStart);
+        int trail_color_start = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_START, opts.trailColorStart);
         if (trail_color_start != opts.trailColorStart) {
             opts.trailColorStart = trail_color_start;
             update = true;
         }
-        int trail_color_end = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRIAL_COLOR_END, opts.trailColorEnd);
+        int trail_color_end = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_END, opts.trailColorEnd);
         if (trail_color_end != opts.trailColorEnd) {
             opts.trailColorEnd = trail_color_end;
             update = true;
