@@ -8,7 +8,7 @@
     </a>
 </p>
 
-<h1 align="center">Starfield — Android Live Wallpaper</h1>
+<h1 align="center">Starfield - Android Live Wallpaper</h1>
 <p align="center">A lightweight, hardware accelerated, highly configurable live wallpaper that simulates a flight through a starfield.</p>
 
 <p align="center">
@@ -17,75 +17,92 @@
   <img src="https://github.com/ffalt/starfield/workflows/test/badge.svg" alt="CI test badge">
 </p>
 
-## Features
+## ✨ Features
 
-Starfield focuses on smooth visuals and configurability without compromising battery life.
+Starfield focuses on smooth visuals and configurability without compromising battery life. Every aspect of the simulation can be tuned to match your taste - from a calm, drifting nebula feel to a blazing warp-speed rush.
 
-- Highly configurable starfield
-  - Adjustable star count, size and color
-  - Min/max star speeds for varied motion
-- Motion & visual effects
-  - Star trails with configurable gradient colors
-  - Meteors (occasional streaks) with spawn probability and trail colors
-- Screen & sensor interaction
-  - Follow home screen swiping with optional restore behavior
-  - Sensor-based movement with adjustable intensity
-  - Battery-aware speed reduction option
-- Performance & expert controls
-  - Adjustable framerate (FPS) for performance tuning
-  - Depth setting to control perceived 3D effect
-- Usability
-  - Color pickers for star, trail and meteor colors
-  - Persistent settings and a Reset-to-defaults option
+| Category                  | What you get                                                                         |
+|---------------------------|--------------------------------------------------------------------------------------|
+| 🌟 **Stars**              | Adjustable count, size, color, and min/max speeds                                    |
+| 🔵 **Star shape**         | Toggle between smooth round circles and square pixels                                |
+| 🚀 **Star acceleration**  | Each star naturally speeds up as it zooms toward you for a warp-rush feel            |
+| ✨ **Star trails**         | Enable/disable motion trails; independent inner & outer gradient colors              |
+| ☄️ **Meteors**            | Up to 3 simultaneous meteors spawning from any screen edge; configurable probability |
+| 🌠 **Meteor detail**      | Multi-segment gradient trail, bright core streak, and glowing filled head            |
+| 🎨 **Colors**             | Full color pickers for stars, trail inner/outer, and meteor head/tail                |
+| 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; optional restore-to-center     |
+| 🔄 **Gyroscope**          | Tilt-to-steer via gyroscope with adjustable intensity                                |
+| 🔋 **Battery-aware**      | Automatically scales down star speed proportionally to battery level (optional)      |
+| ⚡ **Performance**         | Adjustable FPS cap; hardware-accelerated canvas rendering                            |
+| 🌌 **Depth of field**     | Depth multiplier controls the perceived 3D parallax and zoom range                   |
+| ⏸️ **Smart pause**        | Rendering stops automatically when the wallpaper is not visible - zero waste         |
+| 🔐 **Boot-safe settings** | Preferences stored in device-protected storage; available before screen unlock       |
+| 💾 **Settings**           | Persistent preferences with a one-tap Reset-to-defaults                              |
 
-## Screenshots
+## 📸 Screenshots
 
 <p align="middle">
 <img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2_wallpaper.jpg" alt="Wallpaper">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4_settings.jpg" alt="Settings">
 </p>
 
-## Installation
+*Lock screen · Home screen wallpaper · Settings panel*
+
+## 📲 Installation
+
+No Play Store account needed - grab the APK directly:
 
 <a href="https://github.com/ffalt/starfield/releases" target="_blank"><img height="80" src="./badge-github.png" alt="Get it on Github"></a>
 <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22:%22io.github.ffalt.starfield%22,%22url%22:%22https://github.com/ffalt/starfield%22,%22author%22:%22ffalt%22,%22name%22:%22Starfield%22,%22preferredApkIndex%22:%200%7D"  target="_blank"><img height="80" src="./badge-obtainium.png" alt="Get it on Obtainium"></a>
 
+**Obtainium** lets you track and auto-update the app straight from this GitHub repository, so you'll always have the latest version without any app store.
 
+### Quick-start after install
 
-## Contribution & translation
+1. Long-press your home screen → **Wallpapers** → **Live Wallpapers**
+2. Select **Starfield** from the list
+3. Tap **Settings** to customise and enjoy 🚀
 
-Contributions are welcome. Small ways to help:
-- Open issues for bugs or feature requests.
-- Send pull requests with small, focused changes.
-- Help translate: this project uses Crowdin  
-  contribute translations at https://crowdin.com/project/starfield-wallpaper
+> [!Tip:] 
+> Starfield also installs a dedicated app icon in your launcher. Tap it any time to jump straight to wallpaper - no need to dig through wallpaper menus.
 
+## 🤝 Contribution & translation
 
+All contributions are warmly welcome - no contribution is too small!
 
-## License
-
-This project is licensed under the GPL 3.0 license. See `LICENSE` for details.
-
-
-
-## Building from source
-
-- Requirements: Java JDK (11+ recommended), Android SDK, Gradle wrapper (included)
-
-To build a debug APK locally:
-
-- macOS / Linux / WSL
-
-  ./gradlew assembleDebug
-
-- Install to a connected device (ADB required):
-
-  adb install -r app/build/outputs/apk/debug/app-debug.apk
-
-Note: The project uses the standard Android Gradle structure (see `app/` folder).
+- 🐛 **Bug reports & ideas** - open an [issue](https://github.com/ffalt/starfield/issues)
+- 🔧 **Code** - send a pull request with small, focused changes
+- 🌍 **Translations** - help localise Starfield via Crowdin:  
+  [crowdin.com/project/starfield-wallpaper](https://crowdin.com/project/starfield-wallpaper)
 
 
 
-## Acknowledgments
+## ⚖️ License
 
-This project uses https://github.com/jaredrummler/ColorPicker
+This project is licensed under the **GPL 3.0** license. See [`LICENSE`](./LICENSE) for details.
+
+
+
+## 🔨 Building from source
+
+**Requirements:** Java JDK 11+, Android SDK, Gradle wrapper (already included)
+
+```bash
+# Clone the repository
+git clone https://github.com/ffalt/starfield.git
+cd starfield
+
+# Build a debug APK
+./gradlew assembleDebug
+
+# (Optional) Install directly to a connected device via ADB
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+```
+
+> The project follows the standard Android Gradle layout - all app code lives under `app/src/main/`.
+
+
+
+## 🙏 Acknowledgments
+
+- Color picker UI by [jaredrummler/ColorPicker](https://github.com/jaredrummler/ColorPicker)
 
