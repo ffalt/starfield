@@ -21,7 +21,7 @@
 
 Starfield focuses on smooth visuals and configurability without compromising battery life. Every aspect of the simulation can be tuned to match your taste - from a calm, drifting nebula feel to a blazing warp-speed rush.
 
-| Category                  | What you get                                                                         |
+| Category                  | What you get (most is optional)                                                      |
 |---------------------------|--------------------------------------------------------------------------------------|
 | 🌟 **Stars**              | Adjustable count, size, color, and min/max speeds                                    |
 | 🔵 **Star shape**         | Toggle between smooth round circles and square pixels                                |
@@ -30,9 +30,9 @@ Starfield focuses on smooth visuals and configurability without compromising bat
 | ☄️ **Meteors**            | Up to 3 simultaneous meteors spawning from any screen edge; configurable probability |
 | 🌠 **Meteor detail**      | Multi-segment gradient trail, bright core streak, and glowing filled head            |
 | 🎨 **Colors**             | Full color pickers for stars, trail inner/outer, and meteor head/tail                |
-| 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; optional restore-to-center     |
+| 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; restore-to-center              |
 | 🔄 **Gyroscope**          | Tilt-to-steer via gyroscope with adjustable intensity                                |
-| 🔋 **Battery-aware**      | Automatically scales down star speed proportionally to battery level (optional)      |
+| 🔋 **Battery-aware**      | Automatically scales down star speed proportionally to battery level                 |
 | ⚡ **Performance**         | Adjustable FPS cap; hardware-accelerated canvas rendering                            |
 | 🌌 **Depth of field**     | Depth multiplier controls the perceived 3D parallax and zoom range                   |
 | ⏸️ **Smart pause**        | Rendering stops automatically when the wallpaper is not visible - zero waste         |
@@ -41,11 +41,12 @@ Starfield focuses on smooth visuals and configurability without compromising bat
 
 ## 📸 Screenshots
 
-<p align="middle">
+<p align="center">
 <img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2_wallpaper.jpg" alt="Wallpaper">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4_settings.jpg" alt="Settings">
 </p>
-
+<p align="center">
 *Lock screen · Home screen wallpaper · Settings panel*
+</p>
 
 ## 📲 Installation
 
@@ -63,7 +64,7 @@ No Play Store account needed - grab the APK directly:
 3. Tap **Settings** to customise and enjoy 🚀
 
 > [!Tip] 
-> Starfield also installs a dedicated app icon in your launcher. Tap it any time to jump straight to wallpaper - no need to dig through wallpaper menus.
+> Starfield also installs a dedicated app icon in your launcher. Tap it any time to jump straight to the wallpaper - no need to dig through wallpaper menus.
 
 ## 🤝 Contribution & translation
 
