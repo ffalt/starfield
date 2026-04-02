@@ -62,7 +62,7 @@ No Play Store account needed - grab the APK directly:
 2. Select **Starfield** from the list
 3. Tap **Settings** to customise and enjoy 🚀
 
-> [!Tip:] 
+> [!Tip] 
 > Starfield also installs a dedicated app icon in your launcher. Tap it any time to jump straight to wallpaper - no need to dig through wallpaper menus.
 
 ## 🤝 Contribution & translation
