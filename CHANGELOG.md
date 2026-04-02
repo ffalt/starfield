@@ -1,5 +1,5 @@
 
-## Unreleased
+## [v0.0.11](https://github.com/ffalt/starfield/compare/v0.0.11) (2026-03-16)
 
 ### Features
 
@@ -19,7 +19,7 @@
  -  **meteors**  correct speedBase calculation for meteor spawning ([61f127b4d5a6e4c](https://github.com/ffalt/starfield/commit/61f127b4d5a6e4c099ef62376e0d45fa0e52a8ea))
  -  **sensor**  fix race condition by posting sensor updates to main thread ([04fee2f2a8b0908](https://github.com/ffalt/starfield/commit/04fee2f2a8b09084ace63d5d323584f61c449580))
 
-## Unreleased
+## [v0.0.10](https://github.com/ffalt/starfield/compare/v0.0.10) (2025-12-13)
 
 ### Features
 
