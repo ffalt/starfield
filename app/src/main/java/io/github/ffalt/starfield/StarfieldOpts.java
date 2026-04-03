@@ -32,52 +32,52 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 
 public class StarfieldOpts {
-    public static final float defaultMaxV = 20;
-    public static final float defaultMinV = 1;
-    public static final float defaultStarSize = 2;
-    public static final int defaultNumStars = 1000;
-    public static final boolean defaultStarsCircle = true;
-    public static final boolean defaultStarsTrail = true;
-    public static final boolean defaultFollowScreen = true;
-    public static final int defaultFollowScreenIntensity = 10;
-    public static final boolean defaultFollowSensor = false;
-    public static final int defaultFollowSensorIntensity = 10;
-    public static final boolean defaultFollowRestore = true;
-    public static final int defaultStarColor = Color.WHITE;
-    public static final int defaultTrailColorStart = Color.WHITE;
-    public static final int defaultTrailColorEnd = Color.parseColor("#B3B3B3");
-    public static final boolean defaultMeteorsEnabled = true;
-    public static final int defaultMeteorColorStart = Color.parseColor("#FFEB3B");
-    public static final int defaultMeteorColorEnd = Color.parseColor("#E98E1E");
-    public static final float defaultMeteorSpawnProb = 0.0005f; // per-frame
-    public static final int meteorMaxCount = 3;
-    public static final float defaultDepth = 2f;
-    public static final boolean defaultBatterySpeed = false;
-    public float W = 100f;
-    public float H = 100f;
+    public static final float DEFAULT_MAX_V = 20;
+    public static final float DEFAULT_MIN_V = 1;
+    public static final float DEFAULT_STAR_SIZE = 2;
+    public static final int DEFAULT_NUM_STARS = 1000;
+    public static final boolean DEFAULT_STARS_CIRCLE = true;
+    public static final boolean DEFAULT_STARS_TRAIL = true;
+    public static final boolean DEFAULT_FOLLOW_SCREEN = true;
+    public static final int DEFAULT_FOLLOW_SCREEN_INTENSITY = 10;
+    public static final boolean DEFAULT_FOLLOW_SENSOR = false;
+    public static final int DEFAULT_FOLLOW_SENSOR_INTENSITY = 10;
+    public static final boolean DEFAULT_FOLLOW_RESTORE = true;
+    public static final int DEFAULT_STAR_COLOR = Color.WHITE;
+    public static final int DEFAULT_TRAIL_COLOR_START = Color.WHITE;
+    public static final int DEFAULT_TRAIL_COLOR_END = Color.parseColor("#B3B3B3");
+    public static final boolean DEFAULT_METEORS_ENABLED = true;
+    public static final int DEFAULT_METEOR_COLOR_START = Color.parseColor("#FFEB3B");
+    public static final int DEFAULT_METEOR_COLOR_END = Color.parseColor("#E98E1E");
+    public static final float DEFAULT_METEOR_SPAWN_PROB = 0.0005f; // per-frame
+    public static final int METEOR_MAX_COUNT = 3;
+    public static final float DEFAULT_DEPTH = 2f;
+    public static final boolean DEFAULT_BATTERY_SPEED = false;
+    public float width = 100f;
+    public float height = 100f;
     public float hW = 50f;
     public float hH = 50f;
     public float initialZ = 200f;
-    public float minV = StarfieldOpts.defaultMinV;
-    public float maxV = StarfieldOpts.defaultMaxV;
-    public float starSize = StarfieldOpts.defaultStarSize;
-    public int numStars = StarfieldOpts.defaultNumStars;
-    public int starColor = StarfieldOpts.defaultStarColor;
-    public int trailColorStart = StarfieldOpts.defaultTrailColorStart;
-    public int trailColorEnd = StarfieldOpts.defaultTrailColorEnd;
-    public boolean meteorsEnabled = StarfieldOpts.defaultMeteorsEnabled;
-    public float meteorSpawnProb = StarfieldOpts.defaultMeteorSpawnProb;
-    public int meteorColorStart = StarfieldOpts.defaultMeteorColorStart;
-    public int meteorColorEnd = StarfieldOpts.defaultMeteorColorEnd;
-    public boolean followScreen = StarfieldOpts.defaultFollowScreen;
-    public int followScreenIntensity = StarfieldOpts.defaultFollowScreenIntensity;
-    public boolean followRestore = StarfieldOpts.defaultFollowRestore;
-    public boolean followSensor = StarfieldOpts.defaultFollowSensor;
-    public int followSensorIntensity = StarfieldOpts.defaultFollowSensorIntensity;
-    public boolean trails = StarfieldOpts.defaultStarsTrail;
-    public boolean circle = StarfieldOpts.defaultStarsCircle;
-    public float depth = StarfieldOpts.defaultDepth;
-    public boolean batterySpeed = StarfieldOpts.defaultBatterySpeed;
+    public float minV = StarfieldOpts.DEFAULT_MIN_V;
+    public float maxV = StarfieldOpts.DEFAULT_MAX_V;
+    public float starSize = StarfieldOpts.DEFAULT_STAR_SIZE;
+    public int numStars = StarfieldOpts.DEFAULT_NUM_STARS;
+    public int starColor = StarfieldOpts.DEFAULT_STAR_COLOR;
+    public int trailColorStart = StarfieldOpts.DEFAULT_TRAIL_COLOR_START;
+    public int trailColorEnd = StarfieldOpts.DEFAULT_TRAIL_COLOR_END;
+    public boolean meteorsEnabled = StarfieldOpts.DEFAULT_METEORS_ENABLED;
+    public float meteorSpawnProb = StarfieldOpts.DEFAULT_METEOR_SPAWN_PROB;
+    public int meteorColorStart = StarfieldOpts.DEFAULT_METEOR_COLOR_START;
+    public int meteorColorEnd = StarfieldOpts.DEFAULT_METEOR_COLOR_END;
+    public boolean followScreen = StarfieldOpts.DEFAULT_FOLLOW_SCREEN;
+    public int followScreenIntensity = StarfieldOpts.DEFAULT_FOLLOW_SCREEN_INTENSITY;
+    public boolean followRestore = StarfieldOpts.DEFAULT_FOLLOW_RESTORE;
+    public boolean followSensor = StarfieldOpts.DEFAULT_FOLLOW_SENSOR;
+    public int followSensorIntensity = StarfieldOpts.DEFAULT_FOLLOW_SENSOR_INTENSITY;
+    public boolean trails = StarfieldOpts.DEFAULT_STARS_TRAIL;
+    public boolean circle = StarfieldOpts.DEFAULT_STARS_CIRCLE;
+    public float depth = StarfieldOpts.DEFAULT_DEPTH;
+    public boolean batterySpeed = StarfieldOpts.DEFAULT_BATTERY_SPEED;
     public int fps = 60;
     public long drawTime = Math.round(1000.0 / 60);
 
@@ -87,14 +87,14 @@ public class StarfieldOpts {
     }
 
     public void updateDepth() {
-        this.initialZ = Math.min(W, H) * depth;
+        this.initialZ = Math.min(width, height) * depth;
     }
 
-    public void updateBounds(int W, int H) {
-        this.W = W;
-        this.H = H;
-        this.hW = W / 2f;
-        this.hH = H / 2f;
+    public void updateBounds(int w, int h) {
+        this.width = w;
+        this.height = h;
+        this.hW = w / 2f;
+        this.hH = h / 2f;
         updateDepth();
     }
 

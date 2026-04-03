@@ -37,14 +37,14 @@ import io.github.ffalt.starfield.StarfieldOpts;
 public class MeteorsPaint {
     private final StarfieldOpts opts;
     private final Paint meteorPaint;
-    private boolean[] meteors_active = new boolean[0];
-    private float[] meteors_x = new float[0];
-    private float[] meteors_y = new float[0];
-    private float[] meteors_vx = new float[0];
-    private float[] meteors_vy = new float[0];
-    private float[] meteors_life = new float[0];
-    private float[] meteors_init_life = new float[0];
-    private float[] meteors_length = new float[0];
+    private boolean[] meteorsActive = new boolean[0];
+    private float[] meteorsX = new float[0];
+    private float[] meteorsY = new float[0];
+    private float[] meteorsVx = new float[0];
+    private float[] meteorsVy = new float[0];
+    private float[] meteorsLife = new float[0];
+    private float[] meteorsInitLife = new float[0];
+    private float[] meteorsLength = new float[0];
     private static final int METEOR_SEGMENTS = 20;
     private static final float[] SEG_F0 = new float[METEOR_SEGMENTS];
     private static final float[] SEG_F1 = new float[METEOR_SEGMENTS];
@@ -54,8 +54,12 @@ public class MeteorsPaint {
     private float speedModifier = 1.0f;
     private static final float DEG_TO_RAD = (float) (Math.PI / 180.0);
     private final Random rng = new Random();
-    private int cachedARStart, cachedAGStart, cachedABStart;
-    private int cachedAREnd, cachedAGEnd, cachedABEnd;
+    private int cachedARStart;
+    private int cachedAGStart;
+    private int cachedABStart;
+    private int cachedAREnd;
+    private int cachedAGEnd;
+    private int cachedABEnd;
 
     static {
         for (int s = 0; s < METEOR_SEGMENTS; s++) {
@@ -81,24 +85,24 @@ public class MeteorsPaint {
     }
 
     public void init() {
-        int n = StarfieldOpts.meteorMaxCount;
-        meteors_active = new boolean[n];
-        meteors_x = new float[n];
-        meteors_y = new float[n];
-        meteors_vx = new float[n];
-        meteors_vy = new float[n];
-        meteors_life = new float[n];
-        meteors_init_life = new float[n];
-        meteors_length = new float[n];
+        int n = StarfieldOpts.METEOR_MAX_COUNT;
+        meteorsActive = new boolean[n];
+        meteorsX = new float[n];
+        meteorsY = new float[n];
+        meteorsVx = new float[n];
+        meteorsVy = new float[n];
+        meteorsLife = new float[n];
+        meteorsInitLife = new float[n];
+        meteorsLength = new float[n];
         for (int i = 0; i < n; i++) {
-            meteors_active[i] = false;
-            meteors_x[i] = 0f;
-            meteors_y[i] = 0f;
-            meteors_vx[i] = 0f;
-            meteors_vy[i] = 0f;
-            meteors_life[i] = 0f;
-            meteors_init_life[i] = 0f;
-            meteors_length[i] = 0f;
+            meteorsActive[i] = false;
+            meteorsX[i] = 0f;
+            meteorsY[i] = 0f;
+            meteorsVx[i] = 0f;
+            meteorsVy[i] = 0f;
+            meteorsLife[i] = 0f;
+            meteorsInitLife[i] = 0f;
+            meteorsLength[i] = 0f;
         }
         this.refreshColors();
     }
@@ -116,18 +120,18 @@ public class MeteorsPaint {
         if (rng.nextFloat() < opts.meteorSpawnProb) {
             spawnFreeMeteor();
         }
-        int n = meteors_active.length;
+        int n = meteorsActive.length;
         for (int i = 0; i < n; i++) {
-            if (meteors_active[i]) {
+            if (meteorsActive[i]) {
                 moveMeteor(i);
             }
         }
     }
 
     public void draw(Canvas c) {
-        int n = meteors_active.length;
+        int n = meteorsActive.length;
         for (int i = 0; i < n; i++) {
-            if (meteors_active[i]) {
+            if (meteorsActive[i]) {
                 drawMeteor(c, i);
             }
         }
@@ -138,24 +142,24 @@ public class MeteorsPaint {
     }
 
     private void moveMeteor(int i) {
-        meteors_x[i] += meteors_vx[i] * speedModifier;
-        meteors_y[i] += meteors_vy[i] * speedModifier;
-        meteors_life[i] -= 1f;
-        float mx = meteors_x[i];
-        float my = meteors_y[i];
-        if (meteors_life[i] <= 0f || mx < -50f || mx > opts.W + 50f || my < -50f || my > opts.H + 50f) {
-            meteors_active[i] = false;
+        meteorsX[i] += meteorsVx[i] * speedModifier;
+        meteorsY[i] += meteorsVy[i] * speedModifier;
+        meteorsLife[i] -= 1f;
+        float mx = meteorsX[i];
+        float my = meteorsY[i];
+        if (meteorsLife[i] <= 0f || mx < -50f || mx > opts.width + 50f || my < -50f || my > opts.height + 50f) {
+            meteorsActive[i] = false;
         }
     }
 
     private void drawMeteor(Canvas c, int i) {
         // hoist repeated computations out of the inner loop
-        float mx = meteors_x[i];
-        float my = meteors_y[i];
-        float mvx = meteors_vx[i];
-        float mvy = meteors_vy[i];
-        float mlen = meteors_length[i];
-        float lifeRatio = meteors_life[i] / (meteors_init_life[i] + 1e-6f);
+        float mx = meteorsX[i];
+        float my = meteorsY[i];
+        float mvx = meteorsVx[i];
+        float mvy = meteorsVy[i];
+        float mlen = meteorsLength[i];
+        float lifeRatio = meteorsLife[i] / (meteorsInitLife[i] + 1e-6f);
         if (lifeRatio < 0f) lifeRatio = 0f;
         else if (lifeRatio > 1f) lifeRatio = 1f;
         float tx = mx - mvx * mlen;
@@ -192,12 +196,12 @@ public class MeteorsPaint {
         }
 
         // thin bright core streak from head into tail (short), gives a sharp core
-        float coreLen = meteors_length[i] * 0.25f;
+        float coreLen = meteorsLength[i] * 0.25f;
         if (coreLen < 2f) coreLen = 2f;
-        float hx = meteors_x[i];
-        float hy = meteors_y[i];
-        float cx = hx - meteors_vx[i] * (coreLen / (meteors_length[i] + 0.0001f));
-        float cy = hy - meteors_vy[i] * (coreLen / (meteors_length[i] + 0.0001f));
+        float hx = meteorsX[i];
+        float hy = meteorsY[i];
+        float cx = hx - meteorsVx[i] * (coreLen / (meteorsLength[i] + 0.0001f));
+        float cy = hy - meteorsVy[i] * (coreLen / (meteorsLength[i] + 0.0001f));
         int coreA = (int) (lifeRatio * 255f);
         meteorPaint.setColor((opts.meteorColorStart & 0x00FFFFFF) | (coreA << 24));
         meteorPaint.setStrokeWidth(Math.max(1f, baseStroke * 0.35f));
@@ -209,16 +213,16 @@ public class MeteorsPaint {
         else if (headRatio > 1f) headRatio = 1f;
         int headAlpha = (int) (headRatio * 255f);
         meteorPaint.setColor((opts.meteorColorStart & 0x00FFFFFF) | (headAlpha << 24));
-        float headRadius = Math.max(1f, Math.min(12f, meteors_length[i] * 0.14f));
+        float headRadius = Math.max(1f, Math.min(12f, meteorsLength[i] * 0.14f));
         meteorPaint.setStyle(Paint.Style.FILL);
-        c.drawCircle(meteors_x[i], meteors_y[i], headRadius, meteorPaint);
+        c.drawCircle(meteorsX[i], meteorsY[i], headRadius, meteorPaint);
         meteorPaint.setStyle(Paint.Style.STROKE);
     }
 
     private void spawnFreeMeteor() {
-        int n = meteors_active.length;
+        int n = meteorsActive.length;
         for (int i = 0; i < n; i++) {
-            if (!meteors_active[i]) {
+            if (!meteorsActive[i]) {
                 spawnMeteor(i);
                 return;
             }
@@ -231,33 +235,33 @@ public class MeteorsPaint {
         int edge = rng.nextInt(4);
         switch (edge) {
             case 0: // top
-                meteors_x[i] = rng.nextFloat() * opts.W;
-                meteors_y[i] = -10f;
+                meteorsX[i] = rng.nextFloat() * opts.width;
+                meteorsY[i] = -10f;
                 angle = (20f + rng.nextFloat() * 140f) * DEG_TO_RAD;
                 break;
             case 1: // right
-                meteors_x[i] = opts.W + 10f;
-                meteors_y[i] = rng.nextFloat() * opts.H;
+                meteorsX[i] = opts.width + 10f;
+                meteorsY[i] = rng.nextFloat() * opts.height;
                 angle = (110f + rng.nextFloat() * 140f) * DEG_TO_RAD;
                 break;
             case 2: // bottom
-                meteors_x[i] = rng.nextFloat() * opts.W;
-                meteors_y[i] = opts.H + 10f;
+                meteorsX[i] = rng.nextFloat() * opts.width;
+                meteorsY[i] = opts.height + 10f;
                 angle = (200f + rng.nextFloat() * 140f) * DEG_TO_RAD;
                 break;
             default: // left
-                meteors_x[i] = -10f;
-                meteors_y[i] = rng.nextFloat() * opts.H;
+                meteorsX[i] = -10f;
+                meteorsY[i] = rng.nextFloat() * opts.height;
                 angle = (-70f + rng.nextFloat() * 140f) * DEG_TO_RAD;
                 break;
         }
 
-        meteors_vx[i] = (float) Math.cos(angle) * speedBase;
-        meteors_vy[i] = (float) Math.sin(angle) * speedBase;
+        meteorsVx[i] = (float) Math.cos(angle) * speedBase;
+        meteorsVy[i] = (float) Math.sin(angle) * speedBase;
 
-        meteors_init_life[i] = 40f + rng.nextFloat() * 80f;
-        meteors_life[i] = meteors_init_life[i];
-        meteors_length[i] = 18f + rng.nextFloat() * 26f;
-        meteors_active[i] = true;
+        meteorsInitLife[i] = 40f + rng.nextFloat() * 80f;
+        meteorsLife[i] = meteorsInitLife[i];
+        meteorsLength[i] = 18f + rng.nextFloat() * 26f;
+        meteorsActive[i] = true;
     }
 }

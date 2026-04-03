@@ -45,12 +45,12 @@ public class StarTrailPaintCache extends PaintCache {
 
     private Shader getSharedShader() {
         // recreate shader if bounds changed
-        int w = Math.max(1, Math.round(opts.W));
-        int h = Math.max(1, Math.round(opts.H));
+        int w = Math.max(1, Math.round(opts.width));
+        int h = Math.max(1, Math.round(opts.height));
         if (sharedShader == null || shaderW != w || shaderH != h) {
             shaderW = w;
             shaderH = h;
-            sharedShader = new RadialGradient(opts.hW, opts.hH, Math.min(opts.H, opts.W), opts.trailColorStart, opts.trailColorEnd, Shader.TileMode.CLAMP);
+            sharedShader = new RadialGradient(opts.hW, opts.hH, Math.min(opts.height, opts.width), opts.trailColorStart, opts.trailColorEnd, Shader.TileMode.CLAMP);
         }
         return sharedShader;
     }

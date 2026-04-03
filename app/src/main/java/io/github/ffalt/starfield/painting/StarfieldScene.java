@@ -128,50 +128,50 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.numStars = starCount;
             update = true;
         }
-        int min_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(opts.minV));
-        int max_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(opts.maxV));
-        if (min_v != opts.minV || max_v != opts.maxV) {
-            opts.minV = min_v;
-            opts.maxV = max_v;
-            if (min_v > max_v) {
-                opts.minV = max_v;
-                opts.maxV = min_v;
+        int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(opts.minV));
+        int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(opts.maxV));
+        if (minV != opts.minV || maxV != opts.maxV) {
+            opts.minV = minV;
+            opts.maxV = maxV;
+            if (minV > maxV) {
+                opts.minV = maxV;
+                opts.maxV = minV;
             }
             update = true;
         }
-        boolean star_trail = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_TRAIL, opts.trails);
-        if (star_trail != opts.trails) {
-            opts.trails = star_trail;
+        boolean starTrail = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_TRAIL, opts.trails);
+        if (starTrail != opts.trails) {
+            opts.trails = starTrail;
         }
-        boolean star_circle = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_CIRCLE, opts.circle);
-        if (star_circle != opts.circle) {
-            opts.circle = star_circle;
+        boolean starCircle = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_CIRCLE, opts.circle);
+        if (starCircle != opts.circle) {
+            opts.circle = starCircle;
         }
-        boolean follow_screen = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN, opts.followScreen);
-        if (follow_screen != opts.followScreen) {
-            opts.followScreen = follow_screen;
+        boolean followScreen = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN, opts.followScreen);
+        if (followScreen != opts.followScreen) {
+            opts.followScreen = followScreen;
         }
-        int follow_screen_intensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN_INTENSITY, opts.followScreenIntensity);
-        if (follow_screen_intensity != opts.followScreenIntensity) {
-            opts.followScreenIntensity = follow_screen_intensity;
+        int followScreenIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN_INTENSITY, opts.followScreenIntensity);
+        if (followScreenIntensity != opts.followScreenIntensity) {
+            opts.followScreenIntensity = followScreenIntensity;
         }
-        boolean follow_sensor = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR, opts.followSensor);
-        if (follow_sensor != opts.followSensor) {
-            opts.followSensor = follow_sensor;
+        boolean followSensor = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR, opts.followSensor);
+        if (followSensor != opts.followSensor) {
+            opts.followSensor = followSensor;
             updateSensorListener();
             update = true;
         }
-        int follow_sensor_intensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR_INTENSITY, opts.followSensorIntensity);
-        if (follow_sensor_intensity != opts.followSensorIntensity) {
-            opts.followSensorIntensity = follow_sensor_intensity;
+        int followSensorIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR_INTENSITY, opts.followSensorIntensity);
+        if (followSensorIntensity != opts.followSensorIntensity) {
+            opts.followSensorIntensity = followSensorIntensity;
         }
-        boolean follow_restore = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_RESTORE, opts.followRestore);
-        if (follow_restore != opts.followRestore) {
-            opts.followRestore = follow_restore;
+        boolean followRestore = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_RESTORE, opts.followRestore);
+        if (followRestore != opts.followRestore) {
+            opts.followRestore = followRestore;
         }
-        float star_size = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_SIZE, Math.round(opts.starSize * 10)) / 10f;
-        if (star_size != opts.starSize) {
-            opts.starSize = star_size;
+        float starSize = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_SIZE, Math.round(opts.starSize * 10)) / 10f;
+        if (starSize != opts.starSize) {
+            opts.starSize = starSize;
         }
         float depth = prefs.getInt(StarfieldPrefs.SHARED_PREFS_DEPTH, Math.round(opts.depth * 10)) / 10f;
         if (depth != opts.depth) {
@@ -179,47 +179,47 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.updateDepth();
             update = true;
         }
-        int star_color = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_COLOR, opts.starColor);
-        if (star_color != opts.starColor) {
-            opts.starColor = star_color;
+        int starColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_COLOR, opts.starColor);
+        if (starColor != opts.starColor) {
+            opts.starColor = starColor;
             update = true;
         }
-        int trail_color_start = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_START, opts.trailColorStart);
-        if (trail_color_start != opts.trailColorStart) {
-            opts.trailColorStart = trail_color_start;
+        int trailColorStart = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_START, opts.trailColorStart);
+        if (trailColorStart != opts.trailColorStart) {
+            opts.trailColorStart = trailColorStart;
             update = true;
         }
-        int trail_color_end = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_END, opts.trailColorEnd);
-        if (trail_color_end != opts.trailColorEnd) {
-            opts.trailColorEnd = trail_color_end;
+        int trailColorEnd = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_END, opts.trailColorEnd);
+        if (trailColorEnd != opts.trailColorEnd) {
+            opts.trailColorEnd = trailColorEnd;
             update = true;
         }
-        boolean meteors_enabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_METEORS_ENABLED, opts.meteorsEnabled);
-        if (meteors_enabled != opts.meteorsEnabled) {
-            opts.meteorsEnabled = meteors_enabled;
+        boolean meteorsEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_METEORS_ENABLED, opts.meteorsEnabled);
+        if (meteorsEnabled != opts.meteorsEnabled) {
+            opts.meteorsEnabled = meteorsEnabled;
             update = true;
         }
-        int meteor_color_start = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_START, opts.meteorColorStart);
-        if (meteor_color_start != opts.meteorColorStart) {
-            opts.meteorColorStart = meteor_color_start;
+        int meteorColorStart = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_START, opts.meteorColorStart);
+        if (meteorColorStart != opts.meteorColorStart) {
+            opts.meteorColorStart = meteorColorStart;
             update = true;
         }
-        int meteor_color_end = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_END, opts.meteorColorEnd);
-        if (meteor_color_end != opts.meteorColorEnd) {
-            opts.meteorColorEnd = meteor_color_end;
+        int meteorColorEnd = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_END, opts.meteorColorEnd);
+        if (meteorColorEnd != opts.meteorColorEnd) {
+            opts.meteorColorEnd = meteorColorEnd;
             update = true;
         }
-        float meteor_spawn_prob = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEORS_PROBABILITY, Math.round(opts.meteorSpawnProb * 10000)) / 10000f;
-        if (meteor_spawn_prob != opts.meteorSpawnProb) {
-            opts.meteorSpawnProb = meteor_spawn_prob;
+        float meteorSpawnProb = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEORS_PROBABILITY, Math.round(opts.meteorSpawnProb * 10000)) / 10000f;
+        if (meteorSpawnProb != opts.meteorSpawnProb) {
+            opts.meteorSpawnProb = meteorSpawnProb;
         }
         int fps = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FPS, opts.fps);
         if (fps != opts.fps) {
             opts.updateFPS(fps);
         }
-        boolean battery_speed = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BATTERY_SPEED, opts.batterySpeed);
-        if (battery_speed != opts.batterySpeed) {
-            opts.batterySpeed = battery_speed;
+        boolean batterySpeed = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BATTERY_SPEED, opts.batterySpeed);
+        if (batterySpeed != opts.batterySpeed) {
+            opts.batterySpeed = batterySpeed;
             updateBatteryListener();
             update = true;
         }
@@ -259,6 +259,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             try {
                 sensorManager.unregisterListener(this);
             } catch (Exception ignored) {
+                // ignore
             }
         }
     }
@@ -292,7 +293,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     private void drawBackground(Canvas c) {
-        c.drawRect(0, 0, opts.W, opts.H, mPaintFill);
+        c.drawRect(0, 0, opts.width, opts.height, mPaintFill);
     }
 
     public void onCreate(Context context) {
@@ -352,6 +353,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             try {
                 context.unregisterReceiver(batteryReceiver);
             } catch (IllegalArgumentException ignored) {
+                // ignore
             }
             batteryReceiver = null;
         }

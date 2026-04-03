@@ -25,4 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          ref: main
       - uses: ashutoshgngwr/validate-fastlane-supply-metadata@v2

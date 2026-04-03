@@ -44,8 +44,8 @@ import io.github.ffalt.starfield.StarfieldPrefs;
 
 public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
     public static final String RESET_PREFERENCE_KEY = "reset";
-    public Preference min_v_pref;
-    public Preference max_v_pref;
+    public Preference minVPref;
+    public Preference maxVPref;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -53,24 +53,24 @@ public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
         preferenceManager.setStorageDeviceProtected();
         preferenceManager.setSharedPreferencesName(StarfieldPrefs.SHARED_PREFS_NAME);
         setPreferencesFromResource(R.xml.preferences, rootKey);
-        min_v_pref = findPreference(StarfieldPrefs.SHARED_PREFS_MIN_V);
-        max_v_pref = findPreference(StarfieldPrefs.SHARED_PREFS_MAX_V);
+        minVPref = findPreference(StarfieldPrefs.SHARED_PREFS_MIN_V);
+        maxVPref = findPreference(StarfieldPrefs.SHARED_PREFS_MAX_V);
         Activity parent = getActivity();
         if (parent != null) {
             SharedPreferences prefs = StarfieldOpts.getPreferences(parent);
-            if (min_v_pref != null) {
-                min_v_pref.setOnPreferenceChangeListener((preference, newValue) -> {
-                    int min_v = (int) newValue;
-                    int max_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(StarfieldOpts.defaultMaxV));
-                    updateVLabels(min_v, max_v);
+            if (minVPref != null) {
+                minVPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                    int minV = (int) newValue;
+                    int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(StarfieldOpts.DEFAULT_MAX_V));
+                    updateVLabels(minV, maxV);
                     return true;
                 });
             }
-            if (max_v_pref != null) {
-                max_v_pref.setOnPreferenceChangeListener((preference, newValue) -> {
-                    int min_v = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(StarfieldOpts.defaultMinV));
-                    int max_v = (int) newValue;
-                    updateVLabels(min_v, max_v);
+            if (maxVPref != null) {
+                maxVPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                    int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(StarfieldOpts.DEFAULT_MIN_V));
+                    int maxV = (int) newValue;
+                    updateVLabels(minV, maxV);
                     return true;
                 });
             }
@@ -86,13 +86,13 @@ public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
         return false;
     }
 
-    private void updateVLabels(int min_v, int max_v) {
-        if (min_v > max_v) {
-            min_v_pref.setTitle(getString(R.string.settings_max_speed));
-            max_v_pref.setTitle(getString(R.string.settings_min_speed));
+    private void updateVLabels(int minV, int maxV) {
+        if (minV > maxV) {
+            minVPref.setTitle(getString(R.string.settings_max_speed));
+            maxVPref.setTitle(getString(R.string.settings_min_speed));
         } else {
-            min_v_pref.setTitle(getString(R.string.settings_min_speed));
-            max_v_pref.setTitle(getString(R.string.settings_max_speed));
+            minVPref.setTitle(getString(R.string.settings_min_speed));
+            maxVPref.setTitle(getString(R.string.settings_max_speed));
         }
     }
 

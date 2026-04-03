@@ -39,17 +39,17 @@ import io.github.ffalt.starfield.painting.cache.StarTrailPaintCache;
 public class StarsPaint {
     private final StarfieldOpts opts;
     private final Random rng = new Random();
-    private float[] stars_x = new float[0];
-    private float[] stars_y = new float[0];
-    private float[] stars_z = new float[0];
-    private float[] stars_v = new float[0];
-    private float[] stars_radius = new float[0];
-    private float[] stars_last_x = new float[0];
-    private float[] stars_last_y = new float[0];
-    private float[] stars_current_x = new float[0];
-    private float[] stars_current_y = new float[0];
-    private float[] stars_current_radius = new float[0];
-    private int[] stars_current_brightness = new int[0];
+    private float[] starsX = new float[0];
+    private float[] starsY = new float[0];
+    private float[] starsZ = new float[0];
+    private float[] starsV = new float[0];
+    private float[] starsRadius = new float[0];
+    private float[] starsLastX = new float[0];
+    private float[] starsLastY = new float[0];
+    private float[] starsCurrentX = new float[0];
+    private float[] starsCurrentY = new float[0];
+    private float[] starsCurrentRadius = new float[0];
+    private int[] starsCurrentBrightness = new int[0];
     private final StarPaintCache starPaints;
     private final StarTrailPaintCache starTrailPaints;
     private float offsetX = 0;
@@ -60,8 +60,8 @@ public class StarsPaint {
     private float tiltOffsetY = 0;
     private float tiltTargetX = 0;
     private float tiltTargetY = 0;
-    private static final float maxTiltAngle = (float) Math.toRadians(50.0);
     private float speedModifier = 1.0f;
+    private static final float MAX_TILT_ANGLE = (float) Math.toRadians(50.0);
 
     public StarsPaint(StarfieldOpts opts) {
         this.opts = opts;
@@ -71,24 +71,24 @@ public class StarsPaint {
 
     public void init() {
         int n = opts.numStars;
-        stars_x = new float[n];
-        stars_y = new float[n];
-        stars_z = new float[n];
-        stars_v = new float[n];
-        stars_radius = new float[n];
-        stars_last_x = new float[n];
-        stars_last_y = new float[n];
-        stars_current_x = new float[n];
-        stars_current_y = new float[n];
-        stars_current_radius = new float[n];
-        stars_current_brightness = new int[n];
+        starsX = new float[n];
+        starsY = new float[n];
+        starsZ = new float[n];
+        starsV = new float[n];
+        starsRadius = new float[n];
+        starsLastX = new float[n];
+        starsLastY = new float[n];
+        starsCurrentX = new float[n];
+        starsCurrentY = new float[n];
+        starsCurrentRadius = new float[n];
+        starsCurrentBrightness = new int[n];
 
         for (int i = 0; i < n; i++) {
-            stars_z[i] = 0f;
-            stars_current_radius[i] = 0f;
-            stars_current_brightness[i] = 0;
+            starsZ[i] = 0f;
+            starsCurrentRadius[i] = 0f;
+            starsCurrentBrightness[i] = 0;
             randomStarPosition(i);
-            stars_z[i] = rng.nextFloat() * opts.initialZ;
+            starsZ[i] = rng.nextFloat() * opts.initialZ;
         }
     }
 
@@ -123,23 +123,23 @@ public class StarsPaint {
         float totalOffsetY = offsetY + tiltOffsetY;
         float hW = opts.hW;
         float hH = opts.hH;
-        float W = opts.W;
-        float H = opts.H;
+        float width = opts.width;
+        float height = opts.height;
         float initialZ = opts.initialZ;
         float starSize = opts.starSize;
 
-        int n = stars_x.length;
+        int n = starsX.length;
         for (int i = 0; i < n; i++) {
-            moveStar(i, totalOffsetX, totalOffsetY, hW, hH, W, H, initialZ, starSize);
+            moveStar(i, totalOffsetX, totalOffsetY, hW, hH, width, height, initialZ, starSize);
         }
     }
 
     public void draw(Canvas c) {
-        float W = opts.W;
-        float H = opts.H;
-        int n = stars_x.length;
+        float width = opts.width;
+        float height = opts.height;
+        int n = starsX.length;
         for (int i = 0; i < n; i++) {
-            drawStar(c, i, W, H);
+            drawStar(c, i, width, height);
         }
     }
 
@@ -153,12 +153,12 @@ public class StarsPaint {
     }
 
     public void setTilt(float tiltX, float tiltY) {
-        float clampedPitch = Math.max(-maxTiltAngle, Math.min(maxTiltAngle, tiltX));
-        float clampedRoll = Math.max(-maxTiltAngle, Math.min(maxTiltAngle, tiltY));
-        float nPitch = clampedPitch / maxTiltAngle;
-        float nRoll = clampedRoll / maxTiltAngle;
-        float targetX = -nRoll * opts.W;
-        float targetY = nPitch * opts.H;
+        float clampedPitch = Math.max(-MAX_TILT_ANGLE, Math.min(MAX_TILT_ANGLE, tiltX));
+        float clampedRoll = Math.max(-MAX_TILT_ANGLE, Math.min(MAX_TILT_ANGLE, tiltY));
+        float nPitch = clampedPitch / MAX_TILT_ANGLE;
+        float nRoll = clampedRoll / MAX_TILT_ANGLE;
+        float targetX = -nRoll * opts.width;
+        float targetY = nPitch * opts.height;
         float intensity = opts.followSensorIntensity / 100f;
         tiltTargetX += (targetX - tiltTargetX) * intensity;
         tiltTargetY += (targetY - tiltTargetY) * intensity;
@@ -187,42 +187,42 @@ public class StarsPaint {
         return v / 100f;
     }
 
-    private void moveStar(int i, float totalOffsetX, float totalOffsetY, float hW, float hH, float W, float H, float initialZ, float starSize) {
+    private void moveStar(int i, float totalOffsetX, float totalOffsetY, float hW, float hH, float width, float height, float initialZ, float starSize) {
         // Move along Z
-        stars_z[i] -= (stars_v[i] * 0.1f * speedModifier);
-        if (stars_z[i] <= 0f) {
+        starsZ[i] -= (starsV[i] * 0.1f * speedModifier);
+        if (starsZ[i] <= 0f) {
             resetStar(i);
             return; // resetStar will reinitialize values for this index
         } else {
-            stars_last_x[i] = stars_current_x[i];
-            stars_last_y[i] = stars_current_y[i];
+            starsLastX[i] = starsCurrentX[i];
+            starsLastY[i] = starsCurrentY[i];
             // speed up
-            stars_v[i] += 0.001f;
+            starsV[i] += 0.001f;
         }
 
         // Update x and y
-        stars_current_x[i] = hW + (W * (stars_x[i] / stars_z[i]) - totalOffsetX);
-        stars_current_y[i] = hH + (H * (stars_y[i] / stars_z[i]) - totalOffsetY);
+        starsCurrentX[i] = hW + (width * (starsX[i] / starsZ[i]) - totalOffsetX);
+        starsCurrentY[i] = hH + (height * (starsY[i] / starsZ[i]) - totalOffsetY);
 
         // Calculate a new radius based on Z
-        stars_current_radius[i] = (1 - mapNumberToRange(stars_z[i], initialZ, 1)) * stars_radius[i] * starSize;
+        starsCurrentRadius[i] = (1 - mapNumberToRange(starsZ[i], initialZ, 1)) * starsRadius[i] * starSize;
 
         // Calculate a new brightness based on Z
-        float mapped = mapNumberToRange(stars_z[i], initialZ, 40);
+        float mapped = mapNumberToRange(starsZ[i], initialZ, 40);
         int bidx = 100 - (int) (mapped + 0.5f);
-        stars_current_brightness[i] = bidx;
+        starsCurrentBrightness[i] = bidx;
     }
 
-    private void drawStar(Canvas c, int i, float W, float H) {
-        float lastX = stars_last_x[i];
-        float lastY = stars_last_y[i];
-        if (lastX < 0 || lastX > W || lastY < 0 || lastY > H) {
+    private void drawStar(Canvas c, int i, float width, float height) {
+        float lastX = starsLastX[i];
+        float lastY = starsLastY[i];
+        if (lastX < 0 || lastX > width || lastY < 0 || lastY > height) {
             return;
         }
-        float currentX = stars_current_x[i];
-        float currentY = stars_current_y[i];
-        int currentBrightness = stars_current_brightness[i];
-        float currentRadius = stars_current_radius[i];
+        float currentX = starsCurrentX[i];
+        float currentY = starsCurrentY[i];
+        int currentBrightness = starsCurrentBrightness[i];
+        float currentRadius = starsCurrentRadius[i];
         if (opts.trails) {
             float dx = lastX - currentX;
             float dy = lastY - currentY;
@@ -248,17 +248,17 @@ public class StarsPaint {
 
     private void resetStar(int i) {
         randomStarPosition(i);
-        stars_z[i] = opts.initialZ;
+        starsZ[i] = opts.initialZ;
     }
 
     private void randomStarPosition(int i) {
-        stars_x[i] = rng.nextFloat() * opts.W - opts.hW;
-        stars_y[i] = rng.nextFloat() * opts.H - opts.hH;
-        stars_v[i] = rng.nextFloat() * (opts.maxV - opts.minV) + opts.minV;
-        stars_radius[i] = roundToPrecision(rng.nextFloat() * 2f + 1f);
-        stars_last_x[i] = -1f;
-        stars_last_y[i] = -1f;
-        stars_current_x[i] = -1f;
-        stars_current_y[i] = -1f;
+        starsX[i] = rng.nextFloat() * opts.width - opts.hW;
+        starsY[i] = rng.nextFloat() * opts.height - opts.hH;
+        starsV[i] = rng.nextFloat() * (opts.maxV - opts.minV) + opts.minV;
+        starsRadius[i] = roundToPrecision(rng.nextFloat() * 2f + 1f);
+        starsLastX[i] = -1f;
+        starsLastY[i] = -1f;
+        starsCurrentX[i] = -1f;
+        starsCurrentY[i] = -1f;
     }
 }
