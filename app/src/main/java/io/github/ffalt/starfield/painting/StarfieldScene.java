@@ -32,9 +32,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
@@ -50,12 +54,11 @@ import io.github.ffalt.starfield.StarfieldPrefs;
 
 public abstract class StarfieldScene implements SurfaceHolderParent, SharedPreferences.OnSharedPreferenceChangeListener, SensorEventListener {
     private Starfield starfield;
-    private static final Paint mPaintFill;
-    static {
-        mPaintFill = new Paint();
-        mPaintFill.setStyle(Paint.Style.FILL);
-        mPaintFill.setColor(Color.BLACK);
-    }
+    private Bitmap bgBitmap = null;
+    private final RectF bgRect = new RectF();
+    private final Paint mPaintBg = new Paint();
+    private final Paint mPaintBgBitmap = new Paint(Paint.FILTER_BITMAP_FLAG);
+    private boolean bgPaintDirty = true;
     public final StarfieldOpts opts = new StarfieldOpts();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final Runnable mDrawThread = this::drawFrame;
@@ -77,6 +80,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     };
 
     public StarfieldScene() {
+        mPaintBg.setStyle(Paint.Style.FILL);
     }
 
     public void onUpdateOffset(float offsetX, float offsetY) {
@@ -87,7 +91,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     public void onUpdateSize(int width, int height) {
         opts.updateBounds(width, height);
+        bgRect.set(0, 0, width, height);
         sizeInitialized = true;
+        bgPaintDirty = true;
         reset();
     }
 
@@ -223,6 +229,26 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             updateBatteryListener();
             update = true;
         }
+        int bgColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_COLOR, opts.bgColor);
+        if (bgColor != opts.bgColor) {
+            opts.bgColor = bgColor;
+            bgPaintDirty = true;
+        }
+        boolean bgGradient = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT, opts.bgGradient);
+        if (bgGradient != opts.bgGradient) {
+            opts.bgGradient = bgGradient;
+            bgPaintDirty = true;
+        }
+        int bgGradientInnerColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT_INNER_COLOR, opts.bgGradientInnerColor);
+        if (bgGradientInnerColor != opts.bgGradientInnerColor) {
+            opts.bgGradientInnerColor = bgGradientInnerColor;
+            bgPaintDirty = true;
+        }
+        int bgGradientRadius = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT_RADIUS, opts.bgGradientRadius);
+        if (bgGradientRadius != opts.bgGradientRadius) {
+            opts.bgGradientRadius = bgGradientRadius;
+            bgPaintDirty = true;
+        }
         if (update) {
             reset();
         }
@@ -292,8 +318,44 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
     }
 
+    private void recycleBgBitmap() {
+        if (bgBitmap != null) {
+            bgBitmap.recycle();
+            bgBitmap = null;
+        }
+    }
+
+    private void rebuildBgPaint() {
+        if (opts.bgGradient && opts.width > 0 && opts.height > 0) {
+            int bW = Math.max(32, Math.round(opts.width / 8f));
+            int bH = Math.max(32, Math.round(opts.height / 8f));
+            if (bgBitmap == null || bgBitmap.getWidth() != bW || bgBitmap.getHeight() != bH) {
+                recycleBgBitmap();
+                bgBitmap = Bitmap.createBitmap(bW, bH, Bitmap.Config.ARGB_8888);
+            }
+            float bhW = bW / 2f;
+            float bhH = bH / 2f;
+            float diag = (float) Math.sqrt(bhW * bhW + bhH * bhH);
+            float radius = Math.max(1f, diag * (opts.bgGradientRadius / 100f));
+            Paint gradPaint = new Paint();
+            gradPaint.setStyle(Paint.Style.FILL);
+            gradPaint.setShader(new RadialGradient(bhW, bhH, radius,
+                    opts.bgGradientInnerColor, opts.bgColor, Shader.TileMode.CLAMP));
+            new Canvas(bgBitmap).drawRect(0, 0, bW, bH, gradPaint);
+        } else {
+            recycleBgBitmap();
+            mPaintBg.setColor(opts.bgColor);
+        }
+        bgPaintDirty = false;
+    }
+
     private void drawBackground(Canvas c) {
-        c.drawRect(0, 0, opts.width, opts.height, mPaintFill);
+        if (bgPaintDirty) rebuildBgPaint();
+        if (bgBitmap != null) {
+            c.drawBitmap(bgBitmap, null, bgRect, mPaintBgBitmap);
+        } else {
+            c.drawRect(bgRect, mPaintBg);
+        }
     }
 
     public void onCreate(Context context) {
@@ -365,6 +427,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         unregisterOnSharedPreferenceChanged(context);
         unregisterSensorListener();
         unregisterBatteryListener(context);
+        recycleBgBitmap();
         mContext = null;
     }
 

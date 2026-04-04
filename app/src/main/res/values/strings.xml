@@ -60,4 +60,13 @@
     <string name="settings_meteor_spawn_probability">Meteor spawn probability</string>
     <string name="settings_meteor_spawn_probability_summary">The probability a meteor is appearing (per frame)</string>
     <string name="error_wallpaper_picker_not_found">Unable to open wallpaper picker. Please set the wallpaper manually from your device settings.</string>
+    <string name="settings_group_background">Background</string>
+    <string name="settings_bg_color">Background color</string>
+    <string name="settings_bg_color_summary" />
+    <string name="settings_bg_gradient">Radial gradient</string>
+    <string name="settings_bg_gradient_summary">Blend from inner color to background color for a nebula feel</string>
+    <string name="settings_bg_gradient_inner_color">Inner color</string>
+    <string name="settings_bg_gradient_inner_color_summary" />
+    <string name="settings_bg_gradient_radius">Gradient size (%)</string>
+    <string name="settings_bg_gradient_radius_summary">Controls how far the gradient spreads across the screen</string>
 </resources>

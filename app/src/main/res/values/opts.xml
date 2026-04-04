@@ -37,4 +37,9 @@
     <bool name="follow_sensor_default">false</bool>
     <bool name="battery_speed_default">false</bool>
     <bool name="meteors_enabled_default">false</bool>
+    <bool name="bg_gradient_default">false</bool>
+    <integer name="bg_gradient_radius_default">70</integer>
+    <integer name="bg_gradient_radius_min">10</integer>
+    <integer name="bg_gradient_radius_max">200</integer>
+    <integer name="bg_gradient_radius_step">10</integer>
 </resources>

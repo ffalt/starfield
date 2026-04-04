@@ -1,5 +1,6 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.preference.PreferenceCategory
         app:iconSpaceReserved="false"
         app:key="stars_category"
@@ -52,6 +53,8 @@
             android:key="star_color"
             android:summary="@string/settings_star_color_summary"
             android:title="@string/settings_star_color"
+            app:cpv_colorPresets="@array/star_color_presets"
+            app:cpv_dialogType="preset"
             app:iconSpaceReserved="false" />
 
         <androidx.preference.SeekBarPreference
@@ -91,6 +94,8 @@
             android:key="trail_color_start"
             android:summary="@string/settings_trail_color_start_summary"
             android:title="@string/settings_trail_color_start"
+            app:cpv_colorPresets="@array/trail_inner_color_presets"
+            app:cpv_dialogType="preset"
             app:dependency="star_trail"
             app:iconSpaceReserved="false" />
 
@@ -99,6 +104,8 @@
             android:key="trail_color_end"
             android:summary="@string/settings_trail_color_end_summary"
             android:title="@string/settings_trail_color_end"
+            app:cpv_colorPresets="@array/trail_outer_color_presets"
+            app:cpv_dialogType="preset"
             app:dependency="star_trail"
             app:iconSpaceReserved="false" />
 
@@ -134,6 +141,8 @@
             android:key="meteor_color_start"
             android:summary="@string/settings_meteor_color_start_summary"
             android:title="@string/settings_meteor_color_start"
+            app:cpv_colorPresets="@array/meteor_head_color_presets"
+            app:cpv_dialogType="preset"
             app:dependency="meteors_enabled"
             app:iconSpaceReserved="false" />
 
@@ -142,6 +151,8 @@
             android:key="meteor_color_end"
             android:summary="@string/settings_meteor_color_end_summary"
             android:title="@string/settings_meteor_color_end"
+            app:cpv_colorPresets="@array/meteor_tail_color_presets"
+            app:cpv_dialogType="preset"
             app:dependency="meteors_enabled"
             app:iconSpaceReserved="false" />
 
@@ -211,6 +222,52 @@
             app:key="battery_speed"
             app:summary="@string/settings_battery_speed_summary"
             app:title="@string/settings_battery_speed_enable" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="background_category"
+        app:title="@string/settings_group_background">
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/bg_color_default"
+            android:key="bg_color"
+            android:summary="@string/settings_bg_color_summary"
+            android:title="@string/settings_bg_color"
+            app:cpv_colorPresets="@array/bg_gradient_color_presets"
+            app:cpv_dialogType="preset"
+            app:iconSpaceReserved="false" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/bg_gradient_default"
+            app:iconSpaceReserved="false"
+            app:key="bg_gradient"
+            app:summary="@string/settings_bg_gradient_summary"
+            app:title="@string/settings_bg_gradient" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/bg_gradient_inner_color_default"
+            android:key="bg_gradient_inner_color"
+            android:summary="@string/settings_bg_gradient_inner_color_summary"
+            android:title="@string/settings_bg_gradient_inner_color"
+            app:cpv_colorPresets="@array/bg_gradient_color_presets"
+            app:cpv_dialogType="preset"
+            app:dependency="bg_gradient"
+            app:iconSpaceReserved="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/bg_gradient_radius_default"
+            android:key="bg_gradient_radius"
+            android:max="@integer/bg_gradient_radius_max"
+            android:summary="@string/settings_bg_gradient_radius_summary"
+            android:title="@string/settings_bg_gradient_radius"
+            app:dependency="bg_gradient"
+            app:iconSpaceReserved="false"
+            app:min="@integer/bg_gradient_radius_min"
+            app:seekBarIncrement="@integer/bg_gradient_radius_step"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
 
     </androidx.preference.PreferenceCategory>
 

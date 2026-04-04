@@ -30,6 +30,8 @@ Starfield focuses on smooth visuals and configurability without compromising bat
 | ☄️ **Meteors**            | Up to 3 simultaneous meteors spawning from any screen edge; configurable probability |
 | 🌠 **Meteor detail**      | Multi-segment gradient trail, bright core streak, and glowing filled head            |
 | 🎨 **Colors**             | Full color pickers for stars, trail inner/outer, and meteor head/tail                |
+| 🌃 **Background color**   | Configurable background color                                                        |
+| 🌫️ **Nebula gradient**   | Optional radial gradient background with adjustable spread                           |
 | 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; restore-to-center              |
 | 🔄 **Gyroscope**          | Tilt-to-steer via gyroscope with adjustable intensity                                |
 | 🔋 **Battery-aware**      | Automatically scales down star speed proportionally to battery level                 |

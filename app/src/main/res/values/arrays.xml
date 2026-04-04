@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="bg_gradient_color_presets">
+        <item>0xFF000000</item>
+        <item>0xFF0A0A2E</item>
+        <item>0xFF050520</item>
+        <item>0xFF150028</item>
+        <item>0xFF1A0035</item>
+        <item>0xFF001035</item>
+        <item>0xFF0A1A25</item>
+        <item>0xFF0F2015</item>
+        <item>0xFF201005</item>
+        <item>0xFF200510</item>
+        <item>0xFF101020</item>
+        <item>0xFF200020</item>
+        <item>0xFF030315</item>
+        <item>0xFF150503</item>
+        <item>0xFF031503</item>
+        <item>0xFF151503</item>
+        <item>0xFF030A10</item>
+        <item>0xFF100305</item>
+        <item>0xFF030F08</item>
+        <item>0xFF0D0A03</item>
+    </integer-array>
+
+    <integer-array name="star_color_presets">
+        <item>0xFFFFFFFF</item>
+        <item>0xFFFFF5E0</item>
+        <item>0xFFFFFAF0</item>
+        <item>0xFFE8F0FF</item>
+        <item>0xFFB0C8FF</item>
+        <item>0xFFAADDFF</item>
+        <item>0xFF88BBFF</item>
+        <item>0xFF66AAFF</item>
+        <item>0xFFFFE88A</item>
+        <item>0xFFFFD700</item>
+        <item>0xFFFFCC00</item>
+        <item>0xFFFFAA44</item>
+        <item>0xFFFF8822</item>
+        <item>0xFFFF6644</item>
+        <item>0xFFFF4422</item>
+        <item>0xFFCC99FF</item>
+        <item>0xFFBB77FF</item>
+        <item>0xFF44EEFF</item>
+        <item>0xFF22DDCC</item>
+        <item>0xFF99FFEE</item>
+    </integer-array>
+
+    <integer-array name="trail_inner_color_presets">
+        <item>0xFFFFFFFF</item>
+        <item>0xFFF0F8FF</item>
+        <item>0xFFB0C8FF</item>
+        <item>0xFFAADDFF</item>
+        <item>0xFF88CCFF</item>
+        <item>0xFF44AAFF</item>
+        <item>0xFF44FFFF</item>
+        <item>0xFF00E5FF</item>
+        <item>0xFF44FF88</item>
+        <item>0xFF00FF7F</item>
+        <item>0xFFFFE88A</item>
+        <item>0xFFFFFF44</item>
+        <item>0xFFFFCC44</item>
+        <item>0xFFFF8844</item>
+        <item>0xFFFF4488</item>
+        <item>0xFFFF44AA</item>
+        <item>0xFFFF88CC</item>
+        <item>0xFFBB88FF</item>
+        <item>0xFF9966FF</item>
+        <item>0xFFCC44FF</item>
+    </integer-array>
+
+    <integer-array name="trail_outer_color_presets">
+        <item>0xFFB3B3B3</item>
+        <item>0xFF999999</item>
+        <item>0xFF887766</item>
+        <item>0xFF8899AA</item>
+        <item>0xFF778899</item>
+        <item>0xFF666666</item>
+        <item>0xFF556677</item>
+        <item>0xFF555555</item>
+        <item>0xFF444444</item>
+        <item>0xFF333333</item>
+        <item>0xFF224488</item>
+        <item>0xFF1A3366</item>
+        <item>0xFF224444</item>
+        <item>0xFF1A3333</item>
+        <item>0xFF334422</item>
+        <item>0xFF443322</item>
+        <item>0xFF442244</item>
+        <item>0xFF332244</item>
+        <item>0xFF443333</item>
+        <item>0xFF334433</item>
+    </integer-array>
+
+    <integer-array name="meteor_head_color_presets">
+        <item>0xFFFFEB3B</item>
+        <item>0xFFFFFFFF</item>
+        <item>0xFFFFF176</item>
+        <item>0xFFFFD740</item>
+        <item>0xFFFFAB40</item>
+        <item>0xFFFF8F00</item>
+        <item>0xFFFF6B00</item>
+        <item>0xFFFF4500</item>
+        <item>0xFFFF1744</item>
+        <item>0xFFFF0000</item>
+        <item>0xFF00E5FF</item>
+        <item>0xFF18FFFF</item>
+        <item>0xFF00B0FF</item>
+        <item>0xFF2979FF</item>
+        <item>0xFF651FFF</item>
+        <item>0xFFE040FB</item>
+        <item>0xFFAA00FF</item>
+        <item>0xFF00E676</item>
+        <item>0xFF69FF47</item>
+        <item>0xFFFF4081</item>
+    </integer-array>
+
+    <integer-array name="meteor_tail_color_presets">
+        <item>0xFFE98E1E</item>
+        <item>0xFFDD7700</item>
+        <item>0xFFCC5500</item>
+        <item>0xFFCC4400</item>
+        <item>0xFFAA3300</item>
+        <item>0xFFFF2200</item>
+        <item>0xFF990000</item>
+        <item>0xFF880000</item>
+        <item>0xFF884400</item>
+        <item>0xFF664400</item>
+        <item>0xFF007799</item>
+        <item>0xFF005577</item>
+        <item>0xFF0044CC</item>
+        <item>0xFF003399</item>
+        <item>0xFF002299</item>
+        <item>0xFF001166</item>
+        <item>0xFF8800CC</item>
+        <item>0xFF6600AA</item>
+        <item>0xFF00AA44</item>
+        <item>0xFFCC0066</item>
+    </integer-array>
+</resources>

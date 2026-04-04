@@ -5,4 +5,6 @@
     <color name="trail_color_end_default">#B3B3B3</color>
     <color name="meteor_color_start_default">#FFEB3B</color>
     <color name="meteor_color_end_default">#E98E1E</color>
+    <color name="bg_color_default">#000000</color>
+    <color name="bg_gradient_inner_color_default">#0A0A2E</color>
 </resources>

@@ -53,6 +53,10 @@ public class StarfieldOpts {
     public static final int METEOR_MAX_COUNT = 3;
     public static final float DEFAULT_DEPTH = 2f;
     public static final boolean DEFAULT_BATTERY_SPEED = false;
+    public static final int DEFAULT_BG_COLOR = Color.BLACK;
+    public static final boolean DEFAULT_BG_GRADIENT = false;
+    public static final int DEFAULT_BG_GRADIENT_INNER_COLOR = Color.parseColor("#0A0A2E");
+    public static final int DEFAULT_BG_GRADIENT_RADIUS = 70;
     public float width = 100f;
     public float height = 100f;
     public float hW = 50f;
@@ -78,6 +82,10 @@ public class StarfieldOpts {
     public boolean circle = StarfieldOpts.DEFAULT_STARS_CIRCLE;
     public float depth = StarfieldOpts.DEFAULT_DEPTH;
     public boolean batterySpeed = StarfieldOpts.DEFAULT_BATTERY_SPEED;
+    public int bgColor = StarfieldOpts.DEFAULT_BG_COLOR;
+    public boolean bgGradient = StarfieldOpts.DEFAULT_BG_GRADIENT;
+    public int bgGradientInnerColor = StarfieldOpts.DEFAULT_BG_GRADIENT_INNER_COLOR;
+    public int bgGradientRadius = StarfieldOpts.DEFAULT_BG_GRADIENT_RADIUS;
     public int fps = 60;
     public long drawTime = Math.round(1000.0 / 60);
 

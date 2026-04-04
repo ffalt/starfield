@@ -50,4 +50,8 @@ public class StarfieldPrefs {
     public static final String SHARED_PREFS_METEORS_PROBABILITY = "meteors_probability";
     public static final String SHARED_PREFS_METEOR_COLOR_START = "meteor_color_start";
     public static final String SHARED_PREFS_METEOR_COLOR_END = "meteor_color_end";
+    public static final String SHARED_PREFS_BG_COLOR = "bg_color";
+    public static final String SHARED_PREFS_BG_GRADIENT = "bg_gradient";
+    public static final String SHARED_PREFS_BG_GRADIENT_INNER_COLOR = "bg_gradient_inner_color";
+    public static final String SHARED_PREFS_BG_GRADIENT_RADIUS = "bg_gradient_radius";
 }
