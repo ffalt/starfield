@@ -89,8 +89,8 @@ public class StarfieldOpts {
     public int fps = 60;
     public long drawTime = Math.round(1000.0 / 60);
 
-    public void updateFPS(int fps) {
-        this.fps = Math.max(1, fps);
+    public void updateFPS(int newFps) {
+        this.fps = Math.max(1, newFps);
         this.drawTime = Math.round(1000.0 / this.fps);
     }
 

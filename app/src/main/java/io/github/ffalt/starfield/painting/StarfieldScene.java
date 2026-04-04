@@ -34,7 +34,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
@@ -42,7 +41,6 @@ import android.graphics.Shader;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.view.SurfaceHolder;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -55,9 +53,11 @@ import io.github.ffalt.starfield.StarfieldPrefs;
 public abstract class StarfieldScene implements SurfaceHolderParent, SharedPreferences.OnSharedPreferenceChangeListener, SensorEventListener {
     private Starfield starfield;
     private Bitmap bgBitmap = null;
+    private Canvas bgCanvas = null;
     private final RectF bgRect = new RectF();
     private final Paint mPaintBg = new Paint();
     private final Paint mPaintBgBitmap = new Paint(Paint.FILTER_BITMAP_FLAG);
+    private final Paint mPaintBgGradient = new Paint(Paint.ANTI_ALIAS_FLAG);
     private boolean bgPaintDirty = true;
     public final StarfieldOpts opts = new StarfieldOpts();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -76,7 +76,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     private final Runnable applyTilt = () -> {
         tiltPending = false;
-        if (starfield != null) starfield.setTilt(pendingTiltX, pendingTiltY);
+        if (starfield != null) {
+            starfield.setTilt(pendingTiltX, pendingTiltY);
+        }
     };
 
     public StarfieldScene() {
@@ -109,8 +111,12 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     public void initSensor(Context context) {
-        if (!opts.followSensor) return;
-        if (sensorManager != null) return;
+        if (!opts.followSensor) {
+            return;
+        }
+        if (sensorManager != null) {
+            return;
+        }
 
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null && sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
@@ -301,7 +307,8 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onAccuracyChanged(Sensor sensor2, int accuracy2) {
+        // nop
     }
 
     public void reset() {
@@ -309,7 +316,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     private void updateSpeedModifier() {
-        if (starfield == null) return;
+        if (starfield == null) {
+            return;
+        }
 
         if (opts.batterySpeed) {
             starfield.setSpeedModifier(0.1f + batteryLevel);
@@ -322,6 +331,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         if (bgBitmap != null) {
             bgBitmap.recycle();
             bgBitmap = null;
+            bgCanvas = null;
         }
     }
 
@@ -332,16 +342,16 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             if (bgBitmap == null || bgBitmap.getWidth() != bW || bgBitmap.getHeight() != bH) {
                 recycleBgBitmap();
                 bgBitmap = Bitmap.createBitmap(bW, bH, Bitmap.Config.ARGB_8888);
+                bgCanvas = new Canvas(bgBitmap);
             }
             float bhW = bW / 2f;
             float bhH = bH / 2f;
             float diag = (float) Math.sqrt(bhW * bhW + bhH * bhH);
             float radius = Math.max(1f, diag * (opts.bgGradientRadius / 100f));
-            Paint gradPaint = new Paint();
-            gradPaint.setStyle(Paint.Style.FILL);
-            gradPaint.setShader(new RadialGradient(bhW, bhH, radius,
+            mPaintBgGradient.setStyle(Paint.Style.FILL);
+            mPaintBgGradient.setShader(new RadialGradient(bhW, bhH, radius,
                     opts.bgGradientInnerColor, opts.bgColor, Shader.TileMode.CLAMP));
-            new Canvas(bgBitmap).drawRect(0, 0, bW, bH, gradPaint);
+            bgCanvas.drawRect(0, 0, bW, bH, mPaintBgGradient);
         } else {
             recycleBgBitmap();
             mPaintBg.setColor(opts.bgColor);
@@ -350,7 +360,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     private void drawBackground(Canvas c) {
-        if (bgPaintDirty) rebuildBgPaint();
+        if (bgPaintDirty) {
+            rebuildBgPaint();
+        }
         if (bgBitmap != null) {
             c.drawBitmap(bgBitmap, null, bgRect, mPaintBgBitmap);
         } else {
@@ -369,13 +381,13 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
     }
 
-    public void onVisibilityChanged(boolean visible) {
-        this.visible = visible;
+    public void onVisibilityChanged(boolean newVisible) {
+        this.visible = newVisible;
         if (starfield != null) {
             starfield.clearOffsets();
         }
         mHandler.removeCallbacks(mDrawThread);
-        if (visible) {
+        if (newVisible) {
             drawFrame();
             if (isSensorAvailable && opts.followSensor && sensorManager != null && sensor != null) {
                 unregisterSensorListener();
@@ -388,8 +400,12 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
 
     private void initBattery(Context context) {
-        if (!opts.batterySpeed) return;
-        if (batteryReceiver != null) return;
+        if (!opts.batterySpeed) {
+            return;
+        }
+        if (batteryReceiver != null) {
+            return;
+        }
 
         batteryReceiver = new BroadcastReceiver() {
             @Override
@@ -432,9 +448,11 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     private void drawFrame() {
-        if (starfield == null || !sizeInitialized) return;
+        if (starfield == null || !sizeInitialized) {
+            return;
+        }
 
-        final long start = SystemClock.elapsedRealtime();
+        final long startNs = System.nanoTime();
         mHandler.removeCallbacks(mDrawThread);
         final SurfaceHolder holder = getSurface();
         Canvas c = null;
@@ -445,12 +463,14 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
                 starfield.draw(c);
             }
         } finally {
-            if (c != null) holder.unlockCanvasAndPost(c);
+            if (c != null) {
+                holder.unlockCanvasAndPost(c);
+            }
         }
         if (visible) {
             starfield.move();
-            final long duration = SystemClock.elapsedRealtime() - start;
-            mHandler.postDelayed(mDrawThread, Math.max(0, opts.drawTime - duration));
+            final long durationMs = (System.nanoTime() - startNs) / 1_000_000L;
+            mHandler.postDelayed(mDrawThread, Math.max(0, opts.drawTime - durationMs));
         }
     }
 }

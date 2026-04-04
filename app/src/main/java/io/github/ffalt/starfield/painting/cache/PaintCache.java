@@ -46,6 +46,17 @@ public class PaintCache {
     }
 
     protected int adjustBrightness(int color, int index) {
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
+        if (r == g && g == b) {
+            // Fast path for achromatic (white/gray) colors: skip HSV round-trip.
+            int v = Math.round(2.55f * index);
+            if (v > 255) {
+                v = 255;
+            }
+            return 0xFF000000 | (v << 16) | (v << 8) | v;
+        }
         Color.colorToHSV(color, hsv);
         hsv[2] = 0.01f * index;
         return Color.HSVToColor(hsv);
@@ -56,8 +67,16 @@ public class PaintCache {
     }
 
     public Paint get(int index) {
-        if (index < 0) index = 0;
-        if (index >= cache.length) index = cache.length - 1;
+        if (index < 0) {
+            index = 0;
+        }
+        if (index >= cache.length) {
+            index = cache.length - 1;
+        }
         return cache[index];
+    }
+
+    public Paint[] getArray() {
+        return cache;
     }
 }
