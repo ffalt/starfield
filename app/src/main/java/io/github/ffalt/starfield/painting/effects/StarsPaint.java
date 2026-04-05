@@ -197,15 +197,11 @@ public class StarsPaint {
         final Paint[] sp = starPaints.getArray();
         for (int i = 0; i < n; i++) {
             float r = sCR[i];
-            if (r < 0.5f) {
-                continue;
-            }
             float cx = sCX[i];
             float cy = sCY[i];
-            if (cx < 0 || cx > width || cy < 0 || cy > height) {
-                continue;
+            if (r >= 0.5f && cx >= 0 && cx <= width && cy >= 0 && cy <= height) {
+                c.drawCircle(cx, cy, r, sp[sCB[i]]);
             }
-            c.drawCircle(cx, cy, r, sp[sCB[i]]);
         }
     }
 
@@ -217,16 +213,12 @@ public class StarsPaint {
         final Paint[] sp = starPaints.getArray();
         for (int i = 0; i < n; i++) {
             float r = sCR[i];
-            if (r < 0.5f) {
-                continue;
-            }
             float cx = sCX[i];
             float cy = sCY[i];
-            if (cx < 0 || cx > width || cy < 0 || cy > height) {
-                continue;
+            if (r >= 0.5f && cx >= 0 && cx <= width && cy >= 0 && cy <= height) {
+                float rH = r * 0.5f;
+                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[sCB[i]]);
             }
-            float rH = r * 0.5f;
-            c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[sCB[i]]);
         }
     }
 
@@ -241,25 +233,21 @@ public class StarsPaint {
         final Paint[] stp = starTrailPaints.getArray();
         for (int i = 0; i < n; i++) {
             float r = sCR[i];
-            if (r < 0.5f) {
-                continue;
-            }
             float lx = sLX[i];
             float ly = sLY[i];
-            if (lx < 0 || lx > width || ly < 0 || ly > height) {
-                continue;
+            if (r >= 0.5f && lx >= 0 && lx <= width && ly >= 0 && ly <= height) {
+                float cx = sCX[i];
+                float cy = sCY[i];
+                int b = sCB[i];
+                float dx = lx - cx;
+                float dy = ly - cy;
+                if (dx * dx + dy * dy > 16f) {
+                    Paint tp = stp[b];
+                    tp.setStrokeWidth(r);
+                    c.drawLine(lx, ly, cx, cy, tp);
+                }
+                c.drawCircle(cx, cy, r, sp[b]);
             }
-            float cx = sCX[i];
-            float cy = sCY[i];
-            int b = sCB[i];
-            float dx = lx - cx;
-            float dy = ly - cy;
-            if (dx * dx + dy * dy > 16f) {
-                Paint tp = stp[b];
-                tp.setStrokeWidth(r);
-                c.drawLine(lx, ly, cx, cy, tp);
-            }
-            c.drawCircle(cx, cy, r, sp[b]);
         }
     }
 
@@ -274,26 +262,22 @@ public class StarsPaint {
         final Paint[] stp = starTrailPaints.getArray();
         for (int i = 0; i < n; i++) {
             float r = sCR[i];
-            if (r < 0.5f) {
-                continue;
-            }
             float lx = sLX[i];
             float ly = sLY[i];
-            if (lx < 0 || lx > width || ly < 0 || ly > height) {
-                continue;
+            if (r >= 0.5f && lx >= 0 && lx <= width && ly >= 0 && ly <= height) {
+                float cx = sCX[i];
+                float cy = sCY[i];
+                int b = sCB[i];
+                float dx = lx - cx;
+                float dy = ly - cy;
+                if (dx * dx + dy * dy > 16f) {
+                    Paint tp = stp[b];
+                    tp.setStrokeWidth(r);
+                    c.drawLine(lx, ly, cx, cy, tp);
+                }
+                float rH = r * 0.5f;
+                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[b]);
             }
-            float cx = sCX[i];
-            float cy = sCY[i];
-            int b = sCB[i];
-            float dx = lx - cx;
-            float dy = ly - cy;
-            if (dx * dx + dy * dy > 16f) {
-                Paint tp = stp[b];
-                tp.setStrokeWidth(r);
-                c.drawLine(lx, ly, cx, cy, tp);
-            }
-            float rH = r * 0.5f;
-            c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[b]);
         }
     }
 
