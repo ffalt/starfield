@@ -54,4 +54,8 @@ public class StarfieldPrefs {
     public static final String SHARED_PREFS_BG_GRADIENT = "bg_gradient";
     public static final String SHARED_PREFS_BG_GRADIENT_INNER_COLOR = "bg_gradient_inner_color";
     public static final String SHARED_PREFS_BG_GRADIENT_RADIUS = "bg_gradient_radius";
+
+    private StarfieldPrefs() {
+        // utility class
+    }
 }

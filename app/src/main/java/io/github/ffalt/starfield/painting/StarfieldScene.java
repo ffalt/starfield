@@ -81,7 +81,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
     };
 
-    public StarfieldScene() {
+    protected StarfieldScene() {
         mPaintBg.setStyle(Paint.Style.FILL);
     }
 
