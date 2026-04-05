@@ -137,4 +137,27 @@
         <item>0xFF00AA44</item>
         <item>0xFFCC0066</item>
     </integer-array>
+
+    <integer-array name="nebula_color_presets">
+        <item>0xFF6633AA</item>
+        <item>0xFF3355CC</item>
+        <item>0xFF8833BB</item>
+        <item>0xFF334499</item>
+        <item>0xFF993344</item>
+        <item>0xFF225588</item>
+        <item>0xFF446622</item>
+        <item>0xFF884422</item>
+        <item>0xFF224455</item>
+        <item>0xFF553388</item>
+        <item>0xFF1A0A3E</item>
+        <item>0xFF0A0A2E</item>
+        <item>0xFF150028</item>
+        <item>0xFF1A0035</item>
+        <item>0xFF001035</item>
+        <item>0xFF200020</item>
+        <item>0xFF0F2015</item>
+        <item>0xFF201005</item>
+        <item>0xFF200510</item>
+        <item>0xFF050520</item>
+    </integer-array>
 </resources>

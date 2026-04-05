@@ -255,6 +255,30 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.bgGradientRadius = bgGradientRadius;
             bgPaintDirty = true;
         }
+        boolean nebulaEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_NEBULA_ENABLED, opts.nebulaEnabled);
+        if (nebulaEnabled != opts.nebulaEnabled) {
+            opts.nebulaEnabled = nebulaEnabled;
+            update = true;
+        }
+        int nebulaColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_COLOR, opts.nebulaColor);
+        if (nebulaColor != opts.nebulaColor) {
+            opts.nebulaColor = nebulaColor;
+            update = true;
+        }
+        int nebulaCount = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_COUNT, opts.nebulaCount);
+        if (nebulaCount != opts.nebulaCount) {
+            opts.nebulaCount = nebulaCount;
+            update = true;
+        }
+        int nebulaOpacity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_OPACITY, opts.nebulaOpacity);
+        if (nebulaOpacity != opts.nebulaOpacity) {
+            opts.nebulaOpacity = nebulaOpacity;
+            update = true;
+        }
+        int nebulaMovement = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_MOVEMENT, opts.nebulaMovement);
+        if (nebulaMovement != opts.nebulaMovement) {
+            opts.nebulaMovement = nebulaMovement;
+        }
         if (update) {
             reset();
         }

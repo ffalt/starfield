@@ -7,4 +7,5 @@
     <color name="meteor_color_end_default">#E98E1E</color>
     <color name="bg_color_default">#000000</color>
     <color name="bg_gradient_inner_color_default">#0A0A2E</color>
+    <color name="nebula_color_default">#6633AA</color>
 </resources>

@@ -42,4 +42,14 @@
     <integer name="bg_gradient_radius_min">10</integer>
     <integer name="bg_gradient_radius_max">200</integer>
     <integer name="bg_gradient_radius_step">10</integer>
+    <bool name="nebula_enabled_default">false</bool>
+    <integer name="nebula_count_default">5</integer>
+    <integer name="nebula_count_min">1</integer>
+    <integer name="nebula_count_max">15</integer>
+    <integer name="nebula_opacity_default">30</integer>
+    <integer name="nebula_opacity_min">5</integer>
+    <integer name="nebula_opacity_max">80</integer>
+    <integer name="nebula_movement_default">5</integer>
+    <integer name="nebula_movement_min">1</integer>
+    <integer name="nebula_movement_max">20</integer>
 </resources>

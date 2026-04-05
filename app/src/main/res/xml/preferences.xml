@@ -160,6 +160,66 @@
 
     <androidx.preference.PreferenceCategory
         app:iconSpaceReserved="false"
+        app:key="nebula_category"
+        app:title="@string/settings_group_nebula">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/nebula_enabled_default"
+            app:iconSpaceReserved="false"
+            app:key="nebula_enabled"
+            app:summary="@string/settings_nebula_enable_summary"
+            app:title="@string/settings_nebula_enable" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            android:defaultValue="@color/nebula_color_default"
+            android:key="nebula_color"
+            android:summary="@string/settings_nebula_color_summary"
+            android:title="@string/settings_nebula_color"
+            app:cpv_colorPresets="@array/nebula_color_presets"
+            app:cpv_dialogType="preset"
+            app:dependency="nebula_enabled"
+            app:iconSpaceReserved="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/nebula_count_default"
+            android:key="nebula_count"
+            android:max="@integer/nebula_count_max"
+            android:summary="@string/settings_nebula_count_summary"
+            android:title="@string/settings_nebula_count"
+            app:dependency="nebula_enabled"
+            app:iconSpaceReserved="false"
+            app:min="@integer/nebula_count_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/nebula_opacity_default"
+            android:key="nebula_opacity"
+            android:max="@integer/nebula_opacity_max"
+            android:summary="@string/settings_nebula_opacity_summary"
+            android:title="@string/settings_nebula_opacity"
+            app:dependency="nebula_enabled"
+            app:iconSpaceReserved="false"
+            app:min="@integer/nebula_opacity_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/nebula_movement_default"
+            android:key="nebula_movement"
+            android:max="@integer/nebula_movement_max"
+            android:summary="@string/settings_nebula_movement_summary"
+            android:title="@string/settings_nebula_movement"
+            app:dependency="nebula_enabled"
+            app:iconSpaceReserved="false"
+            app:min="@integer/nebula_movement_min"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
         app:key="screen_category"
         app:title="@string/settings_group_screen">
 

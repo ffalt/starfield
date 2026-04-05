@@ -31,21 +31,27 @@ import android.graphics.Canvas;
 
 import io.github.ffalt.starfield.StarfieldOpts;
 import io.github.ffalt.starfield.painting.effects.MeteorsPaint;
+import io.github.ffalt.starfield.painting.effects.NebulaPaint;
 import io.github.ffalt.starfield.painting.effects.StarsPaint;
 
 public class Starfield {
     private final StarfieldOpts opts;
     private final MeteorsPaint meteorsPaint;
+    private final NebulaPaint nebulaPaint;
     private final StarsPaint starsPaint;
 
     public Starfield(StarfieldOpts opts) {
         this.opts = opts;
+        nebulaPaint = new NebulaPaint(opts);
         starsPaint = new StarsPaint(opts);
         meteorsPaint = new MeteorsPaint(opts);
         this.init();
     }
 
     private void init() {
+        if (opts.nebulaEnabled) {
+            nebulaPaint.init();
+        }
         starsPaint.init();
         if (opts.meteorsEnabled) {
             meteorsPaint.init();
@@ -53,6 +59,9 @@ public class Starfield {
     }
 
     public void move() {
+        if (opts.nebulaEnabled) {
+            nebulaPaint.move();
+        }
         starsPaint.move();
         if (opts.meteorsEnabled) {
             meteorsPaint.move();
@@ -60,6 +69,9 @@ public class Starfield {
     }
 
     public void draw(Canvas c) {
+        if (opts.nebulaEnabled) {
+            nebulaPaint.draw(c);
+        }
         starsPaint.draw(c);
         if (opts.meteorsEnabled) {
             meteorsPaint.draw(c);
@@ -68,18 +80,30 @@ public class Starfield {
 
     public void setOffsets(float diffX, float diffY) {
         starsPaint.setOffsets(diffX, diffY);
+        if (opts.nebulaEnabled) {
+            nebulaPaint.setOffsets(diffX, diffY);
+        }
     }
 
     public void clearOffsets() {
         starsPaint.clearOffsets();
+        if (opts.nebulaEnabled) {
+            nebulaPaint.clearOffsets();
+        }
     }
 
     public void setTilt(float tiltX, float tiltY) {
         starsPaint.setTilt(tiltX, tiltY);
+        if (opts.nebulaEnabled) {
+            nebulaPaint.setTilt(tiltX, tiltY);
+        }
     }
 
     public void setSpeedModifier(float mod) {
         this.starsPaint.setSpeedModifier(mod);
+        if (opts.nebulaEnabled) {
+            this.nebulaPaint.setSpeedModifier(mod);
+        }
         if (opts.meteorsEnabled) {
             this.meteorsPaint.setSpeedModifier(mod);
         }

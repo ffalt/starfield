@@ -57,6 +57,11 @@ public class StarfieldOpts {
     public static final boolean DEFAULT_BG_GRADIENT = false;
     public static final int DEFAULT_BG_GRADIENT_INNER_COLOR = Color.parseColor("#0A0A2E");
     public static final int DEFAULT_BG_GRADIENT_RADIUS = 70;
+    public static final boolean DEFAULT_NEBULA_ENABLED = false;
+    public static final int DEFAULT_NEBULA_COLOR = Color.parseColor("#6633AA");
+    public static final int DEFAULT_NEBULA_COUNT = 6;
+    public static final int DEFAULT_NEBULA_OPACITY = 40;
+    public static final int DEFAULT_NEBULA_MOVEMENT = 9;
     public float width = 100f;
     public float height = 100f;
     public float hW = 50f;
@@ -86,6 +91,11 @@ public class StarfieldOpts {
     public boolean bgGradient = StarfieldOpts.DEFAULT_BG_GRADIENT;
     public int bgGradientInnerColor = StarfieldOpts.DEFAULT_BG_GRADIENT_INNER_COLOR;
     public int bgGradientRadius = StarfieldOpts.DEFAULT_BG_GRADIENT_RADIUS;
+    public boolean nebulaEnabled = StarfieldOpts.DEFAULT_NEBULA_ENABLED;
+    public int nebulaColor = StarfieldOpts.DEFAULT_NEBULA_COLOR;
+    public int nebulaCount = StarfieldOpts.DEFAULT_NEBULA_COUNT;
+    public int nebulaOpacity = StarfieldOpts.DEFAULT_NEBULA_OPACITY;
+    public int nebulaMovement = StarfieldOpts.DEFAULT_NEBULA_MOVEMENT;
     public int fps = 60;
     public long drawTime = Math.round(1000.0 / 60);
 
