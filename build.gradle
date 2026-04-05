@@ -8,6 +8,50 @@ plugins {
     alias(libs.plugins.grGit)
 }
 
+subprojects {
+    apply plugin: 'checkstyle'
+
+    checkstyle {
+        toolVersion = libs.versions.checkstyle.get()
+        configFile = rootProject.file("app/config/checkstyle/checkstyle.xml")
+        ignoreFailures = true
+        showViolations = true
+    }
+
+    tasks.register('checkstyleMain', Checkstyle) {
+        source 'src/main/java'
+        include '**/*.java'
+        exclude '**/R.java', '**/BuildConfig.java'
+        classpath = files()
+        reports {
+            xml.required = true
+            xml.outputLocation = layout.buildDirectory.file("reports/checkstyle/checkstyle.xml")
+            html.required = true
+            html.outputLocation = layout.buildDirectory.file("reports/checkstyle/checkstyle.html")
+        }
+    }
+
+    plugins.withId('com.android.application') {
+        tasks.named('check').configure {
+            dependsOn 'checkstyleMain'
+        }
+
+        android {
+            lint {
+                abortOnError false
+                checkDependencies true
+                checkReleaseBuilds true
+                lintConfig = file("lint.xml")
+                xmlReport = true
+                htmlReport = true
+                xmlOutput = layout.buildDirectory.file("reports/lint/lint-results.xml").get().asFile
+                htmlOutput = layout.buildDirectory.file("reports/lint/lint-results.html").get().asFile
+                baseline = file("lint-baseline.xml")
+            }
+        }
+    }
+}
+
 def templateChangelogContent = """# Changelog Starfield Live Wallpaper
 {{#tags}}
 
