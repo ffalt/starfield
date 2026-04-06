@@ -47,7 +47,7 @@ Starfield focuses on smooth visuals and configurability without compromising bat
 <img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/1_lock_screen.jpg" alt="Lock Screen">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/2_wallpaper.jpg" alt="Wallpaper">&nbsp; &nbsp;<img width="200" src="./fastlane/metadata/android/en-US/images/phoneScreenshots/4_settings.jpg" alt="Settings">
 </p>
 <p align="center">
-*Lock screen · Home screen wallpaper · Settings panel*
+Lock screen · Home screen wallpaper · Settings panel
 </p>
 
 ## 📲 Installation
