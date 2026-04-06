@@ -21,25 +21,25 @@
 
 Starfield focuses on smooth visuals and configurability without compromising battery life. Every aspect of the simulation can be tuned to match your taste - from a calm, drifting nebula feel to a blazing warp-speed rush.
 
-| Category                  | What you get (most is optional)                                                      |
-|---------------------------|--------------------------------------------------------------------------------------|
-| 🌟 **Stars**              | Adjustable count, size, color, and min/max speeds                                    |
-| 🔵 **Star shape**         | Toggle between smooth round circles and square pixels                                |
-| 🚀 **Star acceleration**  | Each star naturally speeds up as it zooms toward you for a warp-rush feel            |
-| ✨ **Star trails**         | Enable/disable motion trails; independent inner & outer gradient colors              |
-| ☄️ **Meteors**            | Up to 3 simultaneous meteors spawning from any screen edge; configurable probability |
-| 🌠 **Meteor detail**      | Multi-segment gradient trail, bright core streak, and glowing filled head            |
-| 🎨 **Colors**             | Full color pickers for stars, trail inner/outer, and meteor head/tail                |
-| 🌃 **Background color**   | Configurable background color                                                        |
-| 🌫️ **Nebula gradient**   | Optional radial gradient background with adjustable spread                           |
-| 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; restore-to-center              |
-| 🔄 **Gyroscope**          | Tilt-to-steer via gyroscope with adjustable intensity                                |
-| 🔋 **Battery-aware**      | Automatically scales down star speed proportionally to battery level                 |
-| ⚡ **Performance**         | Adjustable FPS cap; hardware-accelerated canvas rendering                            |
-| 🌌 **Depth of field**     | Depth multiplier controls the perceived 3D parallax and zoom range                   |
-| ⏸️ **Smart pause**        | Rendering stops automatically when the wallpaper is not visible - zero waste         |
-| 🔐 **Boot-safe settings** | Preferences stored in device-protected storage; available before screen unlock       |
-| 💾 **Settings**           | Persistent preferences with a one-tap Reset-to-defaults                              |
+| Category                  | What you get (most is optional)                                                           |
+|---------------------------|-------------------------------------------------------------------------------------------|
+| 🌟 **Stars**              | Adjustable count, size, color, and min/max speeds                                         |
+| 🔵 **Star shape**         | Toggle between smooth round circles and square pixels                                     |
+| 🚀 **Star acceleration**  | Each star naturally speeds up as it zooms toward you for a warp-rush feel                 |
+| ✨ **Star trails**         | Enable/disable motion trails; independent inner & outer gradient colors                   |
+| ☄️ **Meteors**            | Up to 3 simultaneous meteors spawning from any screen edge; configurable probability      |
+| 🌠 **Meteor detail**      | Multi-segment gradient trail, bright core streak, and glowing filled head                 |
+| 🎨 **Colors**             | Full color pickers for stars, trail inner/outer, and meteor head/tail                     |
+| 🌫️ **Nebula clouds**     | Slowly drifting translucent color blobs behind the stars                                  |
+| 🌃 **Background color**   | Configurable background color, optional radial gradient background with adjustable spread |
+| 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; restore-to-center                   |
+| 🔄 **Gyroscope**          | Tilt-to-steer via gyroscope with adjustable intensity                                     |
+| 🔋 **Battery-aware**      | Automatically scales down star speed proportionally to battery level                      |
+| ⚡ **Performance**         | Adjustable FPS cap; hardware-accelerated canvas rendering                                 |
+| 🌌 **Depth of field**     | Depth multiplier controls the perceived 3D parallax and zoom range                        |
+| ⏸️ **Smart pause**        | Rendering stops automatically when the wallpaper is not visible - zero waste              |
+| 🔐 **Boot-safe settings** | Preferences stored in device-protected storage; available before screen unlock            |
+| 💾 **Settings**           | Persistent preferences with a one-tap Reset-to-defaults                                   |
 
 ## 📸 Screenshots
 
