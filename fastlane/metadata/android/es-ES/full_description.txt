@@ -1,5 +1,26 @@
-Starfield es un fondo de pantalla en vivo acelerado por hardware para el fondo y la pantalla de bloqueo que muestra volando en un campo de estrellas.
+¡Convierte tu pantalla de inicio en un viaje por el espacio! Starfield es un fondo de pantalla en vivo ligero y fluido que te lleva volando a través de un hermoso campo de estrellas — directamente en tu dispositivo.
 
 Características:
 
- - Ajuste un montón de aspectos, ej. cantidad de estrellas, color, velocidad
+- Campo de estrellas altamente configurable
+  - Cantidad, tamaño y color de estrellas ajustables
+  - Forma de estrella redonda o cuadrada
+  - Controles de velocidad mínima y máxima independientes para un movimiento variado
+- Efectos visuales y de movimiento
+  - Estelas estelares con colores de degradado configurables
+  - Meteoros con frecuencia ajustable y colores de cabeza/cola personalizables
+  - Nubes de nebulosa que se desplazan lentamente detrás de las estrellas, con cantidad, opacidad y movimiento ajustables
+- Fondo
+  - Color de fondo personalizado
+  - Degradado radial opcional que se difumina desde un color central hacia afuera
+- Interacción con pantalla y sensores
+  - Seguimiento del deslizamiento entre pantallas de inicio con intensidad ajustable
+  - Restauración automática de la dirección hacia adelante al volver a la pantalla principal
+  - Movimiento por inclinación basado en giroscopio con intensidad ajustable
+  - Reducción de velocidad según el nivel de batería
+- Rendimiento y controles avanzados
+  - Velocidad de fotogramas (FPS) ajustable para optimizar el rendimiento
+  - Ajuste de profundidad de campo para controlar el efecto 3D percibido
+- Usabilidad
+  - Selectores de color para estrellas, estelas, meteoros, nebulosa y fondo
+  - Ajustes persistentes y opción para restablecer los valores predeterminados

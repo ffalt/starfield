@@ -1,21 +1,27 @@
-Starfield is a lightweight, hardware accelerated, highly configurable live wallpaper that simulates a flight through a starfield.
+Turn your home screen into a journey through space! Starfield is a smooth, lightweight live wallpaper that sends you flying through a beautiful starfield — right on your device.
 
 Features:
 
 - Highly configurable starfield
   - Adjustable star count, size and color
-  - Min/max star speeds for varied motion
+  - Round or square star shape
+  - Separate minimum and maximum speed controls for varied motion
 - Motion & visual effects
   - Star trails with configurable gradient colors
-  - Meteors (occasional streaks) with spawn probability and trail colors
+  - Meteors with adjustable frequency and customizable head/tail colors
+  - Nebula clouds that drift slowly behind the stars, with adjustable count, opacity and movement
+- Background
+  - Custom background color
+  - Optional radial gradient that blends from a center color outward
 - Screen & sensor interaction
-  - Follow home screen swiping with optional restore behavior
-  - Sensor-based movement with adjustable intensity
+  - Follow home screen swiping with adjustable intensity
+  - Auto-restore forward direction when returning to the main screen
+  - Gyroscope-based tilt movement with adjustable intensity
   - Battery-aware speed reduction option
 - Performance & expert controls
   - Adjustable framerate (FPS) for performance tuning
-  - Depth setting to control perceived 3D effect
+  - Depth of field setting to control perceived 3D effect
 - Usability
-  - Color pickers for star, trail and meteor colors
-  - Persistent settings and a Reset-to-defaults option
+  - Color pickers for stars, trails, meteors, nebula and background
+  - Persistent settings and a reset-to-defaults option
 

@@ -1,5 +1,26 @@
-Starfield ist ein hardwarebeschleunigtes Live-Wallpaper für Hintergrund und Sperrbildschirm, das einen Flug durch ein Sternenfeld anzeigt.
+Verwandle deinen Startbildschirm in eine Reise durch das All! Starfield ist ein elegantes, leichtgewichtiges Live-Wallpaper, das dich durch ein wunderschönes Sternenfeld fliegen lässt — direkt auf deinem Gerät.
 
-Features:
+Funktionen:
 
- - Einstellen vieler Aspekte wie z.B. Anzahl der Sterne, Farbe, Geschwindigkeit
+- Hochgradig konfigurierbares Sternenfeld
+  - Einstellbare Sternanzahl, -größe und -farbe
+  - Runde oder eckige Sternform
+  - Getrennte Minimum- und Maximum-Geschwindigkeit für abwechslungsreiche Bewegung
+- Bewegungs- und visuelle Effekte
+  - Sternschweife mit konfigurierbaren Verlaufsfarben
+  - Meteore mit einstellbarer Häufigkeit und anpassbaren Kopf-/Schweiffarben
+  - Nebelwolken, die langsam hinter den Sternen treiben, mit einstellbarer Anzahl, Deckkraft und Bewegung
+- Hintergrund
+  - Benutzerdefinierte Hintergrundfarbe
+  - Optionaler radialer Farbverlauf, der von einer Mittelfarbe nach außen übergeht
+- Bildschirm- und Sensorsteuerung
+  - Sternenfeld folgt dem Wischen zwischen Startbildschirmen mit einstellbarer Intensität
+  - Automatische Wiederherstellung der Vorwärtsrichtung bei Rückkehr zum Hauptbildschirm
+  - Gyroskop-basierte Neigungssteuerung mit einstellbarer Intensität
+  - Batterieabhängige Geschwindigkeitsreduzierung
+- Leistung und Experteneinstellungen
+  - Einstellbare Bildrate (FPS) zur Leistungsoptimierung
+  - Tiefenschärfe-Einstellung zur Steuerung des 3D-Effekts
+- Bedienung
+  - Farbauswahl für Sterne, Schweife, Meteore, Nebel und Hintergrund
+  - Dauerhafte Einstellungen und eine Option zum Zurücksetzen auf Standardwerte
