@@ -1,0 +1,3 @@
+ -  **app**  better icon
+ -  **starfield**  new nebula clouds effect
+ -  **starfield**  configurable background color and optional nebula gradient
