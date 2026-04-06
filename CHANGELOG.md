@@ -1,4 +1,13 @@
 
+## [v0.0.12](https://github.com/ffalt/starfield/compare/v0.0.12) (2026-04-06)
+
+### Features
+
+ -  **app**  better icon ([756a18b3d4a1a9a](https://github.com/ffalt/starfield/commit/756a18b3d4a1a9ad31fe5e14bb907cd126a3ba85))
+ -  **starfield**  new nebula clouds effect ([910ec9f2c941e54](https://github.com/ffalt/starfield/commit/910ec9f2c941e54a71ac903ac17c641007a94b73))
+ -  **starfield**  configurable background color and optional nebula gradient ([660b554e49a0cd9](https://github.com/ffalt/starfield/commit/660b554e49a0cd9002d65fec1681cf88d58aa0e1))
+
+
 ## [v0.0.11](https://github.com/ffalt/starfield/compare/v0.0.11) (2026-03-16)
 
 ### Features
