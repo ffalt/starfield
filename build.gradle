@@ -215,6 +215,7 @@ tasks.register('prepareReleaseTag') {
     }
 }
 
+
 tasks.register('release') {
     dependsOn tasks.named('prepareReleaseTag'), tasks.named('gitChangelogTask'), tasks.named('gitFdroidChangelogTask')
 
@@ -259,3 +260,7 @@ tasks.register('gitFdroidChangelogTask', GitChangelogTask) {
     prependToFile.set(false)
     templateContent.set(templateFdroidChangelogContent)
 }
+
+tasks.named('gitChangelogTask').configure { mustRunAfter tasks.named('prepareReleaseTag') }
+tasks.named('gitFdroidChangelogTask').configure { mustRunAfter tasks.named('prepareReleaseTag') }
+
