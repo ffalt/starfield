@@ -61,4 +61,24 @@
     <string name="settings_meteor_spawn_probability">Вероятность появления метеора</string>
     <string name="settings_meteor_spawn_probability_summary">Вероятность появления метеора (на кадр)</string>
     <string name="error_wallpaper_picker_not_found">Не удалось открыть выбор обоев. Пожалуйста, установите обои вручную в настройках устройства.</string>
+    <string name="settings_group_background">Фон</string>
+    <string name="settings_bg_color">Цвет фона</string>
+    <string name="settings_bg_color_summary" />
+    <string name="settings_bg_gradient">Радиальный градиент</string>
+    <string name="settings_bg_gradient_summary">Переход от внутреннего цвета к цвету фона для (статичного) эффекта туманности</string>
+    <string name="settings_bg_gradient_inner_color">Внутренний цвет</string>
+    <string name="settings_bg_gradient_inner_color_summary" />
+    <string name="settings_bg_gradient_radius">Размер градиента (%)</string>
+    <string name="settings_bg_gradient_radius_summary">Определяет, насколько далеко градиент распространяется по экрану</string>
+    <string name="settings_group_nebula">Туманность</string>
+    <string name="settings_nebula_enable">Включить туманность</string>
+    <string name="settings_nebula_enable_summary">Показывать медленно дрейфующие полупрозрачные цветные пятна за звёздами</string>
+    <string name="settings_nebula_color">Цвет туманности</string>
+    <string name="settings_nebula_color_summary" />
+    <string name="settings_nebula_count">Количество пятен</string>
+    <string name="settings_nebula_count_summary">Количество пятен туманности</string>
+    <string name="settings_nebula_opacity">Прозрачность</string>
+    <string name="settings_nebula_opacity_summary">Насколько видимы пятна туманности</string>
+    <string name="settings_nebula_movement">Интенсивность движения</string>
+    <string name="settings_nebula_movement_summary">Насколько сильно туманность движется и реагирует на наклон и свайп</string>
 </resources>

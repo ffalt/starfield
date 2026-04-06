@@ -61,4 +61,24 @@
     <string name="settings_meteor_spawn_probability">Probabilidad de aparición de meteoros</string>
     <string name="settings_meteor_spawn_probability_summary">La probabilidad que aparece un meteoro (por fotograma)</string>
     <string name="error_wallpaper_picker_not_found">No se pudo abrir el selector de fondos de pantalla. Configure el fondo de pantalla manualmente desde la configuración de su dispositivo.</string>
+    <string name="settings_group_background">Fondo</string>
+    <string name="settings_bg_color">Color de fondo</string>
+    <string name="settings_bg_color_summary" />
+    <string name="settings_bg_gradient">Gradiente radial</string>
+    <string name="settings_bg_gradient_summary">Mezcla del color interior al color de fondo para un efecto de nebulosa (estático)</string>
+    <string name="settings_bg_gradient_inner_color">Color interior</string>
+    <string name="settings_bg_gradient_inner_color_summary" />
+    <string name="settings_bg_gradient_radius">Tamaño del gradiente (%)</string>
+    <string name="settings_bg_gradient_radius_summary">Controla cuánto se extiende el gradiente por la pantalla</string>
+    <string name="settings_group_nebula">Nebulosa</string>
+    <string name="settings_nebula_enable">Activar nebulosa</string>
+    <string name="settings_nebula_enable_summary">Mostrar manchas de color translúcidas que se desplazan lentamente detrás de las estrellas</string>
+    <string name="settings_nebula_color">Color de la nebulosa</string>
+    <string name="settings_nebula_color_summary" />
+    <string name="settings_nebula_count">Número de manchas</string>
+    <string name="settings_nebula_count_summary">Número de manchas de nebulosa</string>
+    <string name="settings_nebula_opacity">Opacidad</string>
+    <string name="settings_nebula_opacity_summary">Qué tan visibles son las manchas de nebulosa</string>
+    <string name="settings_nebula_movement">Intensidad de movimiento</string>
+    <string name="settings_nebula_movement_summary">Cuánto se mueve la nebulosa y reacciona a la inclinación y al deslizamiento</string>
 </resources>

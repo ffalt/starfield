@@ -61,4 +61,24 @@
     <string name="settings_meteor_spawn_probability">Wahrscheinlichkeit für Meteore</string>
     <string name="settings_meteor_spawn_probability_summary">Wahrscheinlichkeit, dass pro Frame ein Meteorit erscheint</string>
     <string name="error_wallpaper_picker_not_found">Hintergrundbild-Auswahl konnte nicht geöffnet werden. Bitte legen Sie das Hintergrundbild manuell in den Geräteeinstellungen fest.</string>
+    <string name="settings_group_background">Hintergrund</string>
+    <string name="settings_bg_color">Hintergrundfarbe</string>
+    <string name="settings_bg_color_summary" />
+    <string name="settings_bg_gradient">Radialer Farbverlauf</string>
+    <string name="settings_bg_gradient_summary">Übergang von innerer Farbe zur Hintergrundfarbe für ein (statisches) Nebel-Gefühl</string>
+    <string name="settings_bg_gradient_inner_color">Innere Farbe</string>
+    <string name="settings_bg_gradient_inner_color_summary" />
+    <string name="settings_bg_gradient_radius">Verlaufsgröße (%)</string>
+    <string name="settings_bg_gradient_radius_summary">Steuert, wie weit sich der Farbverlauf über den Bildschirm ausbreitet</string>
+    <string name="settings_group_nebula">Nebel</string>
+    <string name="settings_nebula_enable">Nebel aktivieren</string>
+    <string name="settings_nebula_enable_summary">Langsam treibende, durchscheinende Farbflecken hinter den Sternen anzeigen</string>
+    <string name="settings_nebula_color">Nebelfarbe</string>
+    <string name="settings_nebula_color_summary" />
+    <string name="settings_nebula_count">Anzahl der Nebel</string>
+    <string name="settings_nebula_count_summary">Anzahl der Nebelflecken</string>
+    <string name="settings_nebula_opacity">Deckkraft</string>
+    <string name="settings_nebula_opacity_summary">Wie sichtbar die Nebel sind</string>
+    <string name="settings_nebula_movement">Bewegungsintensität</string>
+    <string name="settings_nebula_movement_summary">Wie stark der Nebel sich bewegt und auf Neigung und Wischen reagiert</string>
 </resources>
