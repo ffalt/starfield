@@ -52,9 +52,16 @@ jobs:
         run: |
           mv app/build/outputs/apk/release/app-release.apk starfield-${{ env.RELEASE_VERSION }}.apk
 
+      - name: Generate Checksums
+        run: |
+          md5sum starfield-${{ env.RELEASE_VERSION }}.apk > starfield-${{ env.RELEASE_VERSION }}.apk.md5
+          sha256sum starfield-${{ env.RELEASE_VERSION }}.apk > starfield-${{ env.RELEASE_VERSION }}.apk.sha256
+
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           body_path: RELEASE_NOTES.md
           files: |
             starfield-${{ env.RELEASE_VERSION }}.apk
+            starfield-${{ env.RELEASE_VERSION }}.apk.md5
+            starfield-${{ env.RELEASE_VERSION }}.apk.sha256
