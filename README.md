@@ -74,9 +74,7 @@ All contributions are warmly welcome - no contribution is too small!
 
 - 🐛 **Bug reports & ideas** - open an [issue](https://github.com/ffalt/starfield/issues)
 - 🔧 **Code** - send a pull request with small, focused changes
-- 🌍 **Translations** - help localise Starfield via Crowdin:  
-  [crowdin.com/project/starfield-wallpaper](https://crowdin.com/project/starfield-wallpaper)
-
+- 🌍 **Translations** - help localise Starfield
 
 
 ## ⚖️ License
