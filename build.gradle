@@ -51,37 +51,6 @@ subprojects {
     }
 }
 
-def templateChangelogContent = """# Changelog Starfield Live Wallpaper
-{{#tags}}
-
-{{#ifEquals name "Unreleased"}}
-## Unreleased
-{{else}}
-## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
-{{/ifEquals}}
-
-  {{#ifContainsType commits type='feat'}}
-### Features
-
-    {{#commits}}
-      {{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-
-  {{#ifContainsType commits type='fix'}}
-### Bug Fixes
-
-    {{#commits}}
-      {{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-{{/tags}}
- """
-
 // Template only for a single entry append (no global header)
 def templateChangelogEntryContent = """{{#tags}}
 

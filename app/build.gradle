@@ -10,12 +10,12 @@ static def calculateAndroidVersionCode(versionName) {
 
 android {
     namespace = "io.github.ffalt.starfield"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "io.github.ffalt.starfield"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = calculateAndroidVersionCode(project.version)
         versionName = project.version
     }
