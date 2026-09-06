@@ -40,7 +40,7 @@ public class StarTrailPaintCache extends PaintCache {
 
     public StarTrailPaintCache(StarfieldOpts opts) {
         // cache size - brightness is 0..100 in Starfield
-        super(opts, 101);
+        super(opts, 100);
         buildCache();
     }
 
