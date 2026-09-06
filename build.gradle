@@ -123,8 +123,22 @@ static def calculateAndroidVersionCode(versionName) {
     return (major * 1000 * 1000 * 1000) + (minor * 1000 * 1000) + (patch * 1000) + build
 }
 
+static def findPreviousReleaseTag(version) {
+    def versionCode = calculateAndroidVersionCode(version)
+    def prevTag = ['git', 'tag', '--list', 'v*'].execute().text
+            .readLines()
+            *.trim()
+            .findAll { it ==~ /v\d+(\.\d+)*/ }
+            .findAll { calculateAndroidVersionCode(it) < versionCode }
+            .max { calculateAndroidVersionCode(it) }
+    if (!prevTag) {
+        throw new GradleException("No release tag below ${version} found. Cannot determine the changelog range.")
+    }
+    return prevTag
+}
+
 tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    def prev_tag = ['bash', '-lc', 'git tag --sort=-creatordate | head -n 2 | tail -n 1'].execute().text.trim()
+    def prev_tag = findPreviousReleaseTag(project.version)
     println "Generating Release notes for ${project.version} compared to ${prev_tag}"
 
     toRevision.set(project.version)
@@ -136,16 +150,9 @@ tasks.register('gitReleaseNotesTask', GitChangelogTask) {
 }
 
 tasks.register('gitChangelogTask', GitChangelogTask) {
-    // Append only the new changes since the latest tag to the top of CHANGELOG.md
-    def prev_tag = ['bash', '-lc', 'git tag --sort=-creatordate | head -n 1'].execute().text.trim()
-    if (!prev_tag) {
-        // Fallback to initial commit if no tag exists
-        fromRevision.set("440bdfdf94c09ef4edf1885b25852078a66d6332")
-        fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    } else {
-        fromRevision.set(prev_tag)
-        fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    }
+    // Append only the new changes since the previous release to the top of CHANGELOG.md
+    fromRevision.set(findPreviousReleaseTag(project.version))
+    fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
     toRevision.set(project.version)
     file.set(new File("${rootDir}/CHANGELOG.md"))
     prependToFile.set(true)
@@ -196,12 +203,12 @@ tasks.register('release') {
         def versionCode = calculateAndroidVersionCode(project.version)
         def fdroidRelPath = "fastlane/metadata/android/en-US/changelogs/${versionCode}.txt"
         def fdroidFile = file(fdroidRelPath)
-        if (fdroidFile.exists()) {
-            println("Adding F-Droid changelog ${fdroidRelPath} to git")
-            ['git', 'add', fdroidRelPath].execute().waitFor()
-        } else {
-            println("Fdroid changelog not found at ${fdroidRelPath} - skipping add")
+        if (!fdroidFile.exists() || fdroidFile.text.trim().isEmpty()) {
+            throw new GradleException("No changelog entries generated for ${project.version} " +
+                    "(${fdroidRelPath} is empty). Restore the working tree and verify the previous release tag.")
         }
+        println("Adding F-Droid changelog ${fdroidRelPath} to git")
+        ['git', 'add', fdroidRelPath].execute().waitFor()
         // commit changelog
         ['git', 'commit', '-a', '-m', "Release ${project.version}"].execute().waitFor()
         // sign commit
@@ -214,14 +221,8 @@ tasks.register('release') {
 
 tasks.register('gitFdroidChangelogTask', GitChangelogTask) {
     println("Update Fdroid changelogs ${project.version}")
-    def prev_tag = ['bash', '-lc', 'git tag --sort=-creatordate | head -n 1'].execute().text.trim()
-    if (!prev_tag) {
-        fromRevision.set("440bdfdf94c09ef4edf1885b25852078a66d6332")
-        fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    } else {
-        fromRevision.set(prev_tag)
-        fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    }
+    fromRevision.set(findPreviousReleaseTag(project.version))
+    fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
     toRevision.set(project.version)
     def versionCode = calculateAndroidVersionCode(project.version)
     file.set(new File("fastlane/metadata/android/en-US/changelogs/${versionCode}.txt"))
