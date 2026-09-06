@@ -40,7 +40,10 @@ public class PaintCache {
     public PaintCache(StarfieldOpts opts, int length) {
         this.opts = opts;
         cache = new Paint[length + 1];
-        for (int i = 0; i <= length; i++) {
+    }
+
+    protected final void buildCache() {
+        for (int i = 0; i < cache.length; i++) {
             cache[i] = build(i);
         }
     }
