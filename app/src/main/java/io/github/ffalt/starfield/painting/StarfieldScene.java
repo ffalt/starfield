@@ -74,7 +74,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     private Context mContext;
     private volatile float pendingTiltX;
     private volatile float pendingTiltY;
-    private boolean tiltPending = false;
+    private volatile boolean tiltPending = false;
 
     private final Runnable applyTilt = () -> {
         tiltPending = false;
