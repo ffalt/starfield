@@ -510,6 +510,8 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
                 drawBackground(c);
                 starfield.draw(c);
             }
+        } catch (IllegalStateException ignored) {
+            // surface released before this frame could be drawn
         } finally {
             if (c != null) {
                 holder.unlockCanvasAndPost(c);
