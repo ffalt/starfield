@@ -1,8 +1,4 @@
 
-## [v0.0.14](https://github.com/ffalt/starfield/compare/v0.0.14) (2026-09-06)
-
-
-
 ## [v0.0.12](https://github.com/ffalt/starfield/compare/v0.0.12) (2026-04-06)
 
 ### Features
