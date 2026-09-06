@@ -320,6 +320,12 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
     }
 
+    private void releaseSensor() {
+        sensorManager = null;
+        sensor = null;
+        isSensorAvailable = false;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         pendingTiltX = event.values[0];
@@ -461,11 +467,16 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
     }
 
-    public void onDestroy(Context context) {
+    public void onSurfaceDestroyed() {
         visible = false;
         mHandler.removeCallbacks(mDrawThread);
-        unregisterOnSharedPreferenceChanged(context);
         unregisterSensorListener();
+    }
+
+    public void onDestroy(Context context) {
+        onSurfaceDestroyed();
+        releaseSensor();
+        unregisterOnSharedPreferenceChanged(context);
         unregisterBatteryListener(context);
         recycleBgBitmap();
         mContext = null;

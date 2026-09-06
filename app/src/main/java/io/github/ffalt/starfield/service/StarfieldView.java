@@ -47,8 +47,19 @@ public class StarfieldView extends SurfaceView implements SurfaceHolder.Callback
     public StarfieldView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initSizeChangeListener();
-        scene.onCreate(this.getContext());
         this.getHolder().addCallback(this);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        scene.onCreate(this.getContext());
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        scene.onDestroy(this.getContext());
+        super.onDetachedFromWindow();
     }
 
     private void initSizeChangeListener() {
@@ -73,6 +84,6 @@ public class StarfieldView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-        scene.onDestroy(this.getContext());
+        scene.onSurfaceDestroyed();
     }
 }

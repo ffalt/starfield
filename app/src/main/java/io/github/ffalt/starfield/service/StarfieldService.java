@@ -77,8 +77,14 @@ public class StarfieldService extends WallpaperService {
 
         @Override
         public void onSurfaceDestroyed(SurfaceHolder holder) {
-            scene.onDestroy(StarfieldService.this);
+            scene.onSurfaceDestroyed();
             super.onSurfaceDestroyed(holder);
+        }
+
+        @Override
+        public void onDestroy() {
+            scene.onDestroy(StarfieldService.this);
+            super.onDestroy();
         }
 
         @Override
