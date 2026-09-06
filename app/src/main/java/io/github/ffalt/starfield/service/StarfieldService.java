@@ -45,7 +45,7 @@ public class StarfieldService extends WallpaperService {
                 return getSurfaceHolder();
             }
         };
-        private float screenXOffset = 0;
+        private float screenXOffset = -1f;
         private float screenDesired = 0;
 
         StarFieldEngine() {
@@ -67,12 +67,13 @@ public class StarfieldService extends WallpaperService {
         @Override
         public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             super.onSurfaceChanged(holder, format, width, height);
-            this.updateDesired();
             scene.onUpdateSize(width, height);
+            this.updateDesired();
         }
 
         public void updateDesired() {
-            screenDesired = getDesiredMinimumWidth();
+            float desired = getDesiredMinimumWidth();
+            screenDesired = desired > 0 ? desired : scene.opts.width;
         }
 
         @Override
@@ -91,7 +92,7 @@ public class StarfieldService extends WallpaperService {
         public void onOffsetsChanged(float xOffset, float yOffset,
                                      float xStep, float yStep, int xPixels, int yPixels) {
             super.onOffsetsChanged(xOffset, yOffset, xStep, yStep, xPixels, yPixels);
-            if (scene.visible && scene.opts.followScreen) {
+            if (screenXOffset >= 0f && scene.visible && scene.opts.followScreen) {
                 float diff = (screenXOffset - xOffset) * (screenDesired / 4);
                 scene.onUpdateOffset(-diff, 0);
             }
