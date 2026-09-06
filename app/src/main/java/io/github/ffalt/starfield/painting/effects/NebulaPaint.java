@@ -49,7 +49,7 @@ public class NebulaPaint {
     private float[] blobAge = new float[0];
     private float[] blobInvFadeIn = new float[0];
     private float[] blobRespawnDelay = new float[0];
-    private Bitmap blobBitmap;
+    private static Bitmap blobBitmap;
     private final Paint blobPaint = new Paint(Paint.FILTER_BITMAP_FLAG);
     private final RectF destRect = new RectF();
     private float offsetX = 0;
@@ -211,17 +211,18 @@ public class NebulaPaint {
         }
     }
 
-    private void buildBitmap() {
+    private static void buildBitmap() {
         if (blobBitmap != null) {
-            blobBitmap.recycle();
+            return;
         }
-        blobBitmap = Bitmap.createBitmap(BLOB_TEX_SIZE, BLOB_TEX_SIZE, Bitmap.Config.ALPHA_8);
-        Canvas c = new Canvas(blobBitmap);
+        Bitmap bitmap = Bitmap.createBitmap(BLOB_TEX_SIZE, BLOB_TEX_SIZE, Bitmap.Config.ALPHA_8);
+        Canvas c = new Canvas(bitmap);
         float half = BLOB_TEX_SIZE / 2f;
         Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
         p.setShader(new RadialGradient(half, half, half,
                 0xFFFFFFFF, 0x00FFFFFF, Shader.TileMode.CLAMP));
         c.drawCircle(half, half, half, p);
+        blobBitmap = bitmap;
     }
 
     private void spawnBlob(int i, ThreadLocalRandom rng) {
