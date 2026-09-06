@@ -33,24 +33,22 @@ import android.graphics.Paint;
 import java.util.concurrent.ThreadLocalRandom;
 
 import io.github.ffalt.starfield.StarfieldOpts;
+import io.github.ffalt.starfield.painting.ShapeBatcher;
 import io.github.ffalt.starfield.painting.cache.StarPaintCache;
 import io.github.ffalt.starfield.painting.cache.StarTrailPaintCache;
 
 public class StarsPaint {
+    private static final float MAX_TILT_ANGLE = (float) Math.toRadians(50.0);
+    private static final float INV_MAX_TILT_ANGLE = 1f / MAX_TILT_ANGLE;
+    private static final float SMOOTHING = 0.01f;
+
     private final StarfieldOpts opts;
-    private float[] starsX = new float[0];
-    private float[] starsY = new float[0];
-    private float[] starsZ = new float[0];
-    private float[] starsV = new float[0];
-    private float[] starsRadius = new float[0];
-    private float[] starsLastX = new float[0];
-    private float[] starsLastY = new float[0];
-    private float[] starsCurrentX = new float[0];
-    private float[] starsCurrentY = new float[0];
-    private float[] starsCurrentRadius = new float[0];
-    private int[] starsCurrentBrightness = new int[0];
-    private final StarPaintCache starPaints;
-    private final StarTrailPaintCache starTrailPaints;
+    private final StarArrays stars = new StarArrays();
+
+    private final ShapeBatcher bodyBatcher;
+    private final ShapeBatcher trailBatcher;
+
+    // Screen offset and gyroscope tilt, both eased towards their targets in move().
     private float offsetX = 0;
     private float offsetY = 0;
     private float offsetTX = 0;
@@ -60,33 +58,52 @@ public class StarsPaint {
     private float tiltTargetX = 0;
     private float tiltTargetY = 0;
     private float speedModifier = 1.0f;
-    private static final float MAX_TILT_ANGLE = (float) Math.toRadians(50.0);
-    private static final float SMOOTHING = 0.01f;
-    private static final float INV_MAX_TILT_ANGLE = 1f / MAX_TILT_ANGLE;
+
+    // Structure of arrays: one array per star attribute rather than one object per star, so the
+    // update loop walks contiguous memory. cur* hold the projected values draw() renders.
+    private static final class StarArrays {
+        private float[] x = new float[0];
+        private float[] y = new float[0];
+        private float[] z = new float[0];
+        private float[] v = new float[0];
+        private float[] radius = new float[0];
+        private float[] lastX = new float[0];
+        private float[] lastY = new float[0];
+        private float[] curX = new float[0];
+        private float[] curY = new float[0];
+        private float[] curRadius = new float[0];
+        private int[] curBrightness = new int[0];
+
+        private void alloc(int n) {
+            x = new float[n];
+            y = new float[n];
+            z = new float[n];
+            v = new float[n];
+            radius = new float[n];
+            lastX = new float[n];
+            lastY = new float[n];
+            curX = new float[n];
+            curY = new float[n];
+            curRadius = new float[n];
+            curBrightness = new int[n];
+        }
+    }
 
     public StarsPaint(StarfieldOpts opts) {
         this.opts = opts;
-        starPaints = new StarPaintCache(opts);
-        starTrailPaints = new StarTrailPaintCache(opts);
+        bodyBatcher = new ShapeBatcher(new StarPaintCache(opts).getArray(), ShapeBatcher.POINTS);
+        trailBatcher = new ShapeBatcher(new StarTrailPaintCache(opts).getArray(), ShapeBatcher.LINES);
     }
 
     public void init() {
         int n = opts.numStars;
-        starsX = new float[n];
-        starsY = new float[n];
-        starsZ = new float[n];
-        starsV = new float[n];
-        starsRadius = new float[n];
-        starsLastX = new float[n];
-        starsLastY = new float[n];
-        starsCurrentX = new float[n];
-        starsCurrentY = new float[n];
-        starsCurrentRadius = new float[n];
-        starsCurrentBrightness = new int[n];
+        stars.alloc(n);
+        bodyBatcher.resize(n);
+        trailBatcher.resize(n);
         ThreadLocalRandom rng = ThreadLocalRandom.current();
         for (int i = 0; i < n; i++) {
             randomStarPosition(i, rng);
-            starsZ[i] = rng.nextFloat() * opts.initialZ;
+            stars.z[i] = rng.nextFloat() * opts.initialZ;
         }
     }
 
@@ -129,17 +146,17 @@ public class StarsPaint {
         float starSize = opts.starSize;
         float speedFactor = 0.1f * speedModifier * ts;
         float vGain = 0.001f * ts;
-        final float[] sX = starsX;
-        final float[] sY = starsY;
-        final float[] sZ = starsZ;
-        final float[] sV = starsV;
-        final float[] sR = starsRadius;
-        final float[] sLX = starsLastX;
-        final float[] sLY = starsLastY;
-        final float[] sCX = starsCurrentX;
-        final float[] sCY = starsCurrentY;
-        final float[] sCR = starsCurrentRadius;
-        final int[] sCB = starsCurrentBrightness;
+        final float[] sX = stars.x;
+        final float[] sY = stars.y;
+        final float[] sZ = stars.z;
+        final float[] sV = stars.v;
+        final float[] sR = stars.radius;
+        final float[] sLX = stars.lastX;
+        final float[] sLY = stars.lastY;
+        final float[] sCX = stars.curX;
+        final float[] sCY = stars.curY;
+        final float[] sCR = stars.curRadius;
+        final int[] sCB = stars.curBrightness;
         final ThreadLocalRandom rng = ThreadLocalRandom.current();
         int n = sX.length;
         float vRange = opts.maxV - opts.minV;
@@ -176,64 +193,44 @@ public class StarsPaint {
     public void draw(Canvas c) {
         float width = opts.width;
         float height = opts.height;
-        int n = starsX.length;
+        int n = stars.x.length;
         if (opts.trails) {
-            if (opts.circle) {
-                drawLoopTrailsCircle(c, n, width, height);
-            } else {
-                drawLoopTrailsRect(c, n, width, height);
-            }
+            drawLoopTrails(c, n, width, height);
         } else {
-            if (opts.circle) {
-                drawLoopCircle(c, n, width, height);
-            } else {
-                drawLoopRect(c, n, width, height);
-            }
+            drawLoopPoints(c, n, width, height);
         }
     }
 
-    private void drawLoopCircle(Canvas c, int n, float width, float height) {
-        final float[] sCX = starsCurrentX;
-        final float[] sCY = starsCurrentY;
-        final float[] sCR = starsCurrentRadius;
-        final int[] sCB = starsCurrentBrightness;
-        final Paint[] sp = starPaints.getArray();
+    private void drawLoopPoints(Canvas c, int n, float width, float height) {
+        final float[] sCX = stars.curX;
+        final float[] sCY = stars.curY;
+        final float[] sCR = stars.curRadius;
+        final int[] sCB = stars.curBrightness;
+        // drawCircle took a radius while drawRect drew a square of side r, so round stars are twice as wide.
+        final float sizeScale = opts.circle ? 2f : 1f;
         for (int i = 0; i < n; i++) {
             float r = sCR[i];
             float cx = sCX[i];
             float cy = sCY[i];
             if (r >= 0.5f && cx >= 0 && cx <= width && cy >= 0 && cy <= height) {
-                c.drawCircle(cx, cy, r, sp[sCB[i]]);
+                bodyBatcher.add(cx, cy, r * sizeScale, sCB[i]);
             }
         }
+        bodyBatcher.setCap(opts.circle ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
+        bodyBatcher.flush(c);
     }
 
-    private void drawLoopRect(Canvas c, int n, float width, float height) {
-        final float[] sCX = starsCurrentX;
-        final float[] sCY = starsCurrentY;
-        final float[] sCR = starsCurrentRadius;
-        final int[] sCB = starsCurrentBrightness;
-        final Paint[] sp = starPaints.getArray();
-        for (int i = 0; i < n; i++) {
-            float r = sCR[i];
-            float cx = sCX[i];
-            float cy = sCY[i];
-            if (r >= 0.5f && cx >= 0 && cx <= width && cy >= 0 && cy <= height) {
-                float rH = r * 0.5f;
-                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[sCB[i]]);
-            }
-        }
-    }
-
-    private void drawLoopTrailsCircle(Canvas c, int n, float width, float height) {
-        final float[] sLX = starsLastX;
-        final float[] sLY = starsLastY;
-        final float[] sCX = starsCurrentX;
-        final float[] sCY = starsCurrentY;
-        final float[] sCR = starsCurrentRadius;
-        final int[] sCB = starsCurrentBrightness;
-        final Paint[] sp = starPaints.getArray();
-        final Paint[] stp = starTrailPaints.getArray();
+    // Trails and bodies are collected separately and flushed in two passes, so every trail lands under
+    // every body. Before, each star drew its own trail then its own body, which left a later star's trail
+    // on top of an earlier star's body wherever the two crossed.
+    private void drawLoopTrails(Canvas c, int n, float width, float height) {
+        final float[] sLX = stars.lastX;
+        final float[] sLY = stars.lastY;
+        final float[] sCX = stars.curX;
+        final float[] sCY = stars.curY;
+        final float[] sCR = stars.curRadius;
+        final int[] sCB = stars.curBrightness;
+        final float sizeScale = opts.circle ? 2f : 1f;
         for (int i = 0; i < n; i++) {
             float r = sCR[i];
             float lx = sLX[i];
@@ -245,43 +242,14 @@ public class StarsPaint {
                 float dx = lx - cx;
                 float dy = ly - cy;
                 if (dx * dx + dy * dy > 16f) {
-                    Paint tp = stp[b];
-                    tp.setStrokeWidth(r);
-                    c.drawLine(lx, ly, cx, cy, tp);
+                    trailBatcher.add(lx, ly, cx, cy, r, b);
                 }
-                c.drawCircle(cx, cy, r, sp[b]);
+                bodyBatcher.add(cx, cy, r * sizeScale, b);
             }
         }
-    }
-
-    private void drawLoopTrailsRect(Canvas c, int n, float width, float height) {
-        final float[] sLX = starsLastX;
-        final float[] sLY = starsLastY;
-        final float[] sCX = starsCurrentX;
-        final float[] sCY = starsCurrentY;
-        final float[] sCR = starsCurrentRadius;
-        final int[] sCB = starsCurrentBrightness;
-        final Paint[] sp = starPaints.getArray();
-        final Paint[] stp = starTrailPaints.getArray();
-        for (int i = 0; i < n; i++) {
-            float r = sCR[i];
-            float lx = sLX[i];
-            float ly = sLY[i];
-            if (r >= 0.5f && lx >= 0 && lx <= width && ly >= 0 && ly <= height) {
-                float cx = sCX[i];
-                float cy = sCY[i];
-                int b = sCB[i];
-                float dx = lx - cx;
-                float dy = ly - cy;
-                if (dx * dx + dy * dy > 16f) {
-                    Paint tp = stp[b];
-                    tp.setStrokeWidth(r);
-                    c.drawLine(lx, ly, cx, cy, tp);
-                }
-                float rH = r * 0.5f;
-                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[b]);
-            }
-        }
+        trailBatcher.flush(c);
+        bodyBatcher.setCap(opts.circle ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
+        bodyBatcher.flush(c);
     }
 
     public void clearScreenOffsets() {
@@ -324,13 +292,13 @@ public class StarsPaint {
     }
 
     private void randomStarPosition(int i, ThreadLocalRandom rng) {
-        starsX[i] = rng.nextFloat() * opts.width - opts.hW;
-        starsY[i] = rng.nextFloat() * opts.height - opts.hH;
-        starsV[i] = rng.nextFloat() * (opts.maxV - opts.minV) + opts.minV;
-        starsRadius[i] = rng.nextFloat() * 2f + 1f;
-        starsLastX[i] = -1f;
-        starsLastY[i] = -1f;
-        starsCurrentX[i] = -1f;
-        starsCurrentY[i] = -1f;
+        stars.x[i] = rng.nextFloat() * opts.width - opts.hW;
+        stars.y[i] = rng.nextFloat() * opts.height - opts.hH;
+        stars.v[i] = rng.nextFloat() * (opts.maxV - opts.minV) + opts.minV;
+        stars.radius[i] = rng.nextFloat() * 2f + 1f;
+        stars.lastX[i] = -1f;
+        stars.lastY[i] = -1f;
+        stars.curX[i] = -1f;
+        stars.curY[i] = -1f;
     }
 }
