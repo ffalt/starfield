@@ -31,13 +31,13 @@ import android.app.WallpaperManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.github.ffalt.starfield.BuildConfig;
 import io.github.ffalt.starfield.R;
 import io.github.ffalt.starfield.service.StarfieldService;
 
@@ -53,12 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected String getVersion() {
-        try {
-            return getPackageManager()
-                    .getPackageInfo(getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            return "";
-        }
+        return BuildConfig.VERSION_NAME;
     }
 
     public void close(View v) {

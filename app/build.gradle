@@ -20,6 +20,10 @@ android {
         versionName = project.version
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     java {
         toolchain {
             languageVersion = JavaLanguageVersion.of(17)
