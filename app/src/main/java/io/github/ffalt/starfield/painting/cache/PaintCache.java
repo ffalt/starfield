@@ -67,16 +67,6 @@ public class PaintCache {
         return new Paint();
     }
 
-    public Paint get(int index) {
-        if (index < 0) {
-            index = 0;
-        }
-        if (index >= cache.length) {
-            index = cache.length - 1;
-        }
-        return cache[index];
-    }
-
     public Paint[] getArray() {
         return cache;
     }

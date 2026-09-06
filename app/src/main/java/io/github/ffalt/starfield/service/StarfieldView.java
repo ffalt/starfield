@@ -78,8 +78,8 @@ public class StarfieldView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
-    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-        // to be overridden
+    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+        // required by SurfaceHolder.Callback
     }
 
     @Override
