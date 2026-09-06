@@ -151,7 +151,7 @@ public class StarsPaint {
                 sR[i] = rng.nextFloat() * 2f + 1f;
                 sLX[i] = -1f;
                 sLY[i] = -1f;
-                sCR[i] = -1f;
+                sCX[i] = -1f;
                 sCY[i] = -1f;
                 sZ[i] = initialZ;
                 continue;
