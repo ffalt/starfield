@@ -30,6 +30,7 @@ package io.github.ffalt.starfield.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,17 +59,18 @@ public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
         Activity parent = getActivity();
         if (parent != null) {
             SharedPreferences prefs = StarfieldOpts.getPreferences(parent);
+            Resources res = parent.getResources();
             if (minVPref != null) {
                 minVPref.setOnPreferenceChangeListener((preference, newValue) -> {
                     int minV = (int) newValue;
-                    int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(StarfieldOpts.DEFAULT_MAX_V));
+                    int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, res.getInteger(R.integer.max_v_default));
                     updateVLabels(minV, maxV);
                     return true;
                 });
             }
             if (maxVPref != null) {
                 maxVPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                    int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(StarfieldOpts.DEFAULT_MIN_V));
+                    int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, res.getInteger(R.integer.min_v_default));
                     int maxV = (int) newValue;
                     updateVLabels(minV, maxV);
                     return true;

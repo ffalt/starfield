@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -47,6 +48,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import io.github.ffalt.starfield.R;
 import io.github.ffalt.starfield.StarfieldOpts;
 import io.github.ffalt.starfield.StarfieldPrefs;
 
@@ -100,14 +102,13 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     public void updateFromSharedPreference(Context context) {
-        SharedPreferences prefs = StarfieldOpts.getPreferences(context);
-        onSharedPreferenceChanged(prefs, null);
+        loadPreferences(context, StarfieldOpts.getPreferences(context));
     }
 
     public void registerOnSharedPreferenceChanged(Context context) {
         SharedPreferences prefs = StarfieldOpts.getPreferences(context);
         prefs.registerOnSharedPreferenceChangeListener(this);
-        onSharedPreferenceChanged(prefs, null);
+        loadPreferences(context, prefs);
     }
 
     public void initSensor(Context context) {
@@ -134,14 +135,24 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (mContext != null) {
+            loadPreferences(mContext, prefs);
+        }
+    }
+
+    // Defaults come from res/values/opts.xml and res/values/colors.xml, the same resources the settings
+    // screen declares as android:defaultValue. Never fall back to the current value: that would make a
+    // cleared preference file a no-op instead of a reset.
+    private void loadPreferences(Context context, SharedPreferences prefs) {
+        Resources res = context.getResources();
         boolean update = false;
-        int starCount = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_COUNT, opts.numStars);
+        int starCount = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_COUNT, res.getInteger(R.integer.star_count_default));
         if (starCount != opts.numStars) {
             opts.numStars = starCount;
             update = true;
         }
-        int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, Math.round(opts.minV));
-        int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, Math.round(opts.maxV));
+        int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, res.getInteger(R.integer.min_v_default));
+        int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, res.getInteger(R.integer.max_v_default));
         if (minV != opts.minV || maxV != opts.maxV) {
             opts.minV = minV;
             opts.maxV = maxV;
@@ -151,131 +162,131 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             }
             update = true;
         }
-        boolean starTrail = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_TRAIL, opts.trails);
+        boolean starTrail = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_TRAIL, res.getBoolean(R.bool.star_trail_default));
         if (starTrail != opts.trails) {
             opts.trails = starTrail;
         }
-        boolean starCircle = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_CIRCLE, opts.circle);
+        boolean starCircle = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_CIRCLE, res.getBoolean(R.bool.star_round_default));
         if (starCircle != opts.circle) {
             opts.circle = starCircle;
         }
-        boolean followScreen = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN, opts.followScreen);
+        boolean followScreen = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN, res.getBoolean(R.bool.follow_screen_default));
         if (followScreen != opts.followScreen) {
             opts.followScreen = followScreen;
         }
-        int followScreenIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN_INTENSITY, opts.followScreenIntensity);
+        int followScreenIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SCREEN_INTENSITY, res.getInteger(R.integer.follow_screen_intensity_default));
         if (followScreenIntensity != opts.followScreenIntensity) {
             opts.followScreenIntensity = followScreenIntensity;
         }
-        boolean followSensor = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR, opts.followSensor);
+        boolean followSensor = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR, res.getBoolean(R.bool.follow_sensor_default));
         if (followSensor != opts.followSensor) {
             opts.followSensor = followSensor;
             updateSensorListener();
             update = true;
         }
-        int followSensorIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR_INTENSITY, opts.followSensorIntensity);
+        int followSensorIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FOLLOW_SENSOR_INTENSITY, res.getInteger(R.integer.follow_sensor_intensity_default));
         if (followSensorIntensity != opts.followSensorIntensity) {
             opts.followSensorIntensity = followSensorIntensity;
         }
-        boolean followRestore = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_RESTORE, opts.followRestore);
+        boolean followRestore = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_FOLLOW_RESTORE, res.getBoolean(R.bool.follow_restore_default));
         if (followRestore != opts.followRestore) {
             opts.followRestore = followRestore;
         }
-        float starSize = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_SIZE, Math.round(opts.starSize * 10)) / 10f;
+        float starSize = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_SIZE, res.getInteger(R.integer.star_size_default)) / 10f;
         if (starSize != opts.starSize) {
             opts.starSize = starSize;
         }
-        float depth = prefs.getInt(StarfieldPrefs.SHARED_PREFS_DEPTH, Math.round(opts.depth * 10)) / 10f;
+        float depth = prefs.getInt(StarfieldPrefs.SHARED_PREFS_DEPTH, res.getInteger(R.integer.depth_default)) / 10f;
         if (depth != opts.depth) {
             opts.depth = depth;
             opts.updateDepth();
             update = true;
         }
-        int starColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_COLOR, opts.starColor);
+        int starColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_STAR_COLOR, context.getColor(R.color.star_color_default));
         if (starColor != opts.starColor) {
             opts.starColor = starColor;
             update = true;
         }
-        int trailColorStart = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_START, opts.trailColorStart);
+        int trailColorStart = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_START, context.getColor(R.color.trail_color_start_default));
         if (trailColorStart != opts.trailColorStart) {
             opts.trailColorStart = trailColorStart;
             update = true;
         }
-        int trailColorEnd = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_END, opts.trailColorEnd);
+        int trailColorEnd = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_COLOR_END, context.getColor(R.color.trail_color_end_default));
         if (trailColorEnd != opts.trailColorEnd) {
             opts.trailColorEnd = trailColorEnd;
             update = true;
         }
-        boolean meteorsEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_METEORS_ENABLED, opts.meteorsEnabled);
+        boolean meteorsEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_METEORS_ENABLED, res.getBoolean(R.bool.meteors_enabled_default));
         if (meteorsEnabled != opts.meteorsEnabled) {
             opts.meteorsEnabled = meteorsEnabled;
             update = true;
         }
-        int meteorColorStart = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_START, opts.meteorColorStart);
+        int meteorColorStart = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_START, context.getColor(R.color.meteor_color_start_default));
         if (meteorColorStart != opts.meteorColorStart) {
             opts.meteorColorStart = meteorColorStart;
             update = true;
         }
-        int meteorColorEnd = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_END, opts.meteorColorEnd);
+        int meteorColorEnd = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEOR_COLOR_END, context.getColor(R.color.meteor_color_end_default));
         if (meteorColorEnd != opts.meteorColorEnd) {
             opts.meteorColorEnd = meteorColorEnd;
             update = true;
         }
-        float meteorSpawnProb = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEORS_PROBABILITY, Math.round(opts.meteorSpawnProb * 10000)) / 10000f;
+        float meteorSpawnProb = prefs.getInt(StarfieldPrefs.SHARED_PREFS_METEORS_PROBABILITY, res.getInteger(R.integer.meteor_spawn_probability_default)) / 10000f;
         if (meteorSpawnProb != opts.meteorSpawnProb) {
             opts.meteorSpawnProb = meteorSpawnProb;
         }
-        int fps = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FPS, opts.fps);
+        int fps = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FPS, res.getInteger(R.integer.fps_default));
         if (fps != opts.fps) {
             opts.updateFPS(fps);
         }
-        boolean batterySpeed = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BATTERY_SPEED, opts.batterySpeed);
+        boolean batterySpeed = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BATTERY_SPEED, res.getBoolean(R.bool.battery_speed_default));
         if (batterySpeed != opts.batterySpeed) {
             opts.batterySpeed = batterySpeed;
             updateBatteryListener();
             update = true;
         }
-        int bgColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_COLOR, opts.bgColor);
+        int bgColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_COLOR, context.getColor(R.color.bg_color_default));
         if (bgColor != opts.bgColor) {
             opts.bgColor = bgColor;
             bgPaintDirty = true;
         }
-        boolean bgGradient = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT, opts.bgGradient);
+        boolean bgGradient = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT, res.getBoolean(R.bool.bg_gradient_default));
         if (bgGradient != opts.bgGradient) {
             opts.bgGradient = bgGradient;
             bgPaintDirty = true;
         }
-        int bgGradientInnerColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT_INNER_COLOR, opts.bgGradientInnerColor);
+        int bgGradientInnerColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT_INNER_COLOR, context.getColor(R.color.bg_gradient_inner_color_default));
         if (bgGradientInnerColor != opts.bgGradientInnerColor) {
             opts.bgGradientInnerColor = bgGradientInnerColor;
             bgPaintDirty = true;
         }
-        int bgGradientRadius = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT_RADIUS, opts.bgGradientRadius);
+        int bgGradientRadius = prefs.getInt(StarfieldPrefs.SHARED_PREFS_BG_GRADIENT_RADIUS, res.getInteger(R.integer.bg_gradient_radius_default));
         if (bgGradientRadius != opts.bgGradientRadius) {
             opts.bgGradientRadius = bgGradientRadius;
             bgPaintDirty = true;
         }
-        boolean nebulaEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_NEBULA_ENABLED, opts.nebulaEnabled);
+        boolean nebulaEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_NEBULA_ENABLED, res.getBoolean(R.bool.nebula_enabled_default));
         if (nebulaEnabled != opts.nebulaEnabled) {
             opts.nebulaEnabled = nebulaEnabled;
             update = true;
         }
-        int nebulaColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_COLOR, opts.nebulaColor);
+        int nebulaColor = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_COLOR, context.getColor(R.color.nebula_color_default));
         if (nebulaColor != opts.nebulaColor) {
             opts.nebulaColor = nebulaColor;
             update = true;
         }
-        int nebulaCount = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_COUNT, opts.nebulaCount);
+        int nebulaCount = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_COUNT, res.getInteger(R.integer.nebula_count_default));
         if (nebulaCount != opts.nebulaCount) {
             opts.nebulaCount = nebulaCount;
             update = true;
         }
-        int nebulaOpacity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_OPACITY, opts.nebulaOpacity);
+        int nebulaOpacity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_OPACITY, res.getInteger(R.integer.nebula_opacity_default));
         if (nebulaOpacity != opts.nebulaOpacity) {
             opts.nebulaOpacity = nebulaOpacity;
             update = true;
         }
-        int nebulaMovement = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_MOVEMENT, opts.nebulaMovement);
+        int nebulaMovement = prefs.getInt(StarfieldPrefs.SHARED_PREFS_NEBULA_MOVEMENT, res.getInteger(R.integer.nebula_movement_default));
         if (nebulaMovement != opts.nebulaMovement) {
             opts.nebulaMovement = nebulaMovement;
         }
