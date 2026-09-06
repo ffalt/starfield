@@ -81,11 +81,11 @@ public class StarfieldPreferencesFragment extends PreferenceFragmentCompat {
 
     @Override
     public boolean onPreferenceTreeClick(@NonNull Preference preference) {
-        if (preference.getKey().equals(RESET_PREFERENCE_KEY)) {
+        if (RESET_PREFERENCE_KEY.equals(preference.getKey())) {
             askForResetPreference();
             return true;
         }
-        return false;
+        return super.onPreferenceTreeClick(preference);
     }
 
     private void updateVLabels(int minV, int maxV) {
