@@ -52,17 +52,15 @@ public class PaintCache {
         int r = (color >> 16) & 0xFF;
         int g = (color >> 8) & 0xFF;
         int b = color & 0xFF;
+        float scale = 0.01f * index;
         if (r == g && g == b) {
             // Fast path for achromatic (white/gray) colors: skip HSV round-trip.
-            int v = Math.round(2.55f * index);
-            if (v > 255) {
-                v = 255;
-            }
-            return 0xFF000000 | (v << 16) | (v << 8) | v;
+            int v = Math.round(r * scale);
+            return (color & 0xFF000000) | (v << 16) | (v << 8) | v;
         }
         Color.colorToHSV(color, hsv);
-        hsv[2] = 0.01f * index;
-        return Color.HSVToColor(hsv);
+        hsv[2] *= scale;
+        return Color.HSVToColor(Color.alpha(color), hsv);
     }
 
     public Paint build(int index) {
