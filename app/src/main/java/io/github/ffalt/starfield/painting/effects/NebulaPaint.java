@@ -260,11 +260,15 @@ public class NebulaPaint {
         this.speedModifier = mod;
     }
 
-    public void clearOffsets() {
+    public void clearScreenOffsets() {
         offsetTX = 0;
         offsetX = 0;
         offsetTY = 0;
         offsetY = 0;
+    }
+
+    public void clearOffsets() {
+        clearScreenOffsets();
         tiltTargetX = 0;
         tiltTargetY = 0;
     }

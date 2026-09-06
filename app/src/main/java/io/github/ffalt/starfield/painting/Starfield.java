@@ -85,6 +85,13 @@ public class Starfield {
         }
     }
 
+    public void clearScreenOffsets() {
+        starsPaint.clearScreenOffsets();
+        if (opts.nebulaEnabled) {
+            nebulaPaint.clearScreenOffsets();
+        }
+    }
+
     public void clearOffsets() {
         starsPaint.clearOffsets();
         if (opts.nebulaEnabled) {
