@@ -1,0 +1,17 @@
+ -  **manifest**  remove unnecessary tools:ignore attribute
+ -  **build**  enable buildConfig feature, remove deprecated call
+ -  **nebula**  recycle blob bitmap
+ -  **scene**  make tiltPending thread safe
+ -  **paint-cache**  fix color calculation for achromatic colors
+ -  **paint-cache**  set cache size to 100
+ -  **settings**  onPreferenceTreeClick must call super
+ -  **fps**  adjusting the frame rate must not change the speed, set 3ß fps as minimum
+ -  **paint-cache**  keep cache in subclass
+ -  **stars**  correct variable assignment
+ -  **canvas**  handle IllegalStateException when drawing frame
+ -  **offsets**  better support for bad launchers
+ -  **follow-screen**  reset offset when turned off
+ -  **meteors**  speedModifier should be applied only once
+ -  **battery-level**  coherent speed modifier calculation
+ -  **settings**  ensure min and max velocity values are correctly set
+ -  **lifecycle**  refactor surfaceDestroyed and onDestroy

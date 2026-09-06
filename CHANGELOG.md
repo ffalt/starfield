@@ -1,4 +1,27 @@
 
+## [v0.0.13](https://github.com/ffalt/starfield/compare/v0.0.13) (2026-09-06)
+
+
+### Bug Fixes
+
+ -  **manifest**  remove unnecessary tools:ignore attribute ([217d3696d2af9e7](https://github.com/ffalt/starfield/commit/217d3696d2af9e75a5e1ffd4843c6f47946f4e1e))
+ -  **build**  enable buildConfig feature, remove deprecated call ([02bbb43778766c6](https://github.com/ffalt/starfield/commit/02bbb43778766c6196fe2f0b23f28c78dade0349))
+ -  **nebula**  recycle blob bitmap ([783be361c321e7c](https://github.com/ffalt/starfield/commit/783be361c321e7c7f20e89dbf3be75813971b19e))
+ -  **scene**  make tiltPending thread safe ([317e9f3c44dc344](https://github.com/ffalt/starfield/commit/317e9f3c44dc344434a900f403922a64004e6a1d))
+ -  **paint-cache**  fix color calculation for achromatic colors ([580646a3b14fcbc](https://github.com/ffalt/starfield/commit/580646a3b14fcbc836ad3239def888b18620522c))
+ -  **paint-cache**  set cache size to 100 ([9f86e515bb3b3cb](https://github.com/ffalt/starfield/commit/9f86e515bb3b3cb5bae056f5d925cac7ec285966))
+ -  **settings**  onPreferenceTreeClick must call super ([bfef47325d1c6ed](https://github.com/ffalt/starfield/commit/bfef47325d1c6edb066733d331cbbbf91676a51f))
+ -  **fps**  adjusting the frame rate must not change the speed, set 3ß fps as minimum ([5c25c69f388302e](https://github.com/ffalt/starfield/commit/5c25c69f388302e4d385466cc6e31e424a1c19ff))
+ -  **paint-cache**  keep cache in subclass ([af363ce5e293d63](https://github.com/ffalt/starfield/commit/af363ce5e293d63f95e4517256d2a54f90591155))
+ -  **stars**  correct variable assignment ([fa49d6a38499ea0](https://github.com/ffalt/starfield/commit/fa49d6a38499ea07e2d202ea270d0a291a879c62))
+ -  **canvas**  handle IllegalStateException when drawing frame ([d4d59ec0e54063c](https://github.com/ffalt/starfield/commit/d4d59ec0e54063c500d2621c967bc5763d0af471))
+ -  **offsets**  better support for bad launchers ([2fdd9a75e659377](https://github.com/ffalt/starfield/commit/2fdd9a75e6593775da8879da7888984210278580))
+ -  **follow-screen**  reset offset when turned off ([0b1957e586373da](https://github.com/ffalt/starfield/commit/0b1957e586373da81d02aefdb08a4a2af43f0654))
+ -  **meteors**  speedModifier should be applied only once ([a7b456f7daa0cb8](https://github.com/ffalt/starfield/commit/a7b456f7daa0cb890cdfb7c04506fcefd4722be3))
+ -  **battery-level**  coherent speed modifier calculation ([8d231f94ddfd3fd](https://github.com/ffalt/starfield/commit/8d231f94ddfd3fd4412aea49b4322844df346bd3))
+ -  **settings**  ensure min and max velocity values are correctly set ([eb1f69d43ad5ff3](https://github.com/ffalt/starfield/commit/eb1f69d43ad5ff3ffafe2c6ca788635834b2773e))
+ -  **lifecycle**  refactor surfaceDestroyed and onDestroy ([876e349b044ddd3](https://github.com/ffalt/starfield/commit/876e349b044ddd3e4e41e7d4a736e7954e34bf7b))
+
 ## [v0.0.12](https://github.com/ffalt/starfield/compare/v0.0.12) (2026-04-06)
 
 ### Features
