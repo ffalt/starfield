@@ -151,15 +151,13 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.numStars = starCount;
             update = true;
         }
-        int minV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, res.getInteger(R.integer.min_v_default));
-        int maxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, res.getInteger(R.integer.max_v_default));
+        int storedMinV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MIN_V, res.getInteger(R.integer.min_v_default));
+        int storedMaxV = prefs.getInt(StarfieldPrefs.SHARED_PREFS_MAX_V, res.getInteger(R.integer.max_v_default));
+        int minV = Math.min(storedMinV, storedMaxV);
+        int maxV = Math.max(storedMinV, storedMaxV);
         if (minV != opts.minV || maxV != opts.maxV) {
             opts.minV = minV;
             opts.maxV = maxV;
-            if (minV > maxV) {
-                opts.minV = maxV;
-                opts.maxV = minV;
-            }
             update = true;
         }
         boolean starTrail = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_TRAIL, res.getBoolean(R.bool.star_trail_default));
