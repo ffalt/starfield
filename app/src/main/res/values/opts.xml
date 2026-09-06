@@ -22,7 +22,7 @@
     <integer name="meteor_spawn_probability_step">1</integer>
     <integer name="meteor_spawn_probability_max">200</integer>
     <integer name="fps_step">10</integer>
-    <integer name="fps_min">10</integer>
+    <integer name="fps_min">30</integer>
     <integer name="fps_max">120</integer>
     <integer name="follow_sensor_intensity_max">100</integer>
     <integer name="follow_sensor_intensity_min">1</integer>

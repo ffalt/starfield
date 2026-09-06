@@ -237,7 +237,8 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         if (meteorSpawnProb != opts.meteorSpawnProb) {
             opts.meteorSpawnProb = meteorSpawnProb;
         }
-        int fps = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FPS, res.getInteger(R.integer.fps_default));
+        int storedFps = prefs.getInt(StarfieldPrefs.SHARED_PREFS_FPS, res.getInteger(R.integer.fps_default));
+        int fps = Math.max(res.getInteger(R.integer.fps_min), Math.min(res.getInteger(R.integer.fps_max), storedFps));
         if (fps != opts.fps) {
             opts.updateFPS(fps);
         }

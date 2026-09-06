@@ -32,6 +32,7 @@ import android.content.SharedPreferences;
 
 public class StarfieldOpts {
     public static final int METEOR_MAX_COUNT = 3;
+    private static final float REFERENCE_FPS = 60f;
     public float width = 100f;
     public float height = 100f;
     public float hW = 50f;
@@ -68,10 +69,12 @@ public class StarfieldOpts {
     public int nebulaMovement;
     public int fps;
     public long drawTime = Math.round(1000.0 / 60);
+    public float timeScale = 1f;
 
     public void updateFPS(int newFps) {
         this.fps = Math.max(1, newFps);
         this.drawTime = Math.round(1000.0 / this.fps);
+        this.timeScale = REFERENCE_FPS / this.fps;
     }
 
     public void updateDepth() {

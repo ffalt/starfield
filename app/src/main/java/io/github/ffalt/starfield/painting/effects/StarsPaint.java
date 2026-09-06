@@ -91,28 +91,30 @@ public class StarsPaint {
     }
 
     public void move() {
+        float ts = opts.timeScale;
+        float smoothing = SMOOTHING * ts;
         if (opts.followScreen) {
             float dx = offsetTX - offsetX;
             if (dx > SMOOTHING || dx < -SMOOTHING) {
-                offsetX += dx * SMOOTHING;
+                offsetX += dx * smoothing;
             }
             float dy = offsetTY - offsetY;
             if (dy > SMOOTHING || dy < -SMOOTHING) {
-                offsetY += dy * SMOOTHING;
+                offsetY += dy * smoothing;
             }
             if (opts.followRestore) {
-                offsetTX -= offsetTX * SMOOTHING;
-                offsetTY -= offsetTY * SMOOTHING;
+                offsetTX -= offsetTX * smoothing;
+                offsetTY -= offsetTY * smoothing;
             }
         }
         if (opts.followSensor) {
             float tx = tiltTargetX - tiltOffsetX;
             if (tx > SMOOTHING || tx < -SMOOTHING) {
-                tiltOffsetX += tx * SMOOTHING;
+                tiltOffsetX += tx * smoothing;
             }
             float ty = tiltTargetY - tiltOffsetY;
             if (ty > SMOOTHING || ty < -SMOOTHING) {
-                tiltOffsetY += ty * SMOOTHING;
+                tiltOffsetY += ty * smoothing;
             }
         }
         // Cache all loop-invariant values; avoids repeated field reads inside the hot loop.
@@ -125,7 +127,8 @@ public class StarsPaint {
         float initialZ = opts.initialZ;
         float invInitialZ = 1f / initialZ;
         float starSize = opts.starSize;
-        float speedFactor = 0.1f * speedModifier;
+        float speedFactor = 0.1f * speedModifier * ts;
+        float vGain = 0.001f * ts;
         final float[] sX = starsX;
         final float[] sY = starsY;
         final float[] sZ = starsZ;
@@ -159,7 +162,7 @@ public class StarsPaint {
             sZ[i] = sz;
             sLX[i] = sCX[i];
             sLY[i] = sCY[i];
-            sV[i] += 0.001f;
+            sV[i] += vGain;
             float invZ = 1f / sz;
             sCX[i] = hW + (width * sX[i] * invZ - totalOffsetX);
             sCY[i] = hH + (height * sY[i] * invZ - totalOffsetY);

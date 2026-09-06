@@ -124,8 +124,9 @@ public class MeteorsPaint {
 
     public void move() {
         ThreadLocalRandom rng = ThreadLocalRandom.current();
-        // Skip the RNG call entirely when spawning is disabled (meteorSpawnProb == 0 is common).
-        if (opts.meteorSpawnProb > 0f && rng.nextFloat() < opts.meteorSpawnProb) {
+        float ts = opts.timeScale;
+        float spawnProb = opts.meteorSpawnProb * ts;
+        if (spawnProb > 0f && rng.nextFloat() < spawnProb) {
             spawnFreeMeteor(rng);
         }
         // Inline moveMeteor and cache array refs to avoid per-call overhead.
@@ -135,7 +136,7 @@ public class MeteorsPaint {
         final float[] mvx = meteorsVx;
         final float[] mvy = meteorsVy;
         final float[] ml = meteorsLife;
-        float sm = speedModifier;
+        float sm = speedModifier * ts;
         float w = opts.width;
         float h = opts.height;
         int n = active.length;
@@ -145,7 +146,7 @@ public class MeteorsPaint {
             }
             mx[i] += mvx[i] * sm;
             my[i] += mvy[i] * sm;
-            ml[i] -= 1f;
+            ml[i] -= ts;
             float x = mx[i];
             float y = my[i];
             if (ml[i] <= 0f || x < -50f || x > w + 50f || y < -50f || y > h + 50f) {

@@ -102,28 +102,30 @@ public class NebulaPaint {
     }
 
     public void move() {
+        float ts = opts.timeScale;
+        float smoothing = SMOOTHING * ts;
         if (opts.followScreen) {
             float dx = offsetTX - offsetX;
             if (dx > SMOOTHING || dx < -SMOOTHING) {
-                offsetX += dx * SMOOTHING;
+                offsetX += dx * smoothing;
             }
             float dy = offsetTY - offsetY;
             if (dy > SMOOTHING || dy < -SMOOTHING) {
-                offsetY += dy * SMOOTHING;
+                offsetY += dy * smoothing;
             }
             if (opts.followRestore) {
-                offsetTX -= offsetTX * SMOOTHING;
-                offsetTY -= offsetTY * SMOOTHING;
+                offsetTX -= offsetTX * smoothing;
+                offsetTY -= offsetTY * smoothing;
             }
         }
         if (opts.followSensor) {
             float tx = tiltTargetX - tiltOffsetX;
             if (tx > SMOOTHING || tx < -SMOOTHING) {
-                tiltOffsetX += tx * SMOOTHING;
+                tiltOffsetX += tx * smoothing;
             }
             float ty = tiltTargetY - tiltOffsetY;
             if (ty > SMOOTHING || ty < -SMOOTHING) {
-                tiltOffsetY += ty * SMOOTHING;
+                tiltOffsetY += ty * smoothing;
             }
         }
         float parallaxM = PARALLAX * opts.nebulaMovement;
@@ -144,21 +146,21 @@ public class NebulaPaint {
         float h = opts.height;
         float hW = opts.hW;
         float hH = opts.hH;
-        float warpK = WARP_SPEED * speedModifier;
+        float warpK = WARP_SPEED * speedModifier * ts;
         ThreadLocalRandom rng = ThreadLocalRandom.current();
         for (int i = 0; i < n; i++) {
             if (srd[i] > 0f) {
-                srd[i] -= 1f;
+                srd[i] -= ts;
                 if (srd[i] <= 0f) {
                     srd[i] = 0f;
                     spawnBlob(i, rng);
                 }
                 continue;
             }
-            sx[i] += (sx[i] - hW) * warpK + svx[i];
-            sy[i] += (sy[i] - hH) * warpK + svy[i];
+            sx[i] += (sx[i] - hW) * warpK + svx[i] * ts;
+            sy[i] += (sy[i] - hH) * warpK + svy[i] * ts;
             if (sa[i] * sif[i] < 1f) {
-                sa[i] += 1f;
+                sa[i] += ts;
             }
             float r = sr[i];
             float vx = sx[i] - shiftX;
