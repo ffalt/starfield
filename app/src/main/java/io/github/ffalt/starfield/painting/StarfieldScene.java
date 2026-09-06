@@ -352,6 +352,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     public void reset() {
         starfield = new Starfield(opts);
+        updateSpeedModifier();
     }
 
     private void updateSpeedModifier() {
@@ -360,7 +361,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
 
         if (opts.batterySpeed) {
-            starfield.setSpeedModifier(0.1f + batteryLevel);
+            starfield.setSpeedModifier(0.1f + batteryLevel * 0.9f);
         } else {
             starfield.setSpeedModifier(1.0f);
         }
