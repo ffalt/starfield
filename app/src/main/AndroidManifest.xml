@@ -52,8 +52,7 @@
             android:name=".activity.StarfieldPreferencesActivity"
             android:exported="true"
             android:label="@string/settings"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
-            tools:ignore="ExportedPreferenceActivity">
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         </activity>
     </application>
 </manifest>
