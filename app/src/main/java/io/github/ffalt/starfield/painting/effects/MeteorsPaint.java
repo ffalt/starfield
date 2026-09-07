@@ -28,7 +28,11 @@
 package io.github.ffalt.starfield.painting.effects;
 
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Shader;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -46,30 +50,46 @@ public class MeteorsPaint {
     private float[] meteorsLife = new float[0];
     private float[] meteorsInitLife = new float[0];
     private float[] meteorsLength = new float[0];
-    private static final int METEOR_SEGMENTS = 20;
-    private static final float[] SEG_F1 = new float[METEOR_SEGMENTS];
-    private static final float[] SEG_FALLOFF = new float[METEOR_SEGMENTS];
-    private static final float[] SEG_TMID_POW_07 = new float[METEOR_SEGMENTS];
-    private static final float[] SEG_STROKE_FACTOR = new float[METEOR_SEGMENTS];
+    private float[] meteorsDirX = new float[0];
+    private float[] meteorsDirY = new float[0];
+    private float[] meteorsTailLen = new float[0];
     private float speedModifier = 1.0f;
     private static final float DEG_TO_RAD = (float) (Math.PI / 180.0);
     private int cachedColorStartRGB;
-    private final int[] segColorRGB = new int[METEOR_SEGMENTS];
     private static final float CORE_FRACTION = 0.25f;
+    private static final float TAIL_WIDTH_FACTOR = 0.10f;
+    private static final float HEAD_RADIUS_FACTOR = 0.09f;
+    private static final int METEOR_SEGMENTS = 20;
+    private static final int EDGE_POINTS = METEOR_SEGMENTS + 1;
+    private static final float[] EDGE_T = new float[EDGE_POINTS];
+    private static final float[] EDGE_HALF_WIDTH = new float[EDGE_POINTS];
+    private static final float[] EDGE_ALPHA = new float[EDGE_POINTS];
+    private static final float[] EDGE_COLOR_T = new float[EDGE_POINTS];
+    private final int[] gradientColors = new int[EDGE_POINTS];
+    private static final Path TAIL_PATH = new Path();
+    private final Matrix gradientMatrix = new Matrix();
+    private final Paint tailPaint;
 
     static {
-        for (int s = 0; s < METEOR_SEGMENTS; s++) {
-            float f0 = (float) s / (float) METEOR_SEGMENTS;
-            float f1 = (float) (s + 1) / (float) METEOR_SEGMENTS;
-            float tMid = (f0 + f1) * 0.5f;
-            SEG_F1[s] = f1;
-            float oneMinus = 1f - tMid;
-            SEG_FALLOFF[s] = oneMinus * oneMinus * oneMinus;
-            float pow07 = (float) Math.pow(tMid, 0.7);
-            float pow09 = (float) Math.pow(tMid, 0.9);
-            SEG_TMID_POW_07[s] = pow07;
-            SEG_STROKE_FACTOR[s] = 0.95f * (1f - pow09) + 0.05f;
+        for (int j = 0; j < EDGE_POINTS; j++) {
+            float t = (float) j / (float) METEOR_SEGMENTS;
+            EDGE_T[j] = t;
+            EDGE_HALF_WIDTH[j] = (0.95f * (1f - (float) Math.pow(t, 0.9)) + 0.05f) * 0.5f;
+            float oneMinus = 1f - t;
+            EDGE_ALPHA[j] = oneMinus * oneMinus * oneMinus;
+            EDGE_COLOR_T[j] = (float) Math.pow(t, 0.7);
         }
+        for (int j = 0; j < EDGE_POINTS; j++) {
+            if (j == 0) {
+                TAIL_PATH.moveTo(EDGE_T[j], EDGE_HALF_WIDTH[j]);
+            } else {
+                TAIL_PATH.lineTo(EDGE_T[j], EDGE_HALF_WIDTH[j]);
+            }
+        }
+        for (int j = EDGE_POINTS - 1; j >= 0; j--) {
+            TAIL_PATH.lineTo(EDGE_T[j], -EDGE_HALF_WIDTH[j]);
+        }
+        TAIL_PATH.close();
     }
 
     public MeteorsPaint(StarfieldOpts opts) {
@@ -79,6 +99,8 @@ public class MeteorsPaint {
         meteorPaint.setStrokeCap(Paint.Cap.ROUND);
         meteorFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         meteorFillPaint.setStyle(Paint.Style.FILL);
+        tailPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        tailPaint.setStyle(Paint.Style.FILL);
     }
 
     public void init() {
@@ -91,16 +113,9 @@ public class MeteorsPaint {
         meteorsLife = new float[n];
         meteorsInitLife = new float[n];
         meteorsLength = new float[n];
-        for (int i = 0; i < n; i++) {
-            meteorsActive[i] = false;
-            meteorsX[i] = 0f;
-            meteorsY[i] = 0f;
-            meteorsVx[i] = 0f;
-            meteorsVy[i] = 0f;
-            meteorsLife[i] = 0f;
-            meteorsInitLife[i] = 0f;
-            meteorsLength[i] = 0f;
-        }
+        meteorsDirX = new float[n];
+        meteorsDirY = new float[n];
+        meteorsTailLen = new float[n];
         this.refreshColors();
     }
 
@@ -112,14 +127,17 @@ public class MeteorsPaint {
         int aGEnd = (opts.meteorColorEnd >> 8) & 0xFF;
         int aBEnd = opts.meteorColorEnd & 0xFF;
         cachedColorStartRGB = opts.meteorColorStart & 0x00FFFFFF;
-        for (int s = 0; s < METEOR_SEGMENTS; s++) {
-            float tColor = SEG_TMID_POW_07[s];
+        for (int j = 0; j < EDGE_POINTS; j++) {
+            float tColor = EDGE_COLOR_T[j];
             float inv = 1f - tColor;
             int rr = (int) (aRStart * inv + aREnd * tColor);
             int rg = (int) (aGStart * inv + aGEnd * tColor);
             int rb = (int) (aBStart * inv + aBEnd * tColor);
-            segColorRGB[s] = (rr << 16) | (rg << 8) | rb;
+            int alpha = (int) (255f * EDGE_ALPHA[j]);
+            gradientColors[j] = (alpha << 24) | (rr << 16) | (rg << 8) | rb;
         }
+        tailPaint.setShader(new LinearGradient(0f, 0f, 1f, 0f, gradientColors, EDGE_T,
+                Shader.TileMode.CLAMP));
     }
 
     public void move() {
@@ -129,7 +147,6 @@ public class MeteorsPaint {
         if (spawnProb > 0f && rng.nextFloat() < spawnProb) {
             spawnFreeMeteor(rng);
         }
-        // Inline moveMeteor and cache array refs to avoid per-call overhead.
         final boolean[] active = meteorsActive;
         final float[] mx = meteorsX;
         final float[] my = meteorsY;
@@ -170,11 +187,6 @@ public class MeteorsPaint {
     }
 
     private void drawMeteor(Canvas c, int i) {
-        float mx = meteorsX[i];
-        float my = meteorsY[i];
-        float mvx = meteorsVx[i];
-        float mvy = meteorsVy[i];
-        float mlen = meteorsLength[i];
         float initLife = meteorsInitLife[i];
         float lifeRatio = initLife > 0f ? meteorsLife[i] / initLife : 0f;
         if (lifeRatio < 0f) {
@@ -183,43 +195,35 @@ public class MeteorsPaint {
             lifeRatio = 1f;
         }
         float lifeAlpha = lifeRatio * 255f;
-        float dx = -mvx * mlen;
-        float dy = -mvy * mlen;
-        float baseStroke = mlen * 0.16f;
+        float mx = meteorsX[i];
+        float my = meteorsY[i];
+        float mlen = meteorsLength[i];
+        float dirX = meteorsDirX[i];
+        float dirY = meteorsDirY[i];
+        float tailLen = meteorsTailLen[i];
+        float baseStroke = mlen * TAIL_WIDTH_FACTOR;
         if (baseStroke < 1f) {
             baseStroke = 1f;
         } else if (baseStroke > 16f) {
             baseStroke = 16f;
         }
 
-        // Cache Paint refs and segment color array as locals to avoid repeated field reads.
-        final Paint mp = meteorPaint;
-        final int[] colors = segColorRGB;
-        float x0 = mx;
-        float y0 = my;
-        for (int s = 0; s < METEOR_SEGMENTS; s++) {
-            float f1 = SEG_F1[s];
-            float x1 = mx + dx * f1;
-            float y1 = my + dy * f1;
-            int a = (int) (lifeAlpha * SEG_FALLOFF[s]);
-            mp.setColor((a << 24) | colors[s]);
-            mp.setStrokeWidth(baseStroke * SEG_STROKE_FACTOR[s]);
-            c.drawLine(x0, y0, x1, y1, mp);
-            x0 = x1;
-            y0 = y1;
-        }
-
-        // thin bright core streak
-        int coreA = (int) lifeAlpha;
-        mp.setColor(cachedColorStartRGB | (coreA << 24));
-        mp.setStrokeWidth(Math.max(1f, baseStroke * 0.35f));
-        c.drawLine(mx, my, mx + dx * CORE_FRACTION, my + dy * CORE_FRACTION, mp);
-
-        // head: filled circle
-        final Paint mfp = meteorFillPaint;
+        gradientMatrix.setSinCos(dirY, dirX);
+        gradientMatrix.preScale(tailLen, baseStroke);
+        gradientMatrix.postTranslate(mx, my);
+        tailPaint.setAlpha((int) lifeAlpha);
+        c.save();
+        c.concat(gradientMatrix);
+        c.drawPath(TAIL_PATH, tailPaint);
+        c.restore();
+        float dx = dirX * tailLen;
+        float dy = dirY * tailLen;
+        meteorPaint.setColor(cachedColorStartRGB | ((int) lifeAlpha << 24));
+        meteorPaint.setStrokeWidth(Math.max(1f, baseStroke * 0.35f));
+        c.drawLine(mx, my, mx + dx * CORE_FRACTION, my + dy * CORE_FRACTION, meteorPaint);
         int headAlpha = Math.min(255, (int) (lifeAlpha * 1.05f));
-        mfp.setColor(cachedColorStartRGB | (headAlpha << 24));
-        c.drawCircle(mx, my, Math.max(1f, Math.min(12f, mlen * 0.14f)), mfp);
+        meteorFillPaint.setColor(cachedColorStartRGB | (headAlpha << 24));
+        c.drawCircle(mx, my, Math.max(1f, Math.min(12f, mlen * HEAD_RADIUS_FACTOR)), meteorFillPaint);
     }
 
     private void spawnFreeMeteor(ThreadLocalRandom rng) {
@@ -265,6 +269,9 @@ public class MeteorsPaint {
         meteorsInitLife[i] = 40f + rng.nextFloat() * 80f;
         meteorsLife[i] = meteorsInitLife[i];
         meteorsLength[i] = 18f + rng.nextFloat() * 26f;
+        meteorsDirX[i] = -(float) Math.cos(angle);
+        meteorsDirY[i] = -(float) Math.sin(angle);
+        meteorsTailLen[i] = speedBase * meteorsLength[i];
         meteorsActive[i] = true;
     }
 }

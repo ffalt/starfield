@@ -52,6 +52,7 @@ import android.hardware.SensorManager;
 import io.github.ffalt.starfield.R;
 import io.github.ffalt.starfield.StarfieldOpts;
 import io.github.ffalt.starfield.StarfieldPrefs;
+import io.github.ffalt.starfield.painting.effects.ConstellationCatalog;
 
 public abstract class StarfieldScene implements SurfaceHolderParent, SharedPreferences.OnSharedPreferenceChangeListener, SensorEventListener {
     private Starfield starfield;
@@ -277,6 +278,20 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.bgGradientRadius = bgGradientRadius;
             bgPaintDirty = true;
         }
+        boolean constellationsEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_ENABLED, res.getBoolean(R.bool.constellations_enabled_default));
+        if (constellationsEnabled != opts.constellationsEnabled) {
+            opts.constellationsEnabled = constellationsEnabled;
+            update = true;
+        }
+        boolean constellationsLarge = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_LARGE, res.getBoolean(R.bool.constellations_large_default));
+        if (constellationsLarge != opts.constellationsLarge) {
+            opts.constellationsLarge = constellationsLarge;
+            update = true;
+        }
+        boolean constellationsLines = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_LINES, res.getBoolean(R.bool.constellations_lines_default));
+        if (constellationsLines != opts.constellationsLines) {
+            opts.constellationsLines = constellationsLines;
+        }
         boolean nebulaEnabled = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_NEBULA_ENABLED, res.getBoolean(R.bool.nebula_enabled_default));
         if (nebulaEnabled != opts.nebulaEnabled) {
             opts.nebulaEnabled = nebulaEnabled;
@@ -364,7 +379,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     public void reset() {
-        starfield = new Starfield(opts);
+        ConstellationCatalog constellations = opts.constellationsEnabled && mContext != null
+                ? ConstellationCatalog.getInstance(mContext) : null;
+        starfield = new Starfield(opts, constellations);
         updateSpeedModifier();
     }
 
