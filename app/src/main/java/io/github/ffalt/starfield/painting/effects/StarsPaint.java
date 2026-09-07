@@ -33,7 +33,6 @@ import android.graphics.Paint;
 import java.util.concurrent.ThreadLocalRandom;
 
 import io.github.ffalt.starfield.StarfieldOpts;
-import io.github.ffalt.starfield.painting.ShapeBatcher;
 import io.github.ffalt.starfield.painting.cache.StarPaintCache;
 import io.github.ffalt.starfield.painting.cache.StarTrailPaintCache;
 
@@ -51,8 +50,8 @@ public class StarsPaint {
     private final StarArrays stars = new StarArrays();
     private final DrawList draws = new DrawList();
 
-    private final ShapeBatcher bodyBatcher;
-    private final ShapeBatcher trailBatcher;
+    private final StarPaintCache starPaints;
+    private final StarTrailPaintCache starTrailPaints;
 
     // Screen offset and gyroscope tilt, both eased towards their targets in move().
     private float offsetX = 0;
@@ -105,16 +104,14 @@ public class StarsPaint {
 
     public StarsPaint(StarfieldOpts opts) {
         this.opts = opts;
-        bodyBatcher = new ShapeBatcher(new StarPaintCache(opts).getArray(), ShapeBatcher.POINTS);
-        trailBatcher = new ShapeBatcher(new StarTrailPaintCache(opts).getArray(), ShapeBatcher.LINES);
+        starPaints = new StarPaintCache(opts);
+        starTrailPaints = new StarTrailPaintCache(opts);
     }
 
     public void init() {
         int n = opts.numStars;
         stars.alloc(n);
         draws.alloc(n);
-        bodyBatcher.resize(n);
-        trailBatcher.resize(n);
         ThreadLocalRandom rng = ThreadLocalRandom.current();
         for (int i = 0; i < n; i++) {
             randomStarPosition(i, rng);
@@ -248,19 +245,22 @@ public class StarsPaint {
         final float[] dY = draws.y;
         final float[] dR = draws.radius;
         final int[] dB = draws.brightness;
-        // drawCircle took a radius while drawRect drew a square of side r, so round stars are twice as wide.
-        final float sizeScale = opts.circle ? 2f : 1f;
+        final Paint[] sp = starPaints.getArray();
+        final boolean circle = opts.circle;
         int n = draws.count;
         for (int i = 0; i < n; i++) {
-            bodyBatcher.add(dX[i], dY[i], dR[i] * sizeScale, dB[i]);
+            float r = dR[i];
+            float cx = dX[i];
+            float cy = dY[i];
+            if (circle) {
+                c.drawCircle(cx, cy, r, sp[dB[i]]);
+            } else {
+                float rH = r * 0.5f;
+                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[dB[i]]);
+            }
         }
-        bodyBatcher.setCap(opts.circle ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
-        bodyBatcher.flush(c);
     }
 
-    // Trails and bodies are collected separately and flushed in two passes, so every trail lands under
-    // every body. Before, each star drew its own trail then its own body, which left a later star's trail
-    // on top of an earlier star's body wherever the two crossed.
     private void drawLoopTrails(Canvas c) {
         final float[] dX = draws.x;
         final float[] dY = draws.y;
@@ -268,25 +268,31 @@ public class StarsPaint {
         final int[] dB = draws.brightness;
         final float[] dTX = draws.trailX;
         final float[] dTY = draws.trailY;
-        final float sizeScale = opts.circle ? 2f : 1f;
+        final Paint[] sp = starPaints.getArray();
+        final Paint[] stp = starTrailPaints.getArray();
+        final boolean circle = opts.circle;
         int n = draws.count;
         for (int i = 0; i < n; i++) {
+            float r = dR[i];
             float cx = dX[i];
             float cy = dY[i];
             float lx = dTX[i];
             float ly = dTY[i];
-            float r = dR[i];
             int b = dB[i];
             float dx = lx - cx;
             float dy = ly - cy;
             if (dx * dx + dy * dy > 16f) {
-                trailBatcher.add(lx, ly, cx, cy, r, b);
+                Paint tp = stp[b];
+                tp.setStrokeWidth(r);
+                c.drawLine(lx, ly, cx, cy, tp);
             }
-            bodyBatcher.add(cx, cy, r * sizeScale, b);
+            if (circle) {
+                c.drawCircle(cx, cy, r, sp[b]);
+            } else {
+                float rH = r * 0.5f;
+                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[b]);
+            }
         }
-        trailBatcher.flush(c);
-        bodyBatcher.setCap(opts.circle ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
-        bodyBatcher.flush(c);
     }
 
     public void clearScreenOffsets() {
