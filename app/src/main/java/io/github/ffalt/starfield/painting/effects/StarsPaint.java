@@ -41,6 +41,11 @@ public class StarsPaint {
     private static final float MAX_TILT_ANGLE = (float) Math.toRadians(50.0);
     private static final float INV_MAX_TILT_ANGLE = 1f / MAX_TILT_ANGLE;
     private static final float SMOOTHING = 0.01f;
+    // A trail covers a fixed slice of time, not one frame, so its length and how often it is drawn stay
+    // the same at any frame rate. Expressed in 60 fps reference frames, the unit move() already uses:
+    // per reference frame a star travels v * 0.1, whatever the real frame rate.
+    private static final float TRAIL_WINDOW_MS = 60f;
+    private static final float TRAIL_WINDOW_FRAMES = TRAIL_WINDOW_MS * 60f / 1000f;
 
     private final StarfieldOpts opts;
     private final StarArrays stars = new StarArrays();
@@ -58,6 +63,8 @@ public class StarsPaint {
     private float tiltTargetX = 0;
     private float tiltTargetY = 0;
     private float speedModifier = 1.0f;
+    private float lastTotalOffsetX = 0;
+    private float lastTotalOffsetY = 0;
 
     // Structure of arrays: one array per star attribute rather than one object per star, so the
     // update loop walks contiguous memory. cur* hold the projected values draw() renders.
@@ -137,6 +144,20 @@ public class StarsPaint {
         // Cache all loop-invariant values; avoids repeated field reads inside the hot loop.
         float totalOffsetX = offsetX + tiltOffsetX;
         float totalOffsetY = offsetY + tiltOffsetY;
+        // Trails start where the star was TRAIL_WINDOW_FRAMES ago, which is computed from its own motion
+        // rather than remembered, plus where the screen offset was then. The offset is eased a fixed
+        // fraction per frame, so extrapolating this frame's step over the window tracks a pan closely
+        // enough for a smear. Without it a pan would slide the field but leave no trails behind it.
+        final boolean trails = opts.trails;
+        // trailIntensity scales the window as a percentage: 100 is TRAIL_WINDOW_MS, lower means only the
+        // fastest stars streak, higher means slower stars streak too and every streak is longer.
+        float trailWindow = TRAIL_WINDOW_FRAMES * opts.trailIntensity * 0.01f;
+        float trailDz = 0.1f * speedModifier * trailWindow;
+        float trailFrames = trailWindow / ts;
+        float trailOffsetX = totalOffsetX - (totalOffsetX - lastTotalOffsetX) * trailFrames;
+        float trailOffsetY = totalOffsetY - (totalOffsetY - lastTotalOffsetY) * trailFrames;
+        lastTotalOffsetX = totalOffsetX;
+        lastTotalOffsetY = totalOffsetY;
         float hW = opts.hW;
         float hH = opts.hH;
         float width = opts.width;
@@ -177,12 +198,15 @@ public class StarsPaint {
                 continue;
             }
             sZ[i] = sz;
-            sLX[i] = sCX[i];
-            sLY[i] = sCY[i];
             sV[i] += vGain;
             float invZ = 1f / sz;
             sCX[i] = hW + (width * sX[i] * invZ - totalOffsetX);
             sCY[i] = hH + (height * sY[i] * invZ - totalOffsetY);
+            if (trails) {
+                float invZT = 1f / (sz + sV[i] * trailDz);
+                sLX[i] = hW + (width * sX[i] * invZT - trailOffsetX);
+                sLY[i] = hH + (height * sY[i] * invZT - trailOffsetY);
+            }
             float zRatio = sz * invInitialZ;
             sCR[i] = (1 - zRatio) * sR[i] * starSize;
             int b = 100 - (int) (zRatio * 40 + 0.5f);
@@ -257,6 +281,8 @@ public class StarsPaint {
         offsetX = 0;
         offsetTY = 0;
         offsetY = 0;
+        lastTotalOffsetX = tiltOffsetX;
+        lastTotalOffsetY = tiltOffsetY;
     }
 
     public void clearOffsets() {

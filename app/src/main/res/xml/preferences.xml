@@ -89,6 +89,19 @@
             app:summary="@string/settings_trails_summary"
             app:title="@string/settings_trails_enable" />
 
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/trail_intensity_default"
+            android:key="trail_intensity"
+            android:max="@integer/trail_intensity_max"
+            android:summary="@string/settings_trail_intensity_summary"
+            android:title="@string/settings_trail_intensity"
+            app:dependency="star_trail"
+            app:iconSpaceReserved="false"
+            app:min="@integer/trail_intensity_min"
+            app:seekBarIncrement="@integer/trail_intensity_step"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
         <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
             android:defaultValue="@color/trail_color_start_default"
             android:key="trail_color_start"

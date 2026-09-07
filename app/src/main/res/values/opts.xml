@@ -32,6 +32,10 @@
     <integer name="follow_screen_intensity_default">10</integer>
     <bool name="star_round_default">true</bool>
     <bool name="star_trail_default">true</bool>
+    <integer name="trail_intensity_default">100</integer>
+    <integer name="trail_intensity_min">10</integer>
+    <integer name="trail_intensity_max">300</integer>
+    <integer name="trail_intensity_step">10</integer>
     <bool name="follow_screen_default">true</bool>
     <bool name="follow_restore_default">true</bool>
     <bool name="follow_sensor_default">false</bool>

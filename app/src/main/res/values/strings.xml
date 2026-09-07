@@ -29,6 +29,8 @@
     <string name="settings_follow_restore_summary">On side screen do restore forward direction</string>
     <string name="settings_trails_enable">Show</string>
     <string name="settings_trails_summary">You may gain performance if stars trails are not drawn.</string>
+    <string name="settings_trail_intensity">Intensity</string>
+    <string name="settings_trail_intensity_summary">How far back a trail reaches. Higher values also give slower stars a trail.</string>
     <string name="settings_fps">Frames per second</string>
     <string name="settings_fps_summary">Lower values result in jumping stars.</string>
     <string name="settings_round">Round</string>

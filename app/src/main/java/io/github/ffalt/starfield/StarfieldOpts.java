@@ -55,6 +55,7 @@ public class StarfieldOpts {
     public boolean followSensor;
     public int followSensorIntensity;
     public boolean trails;
+    public int trailIntensity;
     public boolean circle;
     public float depth;
     public boolean batterySpeed;

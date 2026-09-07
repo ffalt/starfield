@@ -164,6 +164,10 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         if (starTrail != opts.trails) {
             opts.trails = starTrail;
         }
+        int trailIntensity = prefs.getInt(StarfieldPrefs.SHARED_PREFS_TRAIL_INTENSITY, res.getInteger(R.integer.trail_intensity_default));
+        if (trailIntensity != opts.trailIntensity) {
+            opts.trailIntensity = trailIntensity;
+        }
         boolean starCircle = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_STAR_CIRCLE, res.getBoolean(R.bool.star_round_default));
         if (starCircle != opts.circle) {
             opts.circle = starCircle;

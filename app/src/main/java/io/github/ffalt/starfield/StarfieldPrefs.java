@@ -33,6 +33,7 @@ public class StarfieldPrefs {
     public static final String SHARED_PREFS_STAR_COUNT = "star_count";
     public static final String SHARED_PREFS_MAX_V = "max_v";
     public static final String SHARED_PREFS_STAR_TRAIL = "star_trail";
+    public static final String SHARED_PREFS_TRAIL_INTENSITY = "trail_intensity";
     public static final String SHARED_PREFS_STAR_CIRCLE = "star_circle";
     public static final String SHARED_PREFS_FOLLOW_SCREEN = "follow_screen";
     public static final String SHARED_PREFS_FOLLOW_SCREEN_INTENSITY = "follow_screen_intensity";
