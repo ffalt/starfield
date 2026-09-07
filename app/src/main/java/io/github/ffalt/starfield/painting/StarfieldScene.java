@@ -42,6 +42,7 @@ import android.graphics.Shader;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Choreographer;
 import android.view.SurfaceHolder;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -63,7 +64,11 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     private boolean bgPaintDirty = true;
     public final StarfieldOpts opts = new StarfieldOpts();
     private final Handler mHandler = new Handler(Looper.getMainLooper());
-    private final Runnable mDrawThread = this::drawFrame;
+    private final Choreographer.FrameCallback frameCallback = this::doFrame;
+    private Choreographer choreographer;
+    private long lastVsyncNanos = 0;
+    private long lastRenderNanos = 0;
+    private long frameAccumulatorNanos = 0;
     public boolean visible = false;
     public boolean isSensorAvailable = false;
     private boolean sizeInitialized = false;
@@ -434,9 +439,9 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         if (starfield != null) {
             starfield.clearOffsets();
         }
-        mHandler.removeCallbacks(mDrawThread);
+        stopFrames();
         if (newVisible) {
-            drawFrame();
+            startFrames();
             if (isSensorAvailable && opts.followSensor && sensorManager != null && sensor != null) {
                 unregisterSensorListener();
                 sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -487,7 +492,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
 
     public void onSurfaceDestroyed() {
         visible = false;
-        mHandler.removeCallbacks(mDrawThread);
+        stopFrames();
         unregisterSensorListener();
     }
 
@@ -500,13 +505,52 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         mContext = null;
     }
 
+    private Choreographer getChoreographer() {
+        if (choreographer == null) {
+            choreographer = Choreographer.getInstance();
+        }
+        return choreographer;
+    }
+
+    private void startFrames() {
+        lastVsyncNanos = 0;
+        lastRenderNanos = 0;
+        frameAccumulatorNanos = 0;
+        getChoreographer().postFrameCallback(frameCallback);
+    }
+
+    private void stopFrames() {
+        if (choreographer != null) {
+            choreographer.removeFrameCallback(frameCallback);
+        }
+    }
+
+    private void doFrame(long frameTimeNanos) {
+        if (!visible) {
+            return;
+        }
+        getChoreographer().postFrameCallback(frameCallback);
+        long interval = opts.frameIntervalNanos;
+        frameAccumulatorNanos += lastVsyncNanos == 0 ? interval : frameTimeNanos - lastVsyncNanos;
+        lastVsyncNanos = frameTimeNanos;
+        if (frameAccumulatorNanos < interval) {
+            return;
+        }
+        frameAccumulatorNanos -= interval;
+        if (frameAccumulatorNanos > interval) {
+            // The display cannot reach the requested rate; do not build up credit for a catch-up burst.
+            frameAccumulatorNanos = interval;
+        }
+        opts.updateTimeScale(lastRenderNanos == 0 ? interval : frameTimeNanos - lastRenderNanos);
+        lastRenderNanos = frameTimeNanos;
+        drawFrame();
+    }
+
     private void drawFrame() {
         if (starfield == null || !sizeInitialized) {
             return;
         }
 
-        final long startNs = System.nanoTime();
-        mHandler.removeCallbacks(mDrawThread);
         final SurfaceHolder holder = getSurface();
         Canvas c = null;
         try {
@@ -524,8 +568,6 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         }
         if (visible) {
             starfield.move();
-            final long durationMs = (System.nanoTime() - startNs) / 1_000_000L;
-            mHandler.postDelayed(mDrawThread, Math.max(0, opts.drawTime - durationMs));
         }
     }
 }

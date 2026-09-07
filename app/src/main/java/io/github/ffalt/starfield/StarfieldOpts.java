@@ -33,6 +33,8 @@ import android.content.SharedPreferences;
 public class StarfieldOpts {
     public static final int METEOR_MAX_COUNT = 3;
     private static final float REFERENCE_FPS = 60f;
+    private static final double NANOS_PER_SECOND = 1_000_000_000.0;
+    private static final float MAX_TIME_SCALE = 4f;
     public float width = 100f;
     public float height = 100f;
     public float hW = 50f;
@@ -69,13 +71,18 @@ public class StarfieldOpts {
     public int nebulaOpacity;
     public int nebulaMovement;
     public int fps;
-    public long drawTime = Math.round(1000.0 / 60);
+    public long frameIntervalNanos = Math.round(NANOS_PER_SECOND / REFERENCE_FPS);
     public float timeScale = 1f;
 
     public void updateFPS(int newFps) {
         this.fps = Math.max(1, newFps);
-        this.drawTime = Math.round(1000.0 / this.fps);
+        this.frameIntervalNanos = Math.round(NANOS_PER_SECOND / this.fps);
         this.timeScale = REFERENCE_FPS / this.fps;
+    }
+
+    public void updateTimeScale(long frameDeltaNanos) {
+        float scale = frameDeltaNanos * REFERENCE_FPS / (float) NANOS_PER_SECOND;
+        this.timeScale = scale > MAX_TIME_SCALE ? MAX_TIME_SCALE : scale;
     }
 
     public void updateDepth() {
