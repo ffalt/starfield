@@ -42,6 +42,7 @@ public class StarsPaint {
     private static final float SMOOTHING = 0.01f;
 
     private static final float TRAIL_MIN_LENGTH = 16f;
+    private static final float TRAIL_WIDTH_CIRCLE = 1.5f;
     private static final float TRAIL_WINDOW_MS = 60f;
     private static final float TRAIL_WINDOW_FRAMES = TRAIL_WINDOW_MS * 60f / 1000f;
 
@@ -260,7 +261,7 @@ public class StarsPaint {
         final Paint[] sp = starPaints.getArray();
         final Paint[] stp = starTrailPaints.getArray();
         final boolean circle = opts.circle;
-        final float widthScale = circle ? 2f : 1f;
+        final float widthScale = circle ? TRAIL_WIDTH_CIRCLE : 1f;
         int n = draws.count;
         for (int i = 0; i < n; i++) {
             float r = dR[i];
@@ -271,12 +272,12 @@ public class StarsPaint {
             int b = dB[i];
             float dx = lx - cx;
             float dy = ly - cy;
-            float w = r * widthScale;
-            float minLength = w * w;
-            if (minLength < TRAIL_MIN_LENGTH) {
-                minLength = TRAIL_MIN_LENGTH;
-            }
-            if (dx * dx + dy * dy > minLength) {
+            float length2 = dx * dx + dy * dy;
+            if (length2 > TRAIL_MIN_LENGTH) {
+                float w = r * widthScale;
+                if (w * w > length2) {
+                    w = (float) Math.sqrt(length2);
+                }
                 Paint tp = stp[b];
                 tp.setStrokeWidth(w);
                 c.drawLine(lx, ly, cx, cy, tp);
