@@ -60,6 +60,7 @@ public class StarTrailPaintCache extends PaintCache {
         Paint result = new Paint();
         result.setStyle(Paint.Style.STROKE);
         result.setAntiAlias(true);
+        result.setStrokeCap(Paint.Cap.ROUND);
         result.setStrokeWidth(1f);
         result.setAlpha(index * 255 / 100);
         result.setShader(getSharedShader());

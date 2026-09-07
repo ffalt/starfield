@@ -83,4 +83,11 @@
     <string name="settings_nebula_opacity_summary">Qué tan visibles son las manchas de nebulosa</string>
     <string name="settings_nebula_movement">Intensidad de movimiento</string>
     <string name="settings_nebula_movement_summary">Cuánto se mueve la nebulosa y reacciona a la inclinación y al deslizamiento</string>
+    <string name="settings_group_constellations">Constelaciones</string>
+    <string name="settings_constellations_enable">Mostrar constelaciones</string>
+    <string name="settings_constellations_enable_summary">Vuela a través de los patrones estelares reales de Orion, Ursa Major, Cassiopeia y 86 más</string>
+    <string name="settings_constellations_large">Estrellas más grandes</string>
+    <string name="settings_constellations_large_summary">Dibujar las estrellas de la constelación más grandes que el campo estelar para que destaque el patrón</string>
+    <string name="settings_constellations_lines">Líneas de unión</string>
+    <string name="settings_constellations_lines_summary">Dibujar las líneas clásicas que unen las estrellas de una constelación</string>
 </resources>

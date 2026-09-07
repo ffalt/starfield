@@ -40,11 +40,11 @@ public class StarsPaint {
     private static final float MAX_TILT_ANGLE = (float) Math.toRadians(50.0);
     private static final float INV_MAX_TILT_ANGLE = 1f / MAX_TILT_ANGLE;
     private static final float SMOOTHING = 0.01f;
-    // A trail covers a fixed slice of time, not one frame, so its length and how often it is drawn stay
-    // the same at any frame rate. Expressed in 60 fps reference frames, the unit move() already uses:
-    // per reference frame a star travels v * 0.1, whatever the real frame rate.
+
+    private static final float TRAIL_MIN_LENGTH = 16f;
     private static final float TRAIL_WINDOW_MS = 60f;
     private static final float TRAIL_WINDOW_FRAMES = TRAIL_WINDOW_MS * 60f / 1000f;
+
 
     private final StarfieldOpts opts;
     private final StarArrays stars = new StarArrays();
@@ -66,6 +66,9 @@ public class StarsPaint {
     private float lastTotalOffsetX = 0;
     private float lastTotalOffsetY = 0;
 
+    private final ConstellationPaint constellations;
+    private boolean constellationsActive = false;
+
     private static final class StarArrays {
         private float[] x = new float[0];
         private float[] y = new float[0];
@@ -82,40 +85,26 @@ public class StarsPaint {
         }
     }
 
-    private static final class DrawList {
-        private float[] x = new float[0];
-        private float[] y = new float[0];
-        private float[] radius = new float[0];
-        private int[] brightness = new int[0];
-        private float[] trailX = new float[0];
-        private float[] trailY = new float[0];
-        private int count = 0;
-
-        private void alloc(int n) {
-            x = new float[n];
-            y = new float[n];
-            radius = new float[n];
-            brightness = new int[n];
-            trailX = new float[n];
-            trailY = new float[n];
-            count = 0;
-        }
-    }
-
-    public StarsPaint(StarfieldOpts opts) {
+    public StarsPaint(StarfieldOpts opts, ConstellationPaint constellations) {
         this.opts = opts;
+        this.constellations = constellations;
         starPaints = new StarPaintCache(opts);
         starTrailPaints = new StarTrailPaintCache(opts);
     }
 
     public void init() {
         int n = opts.numStars;
+        int constellationStars = constellations == null ? 0 : constellations.getMaxStars();
+        constellationsActive = constellationStars > 0;
         stars.alloc(n);
-        draws.alloc(n);
+        draws.alloc(n + constellationStars);
         ThreadLocalRandom rng = ThreadLocalRandom.current();
         for (int i = 0; i < n; i++) {
             randomStarPosition(i, rng);
             stars.z[i] = rng.nextFloat() * opts.initialZ;
+        }
+        if (constellationsActive) {
+            constellations.init();
         }
     }
 
@@ -146,16 +135,9 @@ public class StarsPaint {
                 tiltOffsetY += ty * smoothing;
             }
         }
-        // Cache all loop-invariant values; avoids repeated field reads inside the hot loop.
         float totalOffsetX = offsetX + tiltOffsetX;
         float totalOffsetY = offsetY + tiltOffsetY;
-        // Trails start where the star was TRAIL_WINDOW_FRAMES ago, which is computed from its own motion
-        // rather than remembered, plus where the screen offset was then. The offset is eased a fixed
-        // fraction per frame, so extrapolating this frame's step over the window tracks a pan closely
-        // enough for a smear. Without it a pan would slide the field but leave no trails behind it.
         final boolean trails = opts.trails;
-        // trailIntensity scales the window as a percentage: 100 is TRAIL_WINDOW_MS, lower means only the
-        // fastest stars streak, higher means slower stars streak too and every streak is longer.
         float trailWindow = TRAIL_WINDOW_FRAMES * opts.trailIntensity * 0.01f;
         float trailDz = 0.1f * speedModifier * trailWindow;
         float trailFrames = trailWindow / ts;
@@ -229,10 +211,17 @@ public class StarsPaint {
             dB[visible] = b < 0 ? 0 : Math.min(b, 100);
             visible++;
         }
+        if (constellationsActive) {
+            visible = constellations.move(draws, visible, ts, speedFactor, trailDz,
+                    totalOffsetX, totalOffsetY, trailOffsetX, trailOffsetY);
+        }
         draws.count = visible;
     }
 
     public void draw(Canvas c) {
+        if (constellationsActive && opts.constellationsLines) {
+            constellations.drawLines(c, starPaints.getArray());
+        }
         if (opts.trails) {
             drawLoopTrails(c);
         } else {
@@ -271,6 +260,7 @@ public class StarsPaint {
         final Paint[] sp = starPaints.getArray();
         final Paint[] stp = starTrailPaints.getArray();
         final boolean circle = opts.circle;
+        final float widthScale = circle ? 2f : 1f;
         int n = draws.count;
         for (int i = 0; i < n; i++) {
             float r = dR[i];
@@ -281,9 +271,14 @@ public class StarsPaint {
             int b = dB[i];
             float dx = lx - cx;
             float dy = ly - cy;
-            if (dx * dx + dy * dy > 16f) {
+            float w = r * widthScale;
+            float minLength = w * w;
+            if (minLength < TRAIL_MIN_LENGTH) {
+                minLength = TRAIL_MIN_LENGTH;
+            }
+            if (dx * dx + dy * dy > minLength) {
                 Paint tp = stp[b];
-                tp.setStrokeWidth(r);
+                tp.setStrokeWidth(w);
                 c.drawLine(lx, ly, cx, cy, tp);
             }
             if (circle) {

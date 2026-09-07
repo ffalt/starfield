@@ -82,4 +82,11 @@
     <string name="settings_nebula_opacity_summary">How visible the nebula blobs are</string>
     <string name="settings_nebula_movement">Movement intensity</string>
     <string name="settings_nebula_movement_summary">How strongly the nebula moves and reacts to tilt and swipe</string>
+    <string name="settings_group_constellations">Constellations</string>
+    <string name="settings_constellations_enable">Enable constellations</string>
+    <string name="settings_constellations_enable_summary">Fly through the real star patterns of Orion, Ursa Major, Cassiopeia and 86 more</string>
+    <string name="settings_constellations_large">Larger stars</string>
+    <string name="settings_constellations_large_summary">Draw constellation stars bigger than the surrounding star field so the pattern stands out</string>
+    <string name="settings_constellations_lines">Connecting lines</string>
+    <string name="settings_constellations_lines_summary">Draw the classic stick figure lines between the stars of a constellation</string>
 </resources>

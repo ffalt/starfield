@@ -173,6 +173,36 @@
 
     <androidx.preference.PreferenceCategory
         app:iconSpaceReserved="false"
+        app:key="constellation_category"
+        app:title="@string/settings_group_constellations">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/constellations_enabled_default"
+            app:iconSpaceReserved="false"
+            app:key="constellations_enabled"
+            app:summary="@string/settings_constellations_enable_summary"
+            app:title="@string/settings_constellations_enable" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/constellations_large_default"
+            app:dependency="constellations_enabled"
+            app:iconSpaceReserved="false"
+            app:key="constellations_large"
+            app:summary="@string/settings_constellations_large_summary"
+            app:title="@string/settings_constellations_large" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="@bool/constellations_lines_default"
+            app:dependency="constellations_enabled"
+            app:iconSpaceReserved="false"
+            app:key="constellations_lines"
+            app:summary="@string/settings_constellations_lines_summary"
+            app:title="@string/settings_constellations_lines" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        app:iconSpaceReserved="false"
         app:key="nebula_category"
         app:title="@string/settings_group_nebula">
 

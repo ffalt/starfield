@@ -55,6 +55,9 @@ public class StarfieldPrefs {
     public static final String SHARED_PREFS_BG_GRADIENT = "bg_gradient";
     public static final String SHARED_PREFS_BG_GRADIENT_INNER_COLOR = "bg_gradient_inner_color";
     public static final String SHARED_PREFS_BG_GRADIENT_RADIUS = "bg_gradient_radius";
+    public static final String SHARED_PREFS_CONSTELLATIONS_ENABLED = "constellations_enabled";
+    public static final String SHARED_PREFS_CONSTELLATIONS_LARGE = "constellations_large";
+    public static final String SHARED_PREFS_CONSTELLATIONS_LINES = "constellations_lines";
     public static final String SHARED_PREFS_NEBULA_ENABLED = "nebula_enabled";
     public static final String SHARED_PREFS_NEBULA_COLOR = "nebula_color";
     public static final String SHARED_PREFS_NEBULA_COUNT = "nebula_count";

@@ -46,6 +46,9 @@
     <integer name="bg_gradient_radius_min">10</integer>
     <integer name="bg_gradient_radius_max">200</integer>
     <integer name="bg_gradient_radius_step">10</integer>
+    <bool name="constellations_enabled_default">false</bool>
+    <bool name="constellations_large_default">true</bool>
+    <bool name="constellations_lines_default">true</bool>
     <bool name="nebula_enabled_default">false</bool>
     <integer name="nebula_count_default">5</integer>
     <integer name="nebula_count_min">1</integer>

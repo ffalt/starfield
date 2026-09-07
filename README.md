@@ -30,6 +30,7 @@ Starfield focuses on smooth visuals and configurability without compromising bat
 | ☄️ **Meteors**            | Up to 3 simultaneous meteors spawning from any screen edge; configurable probability      |
 | 🌠 **Meteor detail**      | Multi-segment gradient trail, bright core streak, and glowing filled head                 |
 | 🎨 **Colors**             | Full color pickers for stars, trail inner/outer, and meteor head/tail                     |
+| 🔭 **Constellations**     | Fly through 89 real IAU star patterns; optional stick figure lines                        |
 | 🌫️ **Nebula clouds**     | Slowly drifting translucent color blobs behind the stars                                  |
 | 🌃 **Background color**   | Configurable background color, optional radial gradient background with adjustable spread |
 | 📱 **Screen follow**      | Tracks home-screen swiping with adjustable intensity; restore-to-center                   |
@@ -106,4 +107,5 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 ## 🙏 Acknowledgments
 
 - Color picker UI by [jaredrummler/ColorPicker](https://github.com/jaredrummler/ColorPicker)
+- Constellation star patterns derived from [ofrohn/d3-celestial](https://github.com/ofrohn/d3-celestial) - Copyright (c) 2015, Olaf Frohn, [BSD-3-Clause](./app/src/main/assets/constellations/LICENSE)
 

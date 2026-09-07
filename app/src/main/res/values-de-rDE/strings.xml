@@ -83,4 +83,11 @@
     <string name="settings_nebula_opacity_summary">Wie sichtbar die Nebel sind</string>
     <string name="settings_nebula_movement">Bewegungsintensität</string>
     <string name="settings_nebula_movement_summary">Wie stark der Nebel sich bewegt und auf Neigung und Wischen reagiert</string>
+    <string name="settings_group_constellations">Sternbilder</string>
+    <string name="settings_constellations_enable">Sternbilder anzeigen</string>
+    <string name="settings_constellations_enable_summary">Durch die echten Sternmuster von Orion, Ursa Major, Cassiopeia und 86 weiteren fliegen</string>
+    <string name="settings_constellations_large">Größere Sterne</string>
+    <string name="settings_constellations_large_summary">Sterne eines Sternbilds größer als das umgebende Sternenfeld zeichnen, damit das Muster hervorsticht</string>
+    <string name="settings_constellations_lines">Verbindungslinien</string>
+    <string name="settings_constellations_lines_summary">Die klassischen Strichfiguren zwischen den Sternen eines Sternbilds zeichnen</string>
 </resources>

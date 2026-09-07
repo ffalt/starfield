@@ -30,6 +30,8 @@ package io.github.ffalt.starfield.painting;
 import android.graphics.Canvas;
 
 import io.github.ffalt.starfield.StarfieldOpts;
+import io.github.ffalt.starfield.painting.effects.ConstellationCatalog;
+import io.github.ffalt.starfield.painting.effects.ConstellationPaint;
 import io.github.ffalt.starfield.painting.effects.MeteorsPaint;
 import io.github.ffalt.starfield.painting.effects.NebulaPaint;
 import io.github.ffalt.starfield.painting.effects.StarsPaint;
@@ -40,10 +42,11 @@ public class Starfield {
     private final NebulaPaint nebulaPaint;
     private final StarsPaint starsPaint;
 
-    public Starfield(StarfieldOpts opts) {
+    public Starfield(StarfieldOpts opts, ConstellationCatalog constellations) {
         this.opts = opts;
         nebulaPaint = new NebulaPaint(opts);
-        starsPaint = new StarsPaint(opts);
+        starsPaint = new StarsPaint(opts,
+                constellations == null ? null : new ConstellationPaint(opts, constellations));
         meteorsPaint = new MeteorsPaint(opts);
         this.init();
     }

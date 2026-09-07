@@ -286,6 +286,7 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
         boolean constellationsLarge = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_LARGE, res.getBoolean(R.bool.constellations_large_default));
         if (constellationsLarge != opts.constellationsLarge) {
             opts.constellationsLarge = constellationsLarge;
+            // The size boost is baked in when a constellation spawns, so restart to pick it up.
             update = true;
         }
         boolean constellationsLines = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_LINES, res.getBoolean(R.bool.constellations_lines_default));
@@ -379,10 +380,13 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
     }
 
     public void reset() {
-        ConstellationCatalog constellations = opts.constellationsEnabled && mContext != null
-                ? ConstellationCatalog.getInstance(mContext) : null;
-        starfield = new Starfield(opts, constellations);
+        starfield = new Starfield(opts, this.getConstellations());
         updateSpeedModifier();
+    }
+
+    public ConstellationCatalog getConstellations() {
+        return opts.constellationsEnabled && mContext != null
+                ? ConstellationCatalog.getInstance(mContext) : null;
     }
 
     private void updateSpeedModifier() {
