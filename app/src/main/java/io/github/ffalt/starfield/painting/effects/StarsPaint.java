@@ -27,7 +27,9 @@
 
 package io.github.ffalt.starfield.painting.effects;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -43,6 +45,7 @@ public class StarsPaint {
 
     private static final float TRAIL_MIN_LENGTH = 16f;
     private static final float TRAIL_WIDTH_CIRCLE = 1.5f;
+    private static final float TRAIL_MIN_WIDTH_SQ = 2.89f;
     private static final float TRAIL_WINDOW_MS = 60f;
     private static final float TRAIL_WINDOW_FRAMES = TRAIL_WINDOW_MS * 60f / 1000f;
 
@@ -53,6 +56,8 @@ public class StarsPaint {
 
     private final StarPaintCache starPaints;
     private final StarTrailPaintCache starTrailPaints;
+    private final Matrix trailMatrix = new Matrix();
+    private final float[] trailMatrixValues = {1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f};
 
     // Screen offset and gyroscope tilt, both eased towards their targets in move().
     private float offsetX = 0;
@@ -258,37 +263,47 @@ public class StarsPaint {
         final int[] dB = draws.brightness;
         final float[] dTX = draws.trailX;
         final float[] dTY = draws.trailY;
-        final Paint[] sp = starPaints.getArray();
         final Paint[] stp = starTrailPaints.getArray();
-        final boolean circle = opts.circle;
-        final float widthScale = circle ? TRAIL_WIDTH_CIRCLE : 1f;
+        final Bitmap tex = starTrailPaints.getBitmap();
+        final float[] m = trailMatrixValues;
+        final float invTexW = 1f / tex.getWidth();
+        final float invTexH = 1f / tex.getHeight();
+        final float widthScale = opts.circle ? TRAIL_WIDTH_CIRCLE : 1f;
         int n = draws.count;
         for (int i = 0; i < n; i++) {
-            float r = dR[i];
             float cx = dX[i];
             float cy = dY[i];
-            float lx = dTX[i];
-            float ly = dTY[i];
-            int b = dB[i];
-            float dx = lx - cx;
-            float dy = ly - cy;
+            float dx = dTX[i] - cx;
+            float dy = dTY[i] - cy;
             float length2 = dx * dx + dy * dy;
-            if (length2 > TRAIL_MIN_LENGTH) {
-                float w = r * widthScale;
-                if (w * w > length2) {
-                    w = (float) Math.sqrt(length2);
-                }
-                Paint tp = stp[b];
-                tp.setStrokeWidth(w);
-                c.drawLine(lx, ly, cx, cy, tp);
+            float w = dR[i] * widthScale;
+            // Skip trails shorter than 1.7 trail widths: they sit under the star head as a
+            // smudge, costing a draw call and showing nothing.
+            float minLength2 = w * w * TRAIL_MIN_WIDTH_SQ;
+            if (minLength2 < TRAIL_MIN_LENGTH) {
+                minLength2 = TRAIL_MIN_LENGTH;
             }
-            if (circle) {
-                c.drawCircle(cx, cy, r, sp[b]);
-            } else {
-                float rH = r * 0.5f;
-                c.drawRect(cx - rH, cy - rH, cx + rH, cy + rH, sp[b]);
+            if (length2 <= minLength2) {
+                continue;
             }
+            float length = (float) Math.sqrt(length2);
+            // Map the sprite onto the trail: x spans head to tail, y is centred on the axis.
+            float invLength = 1f / length;
+            float ux = dx * invLength;
+            float uy = dy * invLength;
+            float scaleX = length * invTexW;
+            float scaleY = w * invTexH;
+            float halfW = w * 0.5f;
+            m[0] = ux * scaleX;
+            m[1] = -uy * scaleY;
+            m[2] = cx + uy * halfW;
+            m[3] = uy * scaleX;
+            m[4] = ux * scaleY;
+            m[5] = cy - ux * halfW;
+            trailMatrix.setValues(m);
+            c.drawBitmap(tex, trailMatrix, stp[dB[i]]);
         }
+        drawLoopPoints(c);
     }
 
     public void clearScreenOffsets() {
