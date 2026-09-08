@@ -1,0 +1,5 @@
+ - **stars** implement bitmap-based trails for star effects
+ - **trails** must reset after turning trails on
+ - **constellations** add fly-through constellation patterns
+ - **starfield** use android.view.Choreographer to sync to the display refresh rate
+ - **trails** add trail intensity settings

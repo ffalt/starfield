@@ -1,3 +1,15 @@
+## [v0.0.14](https://github.com/ffalt/starfield/compare/v0.0.13...v0.0.14) (2026-09-08)
+
+### Features
+
+ - **stars** implement bitmap-based trails for star effects ([5073571a9c21509](https://github.com/ffalt/starfield/commit/5073571a9c21509413741a7bbd287690b96c6de2))
+ - **constellations** add fly-through constellation patterns ([53d7b2f4e1e18dd](https://github.com/ffalt/starfield/commit/53d7b2f4e1e18dd1be3f9eca8455d79d4690d420))
+ - **trails** add trail intensity settings ([79e76bcfabadb4b](https://github.com/ffalt/starfield/commit/79e76bcfabadb4b588f4d621ff2278880dd57cfe))
+
+### Bug Fixes
+
+ - **trails** must reset after turning trails on ([30eb5736ac08b06](https://github.com/ffalt/starfield/commit/30eb5736ac08b06a32381d4675eddc8cd88e8bf9))
+ - **starfield** use android.view.Choreographer to sync to the display refresh rate ([4074ea42537b846](https://github.com/ffalt/starfield/commit/4074ea42537b846dd2c7de375fb053c1c289de27))
 
 ## [v0.0.13](https://github.com/ffalt/starfield/compare/v0.0.12...v0.0.13) (2026-09-06)
 
