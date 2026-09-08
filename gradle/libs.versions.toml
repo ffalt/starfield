@@ -4,12 +4,10 @@ appcompat = "1.8.0"
 checkstyle = "10.21.4"
 preference = "1.2.1"
 colorpicker = "1.1.0"
-gitchangelog = "3.1.2"
 kotlin = "2.4.10"
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-gitChangelog = { id = "se.bjurr.gitchangelog.git-changelog-gradle-plugin", version.ref = "gitchangelog" }
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }

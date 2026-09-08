@@ -1,5 +1,5 @@
 
-## [v0.0.13](https://github.com/ffalt/starfield/compare/v0.0.13) (2026-09-06)
+## [v0.0.13](https://github.com/ffalt/starfield/compare/v0.0.12...v0.0.13) (2026-09-06)
 
 
 ### Bug Fixes
@@ -22,7 +22,7 @@
  -  **settings**  ensure min and max velocity values are correctly set ([eb1f69d43ad5ff3](https://github.com/ffalt/starfield/commit/eb1f69d43ad5ff3ffafe2c6ca788635834b2773e))
  -  **lifecycle**  refactor surfaceDestroyed and onDestroy ([876e349b044ddd3](https://github.com/ffalt/starfield/commit/876e349b044ddd3e4e41e7d4a736e7954e34bf7b))
 
-## [v0.0.12](https://github.com/ffalt/starfield/compare/v0.0.12) (2026-04-06)
+## [v0.0.12](https://github.com/ffalt/starfield/compare/v0.0.11...v0.0.12) (2026-04-06)
 
 ### Features
 
@@ -31,7 +31,7 @@
  -  **starfield**  configurable background color and optional nebula gradient ([660b554e49a0cd9](https://github.com/ffalt/starfield/commit/660b554e49a0cd9002d65fec1681cf88d58aa0e1))
 
 
-## [v0.0.11](https://github.com/ffalt/starfield/compare/v0.0.11) (2026-03-16)
+## [v0.0.11](https://github.com/ffalt/starfield/compare/v0.0.10...v0.0.11) (2026-03-16)
 
 ### Features
 
@@ -51,17 +51,17 @@
  -  **meteors**  correct speedBase calculation for meteor spawning ([61f127b4d5a6e4c](https://github.com/ffalt/starfield/commit/61f127b4d5a6e4c099ef62376e0d45fa0e52a8ea))
  -  **sensor**  fix race condition by posting sensor updates to main thread ([04fee2f2a8b0908](https://github.com/ffalt/starfield/commit/04fee2f2a8b09084ace63d5d323584f61c449580))
 
-## [v0.0.10](https://github.com/ffalt/starfield/compare/v0.0.10) (2025-12-13)
+## [v0.0.10](https://github.com/ffalt/starfield/compare/v0.0.9...v0.0.10) (2025-12-13)
 
 ### Features
 
  -  **swiping**  smooth star movement on homescreen changing ([24250d9af374d35](https://github.com/ffalt/starfield/commit/24250d9af374d3543e8b80053de4c2344470a5dd))
 
-## [v0.0.9](https://github.com/ffalt/starfield/compare/v0.0.9) (2025-12-12)
+## [v0.0.9](https://github.com/ffalt/starfield/compare/v0.0.8...v0.0.9) (2025-12-12)
 
  - **translation** add spanish translation, thanks to https://crowdin.com/profile/gjostin769
 
-## [v0.0.8](https://github.com/ffalt/starfield/compare/v0.0.8) (2025-12-12)
+## [v0.0.8](https://github.com/ffalt/starfield/compare/v0.0.7...v0.0.8) (2025-12-12)
 
 ### Features
 
@@ -69,29 +69,29 @@
  -  **sensors**  option to adjust speed to battery level ([3bfd772f19afed2](https://github.com/ffalt/starfield/commit/3bfd772f19afed2d96f337a0b111ef27c509e3a7))
 
 
-## [v0.0.7](https://github.com/ffalt/starfield/compare/v0.0.7) (2025-12-07)
+## [v0.0.7](https://github.com/ffalt/starfield/compare/v0.0.6...v0.0.7) (2025-12-07)
 
 ### Bug Fixes
 
  -  **settings**  ensure window is not behind status bar ([069d8daf7f94f22](https://github.com/ffalt/starfield/commit/069d8daf7f94f22ce38cf40acbca8876bcc889a9))
 
-## [v0.0.6](https://github.com/ffalt/starfield/compare/v0.0.6) (2025-12-07)
+## [v0.0.6](https://github.com/ffalt/starfield/compare/v0.0.5...v0.0.6) (2025-12-07)
 
 - **sensor**: tilt stars based on device gyroscope
 
-## [v0.0.5](https://github.com/ffalt/starfield/compare/v0.0.5) (2025-10-29)
+## [v0.0.5](https://github.com/ffalt/starfield/compare/v0.0.4...v0.0.5) (2025-10-29)
 
 ### Features
 
 -  **dependencies** update
 
-## [v0.0.4](https://github.com/ffalt/starfield/compare/v0.0.4) (2024-04-03)
+## [v0.0.4](https://github.com/ffalt/starfield/compare/v0.0.3...v0.0.4) (2024-04-03)
 
 ### Features
 
 -  **translations**  add Russian thanks to https://crowdin.com/profile/ronner231 ([20d601262163a3e](https://github.com/ffalt/starfield/commit/20d601262163a3e539c472f3cb61e73937bd1ee1))
 
-## [v0.0.3](https://github.com/ffalt/starfield/compare/v0.0.3) (2024-04-02)
+## [v0.0.3](https://github.com/ffalt/starfield/compare/v0.0.2...v0.0.3) (2024-04-02)
 
 ### Features
 
@@ -108,7 +108,7 @@
  -  (main activity): version number display ([b5504062f31a244](https://github.com/ffalt/starfield/commit/b5504062f31a244aed9d556a8d877612db1b1a85))
  -  **build**  sign release commit ([b5e1cf50cff7959](https://github.com/ffalt/starfield/commit/b5e1cf50cff7959bf43b8f27652f57c7838ae8dc))
 
-## [v0.0.2](https://github.com/ffalt/starfield/compare/v0.0.2) (2024-04-01)
+## [v0.0.2](https://github.com/ffalt/starfield/compare/v0.0.1...v0.0.2) (2024-04-01)
 
 ### Features
 
@@ -122,7 +122,7 @@
 
  -  must fetch full repository to generate release notes ([3ee152dbaa3826b](https://github.com/ffalt/starfield/commit/3ee152dbaa3826b8d64663a0fe861ff5d320a44b))
 
-## [v0.0.1](https://github.com/ffalt/starfield/compare/v0.0.1) (2024-03-27)
+## [v0.0.1](https://github.com/ffalt/starfield/compare/440bdfdf94c09ef4edf1885b25852078a66d6332...v0.0.1) (2024-03-27)
 
 
  

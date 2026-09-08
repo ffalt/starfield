@@ -1,10 +1,6 @@
-import se.bjurr.gitchangelog.api.InclusivenessStrategy
-import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
-
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     alias(libs.plugins.androidApplication) apply false
-    alias(libs.plugins.gitChangelog)
 }
 
 subprojects {
@@ -51,71 +47,49 @@ subprojects {
     }
 }
 
-// Template only for a single entry append (no global header)
-def templateChangelogEntryContent = """{{#tags}}
+static def gitOutput(List<String> cmd) {
+    def out = new StringBuffer()
+    def err = new StringBuffer()
+    def proc = cmd.execute()
+    proc.waitForProcessOutput(out, err)
+    if (proc.exitValue() != 0) {
+        throw new GradleException("Command failed: ${cmd.join(' ')}\n${err}")
+    }
+    return out.toString()
+}
 
-{{#ifEquals name "Unreleased"}}
-## Unreleased
-{{else}}
-## [{{name}}](https://github.com/ffalt/starfield/compare/{{name}}) ({{tagDate .}})
-{{/ifEquals}}
+static def collectCommits(fromTag, toRevision) {
+    def pattern = ~/^(feat|fix)(?:\(([^)]*)\))?!?:\s*(.+)$/
+    return gitOutput(['git', 'log', '--no-merges', '--format=%H%x09%s', "${fromTag}..${toRevision}"])
+            .readLines()
+            *.trim()
+            .findAll { it }
+            .collect { line ->
+                def (hash, subject) = line.split('\t', 2)
+                def match = pattern.matcher(subject)
+                match.matches() ? [type: match.group(1), scope: match.group(2), description: match.group(3).trim(), hash: hash] : null
+            }
+            .findAll { it }
+}
 
-  {{#ifContainsType commits type='feat'}}
-### Features
+static def commitBullet(commit, boolean withLink) {
+    def scope = commit.scope ? "**${commit.scope}** " : ""
+    def link = withLink ? " ([${commit.hash.take(15)}](https://github.com/ffalt/starfield/commit/${commit.hash}))" : ""
+    return " - ${scope}${commit.description}${link}"
+}
 
-    {{#commits}}
-      {{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-
-  {{#ifContainsType commits type='fix'}}
-### Bug Fixes
-
-    {{#commits}}
-      {{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-{{/tags}}
-"""
-
-def templateReleaseLogContent = """{{#tags}}{{#ifContainsType commits type='feat'}}## Features
-
-    {{#commits}}
-      {{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-  {{#ifContainsType commits type='fix'}}
-
-## Bug Fixes
-
-    {{#commits}}
-      {{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}} ([{{hash}}](https://github.com/ffalt/starfield/commit/{{hashFull}}))
-      {{/ifCommitType}}
-    {{/commits}}
-  {{/ifContainsType}}
-
-## Full Changelog
-
-https://github.com/ffalt/starfield/compare/PREVIOUS...{{name}}
-{{/tags}}
-"""
-
-def templateFdroidChangelogContent = """{{#tags}}
-    {{#commits}}
-{{#ifCommitType . type='feat'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}}
-{{/ifCommitType}}{{#ifCommitType . type='fix'}}
- - {{#eachCommitScope .}} **{{.}}** {{/eachCommitScope}} {{{commitDescription .}}}
-{{/ifCommitType}}{{/commits}}
-{{/tags}}
-"""
+static def commitSections(commits, String heading, boolean withLinks) {
+    def text = new StringBuilder()
+    [feat: 'Features', fix: 'Bug Fixes'].each { type, title ->
+        def selected = commits.findAll { it.type == type }
+        if (selected) {
+            text.append("${heading} ${title}\n\n")
+            selected.each { text.append(commitBullet(it, withLinks)).append('\n') }
+            text.append('\n')
+        }
+    }
+    return text.toString()
+}
 
 static def calculateAndroidVersionCode(versionName) {
     def (major, minor, patch, build) = versionName.replace("v", "").tokenize('.')
@@ -137,26 +111,30 @@ static def findPreviousReleaseTag(version) {
     return prevTag
 }
 
-tasks.register('gitReleaseNotesTask', GitChangelogTask) {
-    def prev_tag = findPreviousReleaseTag(project.version)
-    println "Generating Release notes for ${project.version} compared to ${prev_tag}"
+tasks.register('gitReleaseNotesTask') {
+    doLast {
+        def prevTag = findPreviousReleaseTag(project.version)
+        println "Generating Release notes for ${project.version} compared to ${prevTag}"
 
-    toRevision.set(project.version)
-    fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    fromRevision.set(prev_tag)
-    file.set(new File("${rootDir}/RELEASE_NOTES.md"))
-    prependToFile.set(false) // false will replace the file, true will prepend content
-    templateContent.set(templateReleaseLogContent.replace("PREVIOUS", prev_tag))
+        def commits = collectCommits(prevTag, project.version)
+        new File("${rootDir}/RELEASE_NOTES.md").text = commitSections(commits, '##', true) +
+                "## Full Changelog\n\nhttps://github.com/ffalt/starfield/compare/${prevTag}...${project.version}\n"
+    }
 }
 
-tasks.register('gitChangelogTask', GitChangelogTask) {
-    // Append only the new changes since the previous release to the top of CHANGELOG.md
-    fromRevision.set(findPreviousReleaseTag(project.version))
-    fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    toRevision.set(project.version)
-    file.set(new File("${rootDir}/CHANGELOG.md"))
-    prependToFile.set(true)
-    templateContent.set(templateChangelogEntryContent)
+tasks.register('gitChangelogTask') {
+    doLast {
+        // Prepend only the new changes since the previous release to the top of CHANGELOG.md
+        def prevTag = findPreviousReleaseTag(project.version)
+        def commits = collectCommits(prevTag, project.version)
+        def tagDate = gitOutput(['git', 'log', '-1', '--format=%cs', project.version]).trim()
+        def entry = "## [${project.version}](https://github.com/ffalt/starfield/compare/${prevTag}...${project.version}) (${tagDate})\n\n" +
+                commitSections(commits, '###', true)
+
+        def changelogFile = new File("${rootDir}/CHANGELOG.md")
+        def existing = changelogFile.exists() ? changelogFile.text.replaceFirst(/^\s+/, '') : ''
+        changelogFile.text = entry + existing
+    }
 }
 
 tasks.register('bumpReleaseVersion') {
@@ -219,15 +197,15 @@ tasks.register('release') {
     }
 }
 
-tasks.register('gitFdroidChangelogTask', GitChangelogTask) {
-    println("Update Fdroid changelogs ${project.version}")
-    fromRevision.set(findPreviousReleaseTag(project.version))
-    fromRevisionStrategy.set(InclusivenessStrategy.EXCLUSIVE)
-    toRevision.set(project.version)
-    def versionCode = calculateAndroidVersionCode(project.version)
-    file.set(new File("fastlane/metadata/android/en-US/changelogs/${versionCode}.txt"))
-    prependToFile.set(false)
-    templateContent.set(templateFdroidChangelogContent)
+tasks.register('gitFdroidChangelogTask') {
+    doLast {
+        println("Update Fdroid changelogs ${project.version}")
+        def prevTag = findPreviousReleaseTag(project.version)
+        def commits = collectCommits(prevTag, project.version)
+        def versionCode = calculateAndroidVersionCode(project.version)
+        def target = new File("${rootDir}/fastlane/metadata/android/en-US/changelogs/${versionCode}.txt")
+        target.text = commits.collect { commitBullet(it, false) }.join('\n') + '\n'
+    }
 }
 
 tasks.named('gitChangelogTask').configure { mustRunAfter tasks.named('prepareReleaseTag') }
