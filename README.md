@@ -106,6 +106,6 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 ## 🙏 Acknowledgments
 
-- Color picker UI by [jaredrummler/ColorPicker](https://github.com/jaredrummler/ColorPicker)
-- Constellation star patterns derived from [ofrohn/d3-celestial](https://github.com/ofrohn/d3-celestial) - Copyright (c) 2015, Olaf Frohn, [BSD-3-Clause](./app/src/main/assets/constellations/LICENSE)
+- Color picker UI by [jaredrummler/ColorPicker](https://github.com/jaredrummler/ColorPicker) - Jared Rummler, [Apache-2.0](https://github.com/jaredrummler/ColorPicker/blob/master/LICENSE)
+- Constellation star patterns derived from [ofrohn/d3-celestial](https://github.com/ofrohn/d3-celestial) - Olaf Frohn, [BSD-3-Clause](./app/src/main/assets/constellations/LICENSE)
 
