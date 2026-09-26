@@ -1,3 +1,10 @@
+## [v0.0.15](https://github.com/ffalt/starfield/compare/v0.0.14...v0.0.15) (2026-09-26)
+
+### Features
+
+ - **i18n** add portuguese, ukrainian, arabic, persian, turkish, romanian, polish, norwegian, italian, irish, greek, french, finnish, dutch, danish, korean, catalan, croatian, serbian, czech, indonesian, japanese, tamil, swahili, chinese ([d7e90f4c9932d40](https://github.com/ffalt/starfield/commit/d7e90f4c9932d404bc42cdec3da8fdf6ed9edff1))
+ - **constellations** add frequency setting for constellation appearance ([cc6c63d2467abb7](https://github.com/ffalt/starfield/commit/cc6c63d2467abb7a244322cedc068478b30e9c9a))
+
 ## [v0.0.14](https://github.com/ffalt/starfield/compare/v0.0.13...v0.0.14) (2026-09-08)
 
 ### Features

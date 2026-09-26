@@ -1,0 +1,2 @@
+ - **i18n** add portuguese, ukrainian, arabic, persian, turkish, romanian, polish, norwegian, italian, irish, greek, french, finnish, dutch, danish, korean, catalan, croatian, serbian, czech, indonesian, japanese, tamil, swahili, chinese
+ - **constellations** add frequency setting for constellation appearance
