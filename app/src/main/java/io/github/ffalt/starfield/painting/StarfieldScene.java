@@ -284,6 +284,14 @@ public abstract class StarfieldScene implements SurfaceHolderParent, SharedPrefe
             opts.constellationsEnabled = constellationsEnabled;
             update = true;
         }
+        int storedConstellationsFrequency = prefs.getInt(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_FREQUENCY,
+                res.getInteger(R.integer.constellations_frequency_default));
+        int constellationsFrequency = Math.max(res.getInteger(R.integer.constellations_frequency_min),
+                Math.min(res.getInteger(R.integer.constellations_frequency_max), storedConstellationsFrequency));
+        if (constellationsFrequency != opts.constellationsFrequency) {
+            opts.constellationsFrequency = constellationsFrequency;
+            update = true;
+        }
         boolean constellationsLarge = prefs.getBoolean(StarfieldPrefs.SHARED_PREFS_CONSTELLATIONS_LARGE, res.getBoolean(R.bool.constellations_large_default));
         if (constellationsLarge != opts.constellationsLarge) {
             opts.constellationsLarge = constellationsLarge;

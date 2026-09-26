@@ -183,6 +183,19 @@
             app:summary="@string/settings_constellations_enable_summary"
             app:title="@string/settings_constellations_enable" />
 
+        <androidx.preference.SeekBarPreference
+            android:defaultValue="@integer/constellations_frequency_default"
+            android:key="constellations_frequency"
+            android:max="@integer/constellations_frequency_max"
+            android:summary="@string/settings_constellations_frequency_summary"
+            android:title="@string/settings_constellations_frequency"
+            app:dependency="constellations_enabled"
+            app:iconSpaceReserved="false"
+            app:min="@integer/constellations_frequency_min"
+            app:seekBarIncrement="@integer/constellations_frequency_step"
+            app:showSeekBarValue="true"
+            app:updatesContinuously="false" />
+
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="@bool/constellations_large_default"
             app:dependency="constellations_enabled"

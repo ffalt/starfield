@@ -70,7 +70,7 @@
     <string name="settings_bg_gradient_summary">Übergang von innerer Farbe zur Hintergrundfarbe für ein (statisches) Nebel-Gefühl</string>
     <string name="settings_bg_gradient_inner_color">Innere Farbe</string>
     <string name="settings_bg_gradient_inner_color_summary" />
-    <string name="settings_bg_gradient_radius">Verlaufsgröße (%)</string>
+    <string name="settings_bg_gradient_radius">Verlaufsgröße</string>
     <string name="settings_bg_gradient_radius_summary">Steuert, wie weit sich der Farbverlauf über den Bildschirm ausbreitet</string>
     <string name="settings_group_nebula">Nebel</string>
     <string name="settings_nebula_enable">Nebel aktivieren</string>
@@ -86,6 +86,8 @@
     <string name="settings_group_constellations">Sternbilder</string>
     <string name="settings_constellations_enable">Sternbilder anzeigen</string>
     <string name="settings_constellations_enable_summary">Durch die echten Sternmuster von Orion, Ursa Major, Cassiopeia und 86 weiteren fliegen</string>
+    <string name="settings_constellations_frequency">Häufigkeit</string>
+    <string name="settings_constellations_frequency_summary">Wie oft Sternbilder erscheinen.</string>
     <string name="settings_constellations_large">Größere Sterne</string>
     <string name="settings_constellations_large_summary">Sterne eines Sternbilds größer als das umgebende Sternenfeld zeichnen, damit das Muster hervorsticht</string>
     <string name="settings_constellations_lines">Verbindungslinien</string>

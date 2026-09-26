@@ -99,7 +99,8 @@ public class ConstellationPaint {
         if (nextZ <= 0f) {
             count = 0;
             brightness = 0;
-            delay = DELAY_MIN + rng.nextFloat() * (DELAY_MAX - DELAY_MIN);
+            float baseDelay = DELAY_MIN + rng.nextFloat() * (DELAY_MAX - DELAY_MIN);
+            delay = baseDelay * 100f / opts.constellationsFrequency;
             return visible;
         }
         z = nextZ;

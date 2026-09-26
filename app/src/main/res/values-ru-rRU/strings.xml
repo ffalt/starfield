@@ -70,7 +70,7 @@
     <string name="settings_bg_gradient_summary">Переход от внутреннего цвета к цвету фона для (статичного) эффекта туманности</string>
     <string name="settings_bg_gradient_inner_color">Внутренний цвет</string>
     <string name="settings_bg_gradient_inner_color_summary" />
-    <string name="settings_bg_gradient_radius">Размер градиента (%)</string>
+    <string name="settings_bg_gradient_radius">Размер градиента</string>
     <string name="settings_bg_gradient_radius_summary">Определяет, насколько далеко градиент распространяется по экрану</string>
     <string name="settings_group_nebula">Туманность</string>
     <string name="settings_nebula_enable">Включить туманность</string>
@@ -86,6 +86,8 @@
     <string name="settings_group_constellations">Созвездия</string>
     <string name="settings_constellations_enable">Показывать созвездия</string>
     <string name="settings_constellations_enable_summary">Полёт сквозь реальные звёздные узоры Orion, Ursa Major, Cassiopeia и ещё 86</string>
+    <string name="settings_constellations_frequency">Частота</string>
+    <string name="settings_constellations_frequency_summary">Как часто появляются созвездия.</string>
     <string name="settings_constellations_large">Более крупные звёзды</string>
     <string name="settings_constellations_large_summary">Рисовать звёзды созвездия крупнее окружающего звёздного поля, чтобы узор выделялся</string>
     <string name="settings_constellations_lines">Соединительные линии</string>

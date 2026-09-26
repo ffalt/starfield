@@ -49,6 +49,10 @@
     <bool name="constellations_enabled_default">false</bool>
     <bool name="constellations_large_default">true</bool>
     <bool name="constellations_lines_default">true</bool>
+    <integer name="constellations_frequency_default">100</integer>
+    <integer name="constellations_frequency_min">10</integer>
+    <integer name="constellations_frequency_max">200</integer>
+    <integer name="constellations_frequency_step">10</integer>
     <bool name="nebula_enabled_default">false</bool>
     <integer name="nebula_count_default">5</integer>
     <integer name="nebula_count_min">1</integer>

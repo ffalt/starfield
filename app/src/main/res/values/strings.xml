@@ -69,7 +69,7 @@
     <string name="settings_bg_gradient_summary">Blend from inner color to background color for a (static) nebula feel</string>
     <string name="settings_bg_gradient_inner_color">Inner color</string>
     <string name="settings_bg_gradient_inner_color_summary" />
-    <string name="settings_bg_gradient_radius">Gradient size (%)</string>
+    <string name="settings_bg_gradient_radius">Gradient size</string>
     <string name="settings_bg_gradient_radius_summary">Controls how far the gradient spreads across the screen</string>
     <string name="settings_group_nebula">Nebula</string>
     <string name="settings_nebula_enable">Enable nebula</string>
@@ -85,6 +85,8 @@
     <string name="settings_group_constellations">Constellations</string>
     <string name="settings_constellations_enable">Enable constellations</string>
     <string name="settings_constellations_enable_summary">Fly through the real star patterns of Orion, Ursa Major, Cassiopeia and 86 more</string>
+    <string name="settings_constellations_frequency">Frequency</string>
+    <string name="settings_constellations_frequency_summary">How often constellations appear.</string>
     <string name="settings_constellations_large">Larger stars</string>
     <string name="settings_constellations_large_summary">Draw constellation stars bigger than the surrounding star field so the pattern stands out</string>
     <string name="settings_constellations_lines">Connecting lines</string>

@@ -66,6 +66,7 @@ public class StarfieldOpts {
     public int bgGradientInnerColor;
     public int bgGradientRadius;
     public boolean constellationsEnabled;
+    public int constellationsFrequency;
     public boolean constellationsLarge;
     public boolean constellationsLines;
     public boolean nebulaEnabled;
