@@ -1,0 +1,26 @@
+Transforme sua tela inicial em uma viagem pelo espaço! Starfield é um papel de parede animado, leve e suave, que leva você por um belo campo de estrelas diretamente no seu dispositivo.
+
+Recursos:
+
+- Campo de estrelas altamente personalizável
+  - Ajuste a quantidade, o tamanho e a cor das estrelas
+  - Escolha estrelas redondas ou quadradas
+  - Controles separados de velocidade mínima e máxima para variar o movimento
+- Movimento e efeitos visuais
+  - Rastros de estrelas com cores de gradiente configuráveis
+  - Meteoros com frequência ajustável e cores personalizáveis para a cabeça e a cauda
+  - Nuvens de nebulosa que flutuam lentamente atrás das estrelas, com quantidade, opacidade e movimento ajustáveis
+- Plano de fundo
+  - Cor de fundo personalizada
+  - Gradiente radial opcional que se espalha a partir de uma cor central
+- Interação com a tela e os sensores
+  - Acompanhe o deslizar entre telas iniciais com intensidade ajustável
+  - Restaure automaticamente a direção para a frente ao voltar à tela principal
+  - Movimento de inclinação controlado pelo giroscópio com intensidade ajustável
+  - Opção para reduzir a velocidade conforme a bateria acaba
+- Desempenho e controles avançados
+  - Taxa de quadros (FPS) ajustável para otimizar o desempenho
+  - Configuração de profundidade de campo para controlar o efeito 3D percebido
+- Facilidade de uso
+  - Seletores de cor para estrelas, rastros, meteoros, nebulosa e fundo
+  - Configurações persistentes e opção para restaurar os valores padrão

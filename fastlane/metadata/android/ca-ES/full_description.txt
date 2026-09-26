@@ -1,0 +1,26 @@
+Converteix la pantalla d’inici en un viatge per l’espai! Starfield és un fons animat fluid i lleuger que et fa volar per un camp d’estrelles preciós, directament al teu dispositiu.
+
+Funcions:
+
+- Camp d’estrelles molt configurable
+  - Ajusta el nombre, la mida i el color de les estrelles
+  - Tria estrelles rodones o quadrades
+  - Controls separats de velocitat mínima i màxima per variar el moviment
+- Moviment i efectes visuals
+  - Esteles d’estrelles amb colors de degradat configurables
+  - Meteors amb freqüència ajustable i colors personalitzables per al cap i la cua
+  - Núvols de nebulosa que es desplacen lentament darrere les estrelles, amb nombre, opacitat i moviment ajustables
+- Fons
+  - Color de fons personalitzat
+  - Degradat radial opcional que s’estén des d’un color central
+- Interacció amb la pantalla i els sensors
+  - Segueix el lliscament entre pantalles d’inici amb intensitat ajustable
+  - Restaura automàticament la direcció cap endavant quan tornes a la pantalla principal
+  - Moviment d’inclinació controlat pel giroscopi amb intensitat ajustable
+  - Opció per reduir la velocitat quan la bateria és baixa
+- Rendiment i controls avançats
+  - Freqüència de fotogrames (FPS) ajustable per optimitzar el rendiment
+  - Ajust de la profunditat de camp per controlar l’efecte 3D percebut
+- Facilitat d’ús
+  - Selectors de color per a les estrelles, les esteles, els meteors, la nebulosa i el fons
+  - Configuració persistent i opció per restaurar els valors predeterminats

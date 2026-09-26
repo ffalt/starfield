@@ -1,0 +1,26 @@
+Geuza skrini yako ya mwanzo kuwa safari ya angani! Starfield ni mandhari hai nyepesi na laini inayokuwezesha kuruka katikati ya uga mzuri wa nyota kwenye kifaa chako.
+
+Vipengele:
+
+- Uga wa nyota unaoweza kubinafsishwa kwa kina
+  - Rekebisha idadi, ukubwa na rangi ya nyota
+  - Chagua nyota za duara au za mraba
+  - Dhibiti kasi ya chini na ya juu kando ili kupata mwendo tofauti
+- Mwendo na madoido ya kuona
+  - Mikondo ya nyota yenye rangi za mchanganyiko zinazoweza kurekebishwa
+  - Vimondo vyenye marudio yanayoweza kurekebishwa na rangi maalum za kichwa na mkia
+  - Mawingu ya nebula yanayoelea polepole nyuma ya nyota, yenye idadi, kutopitisha mwanga na mwendo unaoweza kurekebishwa
+- Mandharinyuma
+  - Rangi maalum ya mandharinyuma
+  - Mchanganyiko wa rangi wa miale unaoweza kuwashwa, unaotoka kwenye rangi ya katikati
+- Mwingiliano na skrini na vihisi
+  - Fuata kutelezesha kati ya skrini za mwanzo kwa ukali unaoweza kurekebishwa
+  - Rejesha mwelekeo wa mbele kiotomatiki unaporudi kwenye skrini kuu
+  - Mwendo wa kuinamisha unaodhibitiwa na gyroscope wenye ukali unaoweza kurekebishwa
+  - Chaguo la kupunguza kasi betri inapokuwa chini
+- Utendaji na vidhibiti vya mahiri
+  - Rekebisha kasi ya fremu (FPS) ili kuboresha utendaji
+  - Mpangilio wa kina cha sehemu wa kudhibiti athari ya 3D inayoonekana
+- Urahisi wa matumizi
+  - Vichagua rangi vya nyota, mikondo, vimondo, nebula na mandharinyuma
+  - Mipangilio huhifadhiwa na inaweza kurejeshwa kwenye thamani chaguomsingi

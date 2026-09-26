@@ -1,0 +1,26 @@
+Transformă ecranul principal într-o călătorie prin spațiu! Starfield este un fundal animat fluid și ușor, care te poartă printre stele chiar pe dispozitivul tău.
+
+Funcții:
+
+- Câmp de stele configurabil
+  - Ajustează numărul, dimensiunea și culoarea stelelor
+  - Alege stele rotunde sau pătrate
+  - Controlează separat viteza minimă și maximă pentru mișcări variate
+- Mișcare și efecte vizuale
+  - Urme de stele cu culori de gradient configurabile
+  - Meteori cu frecvență reglabilă și culori personalizabile pentru cap și coadă
+  - Nori de nebuloasă care plutesc lent în spatele stelelor; poți ajusta numărul, opacitatea și mișcarea
+- Fundal
+  - Culoare de fundal personalizată
+  - Gradient radial opțional, care pornește de la o culoare centrală
+- Interacțiune cu ecranul și senzorii
+  - Urmărește glisarea între ecranele principale cu intensitate reglabilă
+  - Restabilește automat direcția înainte când revii la ecranul principal
+  - Mișcare prin înclinare, controlată de giroscop și cu intensitate reglabilă
+  - Opțiune de reducere a vitezei când bateria este descărcată
+- Performanță și controale avansate
+  - Rată de cadre (FPS) reglabilă pentru optimizarea performanței
+  - Setare pentru profunzimea câmpului, care controlează efectul 3D perceput
+- Ușor de folosit
+  - Selectoare de culoare pentru stele, urme, meteori, nebuloasă și fundal
+  - Setări persistente și opțiune de revenire la valorile implicite

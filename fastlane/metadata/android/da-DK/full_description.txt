@@ -1,0 +1,26 @@
+Forvandl din startskærm til en rejse gennem rummet! Starfield er en jævn og let levende baggrund, der lader dig flyve gennem et smukt stjernefelt direkte på din enhed.
+
+Funktioner:
+
+- Stjernefelt med mange tilpasningsmuligheder
+  - Juster antal, størrelse og farve på stjernerne
+  - Vælg runde eller firkantede stjerner
+  - Styr minimums- og maksimumshastighed separat for varieret bevægelse
+- Bevægelse og visuelle effekter
+  - Stjernespor med konfigurerbare gradientfarver
+  - Meteorer med justerbar hyppighed og tilpassede farver på hoved og hale
+  - Tågeskyer, der driver langsomt bag stjernerne, med justerbart antal, uigennemsigtighed og bevægelse
+- Baggrund
+  - Tilpasset baggrundsfarve
+  - Valgfri radial farveovergang, der breder sig fra en farve i midten
+- Samspil med skærm og sensorer
+  - Følg strygninger mellem startskærme med justerbar intensitet
+  - Gendan automatisk retningen fremad, når du vender tilbage til hovedskærmen
+  - Vipning styret af gyroskop med justerbar intensitet
+  - Mulighed for at sænke hastigheden, når batteriniveauet er lavt
+- Ydeevne og avancerede indstillinger
+  - Justerbar billedfrekvens (FPS) til finjustering af ydeevnen
+  - Dybdeskarphedsindstilling til styring af den oplevede 3D-effekt
+- Brugervenlighed
+  - Farvevælgere til stjerner, spor, meteorer, tåge og baggrund
+  - Indstillinger gemmes, og standardværdier kan gendannes

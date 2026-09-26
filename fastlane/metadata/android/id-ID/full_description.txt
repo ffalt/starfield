@@ -1,0 +1,26 @@
+Ubah layar utama Anda menjadi perjalanan menjelajahi luar angkasa! Starfield adalah wallpaper animasi yang ringan dan mulus, membawa Anda melintasi hamparan bintang yang indah langsung di perangkat.
+
+Fitur:
+
+- Hamparan bintang yang dapat disesuaikan
+  - Atur jumlah, ukuran, dan warna bintang
+  - Pilih bentuk bintang bulat atau persegi
+  - Atur kecepatan minimum dan maksimum secara terpisah untuk variasi gerakan
+- Gerakan dan efek visual
+  - Jejak bintang dengan warna gradien yang dapat diatur
+  - Meteor dengan frekuensi yang dapat diatur serta warna kepala dan ekor yang dapat disesuaikan
+  - Awan nebula yang bergerak perlahan di belakang bintang, dengan jumlah, opasitas, dan gerakan yang dapat diatur
+- Latar belakang
+  - Warna latar belakang khusus
+  - Gradien radial opsional yang menyebar dari warna di tengah
+- Interaksi layar dan sensor
+  - Ikuti usapan antar layar utama dengan intensitas yang dapat diatur
+  - Pulihkan arah ke depan secara otomatis saat kembali ke layar utama
+  - Gerakan miring berbasis giroskop dengan intensitas yang dapat diatur
+  - Opsi untuk mengurangi kecepatan saat baterai hampir habis
+- Performa dan kontrol lanjutan
+  - Atur laju bingkai (FPS) untuk mengoptimalkan performa
+  - Pengaturan kedalaman bidang untuk mengontrol efek 3D yang terlihat
+- Mudah digunakan
+  - Pemilih warna untuk bintang, jejak, meteor, nebula, dan latar belakang
+  - Pengaturan tersimpan dan dapat dikembalikan ke nilai default

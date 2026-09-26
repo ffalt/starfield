@@ -1,0 +1,26 @@
+Zamień ekran główny w podróż przez kosmos! Starfield to płynna i lekka tapeta na żywo, która pozwala przemierzać piękne pole gwiazd bezpośrednio na urządzeniu.
+
+Funkcje:
+
+- Bogato konfigurowalne pole gwiazd
+  - Dostosuj liczbę, rozmiar i kolor gwiazd
+  - Wybierz okrągły lub kwadratowy kształt gwiazd
+  - Ustaw osobno minimalną i maksymalną prędkość, aby urozmaicić ruch
+- Ruch i efekty wizualne
+  - Smugi gwiazd z konfigurowalnymi kolorami gradientu
+  - Meteory z regulowaną częstotliwością i własnymi kolorami głowy oraz ogona
+  - Chmury mgławic powoli dryfujące za gwiazdami, z regulowaną liczbą, kryciem i ruchem
+- Tło
+  - Własny kolor tła
+  - Opcjonalny gradient radialny przechodzący od koloru środkowego na zewnątrz
+- Interakcja z ekranem i czujnikami
+  - Śledzenie przesuwania między ekranami głównymi z regulowaną intensywnością
+  - Automatyczne przywracanie kierunku do przodu po powrocie na ekran główny
+  - Sterowanie ruchem przez przechylanie urządzenia za pomocą żyroskopu
+  - Opcja zmniejszania prędkości przy niskim poziomie baterii
+- Wydajność i zaawansowane ustawienia
+  - Regulowana liczba klatek na sekundę (FPS) do dostrajania wydajności
+  - Ustawienie głębi ostrości kontrolujące postrzegany efekt 3D
+- Wygoda
+  - Wybór kolorów gwiazd, smug, meteorów, mgławic i tła
+  - Trwałe ustawienia i możliwość przywrócenia wartości domyślnych

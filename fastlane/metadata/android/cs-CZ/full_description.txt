@@ -1,0 +1,26 @@
+Proměňte svou domovskou obrazovku v cestu vesmírem! Starfield je plynulá a nenáročná živá tapeta, která vás na vašem zařízení provede nádherným hvězdným polem.
+
+Funkce:
+
+- Hvězdné pole s rozsáhlými možnostmi nastavení
+  - Upravte počet, velikost a barvu hvězd
+  - Vyberte kulaté nebo hranaté hvězdy
+  - Nastavte minimální a maximální rychlost samostatně a dosáhněte různorodého pohybu
+- Pohyb a vizuální efekty
+  - Stopy hvězd s nastavitelnými barvami přechodu
+  - Meteory s nastavitelnou četností a vlastními barvami hlavy a ohonu
+  - Mraky mlhoviny pomalu plující za hvězdami s nastavitelným počtem, neprůhledností a pohybem
+- Pozadí
+  - Vlastní barva pozadí
+  - Volitelný radiální přechod, který se šíří od středové barvy
+- Interakce s obrazovkou a senzory
+  - Sledujte přejetí mezi domovskými obrazovkami s nastavitelnou intenzitou
+  - Při návratu na hlavní obrazovku automaticky obnovte směr vpřed
+  - Pohyb při naklánění ovládaný gyroskopem s nastavitelnou intenzitou
+  - Možnost zpomalit pohyb při nízkém stavu baterie
+- Výkon a pokročilé ovládání
+  - Nastavitelná snímková frekvence (FPS) pro úpravu výkonu
+  - Nastavení hloubky ostrosti ovlivňuje vnímaný 3D efekt
+- Snadné používání
+  - Výběr barev hvězd, stop, meteorů, mlhoviny a pozadí
+  - Trvalé uložení nastavení a možnost obnovení výchozích hodnot

@@ -1,0 +1,26 @@
+Muuta aloitusnäyttösi matkaksi avaruuteen! Starfield on sulava ja kevyt live-taustakuva, joka lennättää sinut kauniin tähtikentän halki suoraan omalla laitteellasi.
+
+Ominaisuudet:
+
+- Monipuolisesti mukautettava tähtikenttä
+  - Säädä tähtien määrää, kokoa ja väriä
+  - Valitse tähdille pyöreä tai neliömäinen muoto
+  - Säädä vähimmäis- ja enimmäisnopeutta erikseen liikkeen vaihtelun lisäämiseksi
+- Liike ja visuaaliset tehosteet
+  - Tähtien vanat mukautettavilla liukuvärien väreillä
+  - Meteorit säädettävällä esiintymistiheydellä sekä mukautettavilla pää- ja pyrstöväreillä
+  - Tähtien takana hitaasti liikkuvat sumupilvet, joiden määrää, peittävyyttä ja liikettä voi säätää
+- Tausta
+  - Mukautettava taustaväri
+  - Valinnainen säteittäinen liukuväri, joka leviää keskiväristä ulospäin
+- Näytön ja anturien vuorovaikutus
+  - Seuraa aloitusnäyttöjen pyyhkäisyä säädettävällä voimakkuudella
+  - Palauta eteenpäin suuntautuva liike automaattisesti palatessasi päänäyttöön
+  - Gyroskoopin ohjaama kallistusliike säädettävällä voimakkuudella
+  - Valinnainen nopeuden hidastus akun varaustason laskiessa
+- Suorituskyky ja lisäasetukset
+  - Säädä kuvataajuutta (FPS) suorituskyvyn optimoimiseksi
+  - Syväterävyysasetus hallitsee havaittua 3D-vaikutelmaa
+- Helppokäyttöisyys
+  - Värivalitsimet tähdille, vanoille, meteoreille, sumulle ja taustalle
+  - Asetukset säilyvät, ja voit palauttaa oletusarvot milloin tahansa

@@ -1,0 +1,26 @@
+Pretvori početni zaslon u putovanje svemirom! Starfield je glatka i lagana živa pozadina koja te vodi kroz prekrasno zvjezdano polje izravno na tvom uređaju.
+
+Značajke:
+
+- Zvjezdano polje s mnogo mogućnosti prilagodbe
+  - Prilagodi broj, veličinu i boju zvijezda
+  - Odaberi okrugle ili kvadratne zvijezde
+  - Zasebno podesi najmanju i najveću brzinu za raznolika kretanja
+- Kretanje i vizualni efekti
+  - Tragovi zvijezda s prilagodljivim bojama gradijenta
+  - Meteori s podesivom učestalošću te prilagodljivim bojama glave i repa
+  - Oblaci maglice koji polako plutaju iza zvijezda; prilagodi njihov broj, neprozirnost i kretanje
+- Pozadina
+  - Prilagođena boja pozadine
+  - Neobavezni radijalni gradijent koji se širi od središnje boje
+- Interakcija sa zaslonom i senzorima
+  - Prati povlačenje između početnih zaslona uz podesiv intenzitet
+  - Automatski vrati smjer prema naprijed pri povratku na glavni zaslon
+  - Kretanje naginjanjem putem žiroskopa uz podesiv intenzitet
+  - Mogućnost usporavanja kada je baterija pri kraju
+- Performanse i napredne kontrole
+  - Podesiva brzina izmjene sličica (FPS) za optimizaciju performansi
+  - Postavka dubine polja za kontrolu doživljenog 3D efekta
+- Jednostavno korištenje
+  - Birači boja za zvijezde, tragove, meteore, maglicu i pozadinu
+  - Trajne postavke i mogućnost vraćanja zadanih vrijednosti

@@ -1,0 +1,26 @@
+Transformez votre écran d’accueil en voyage dans l’espace ! Starfield est un fond d’écran animé fluide et léger qui vous fait traverser un magnifique champ d’étoiles, directement sur votre appareil.
+
+Fonctionnalités :
+
+- Champ d’étoiles hautement personnalisable
+  - Réglez le nombre, la taille et la couleur des étoiles
+  - Choisissez des étoiles rondes ou carrées
+  - Contrôlez séparément les vitesses minimale et maximale pour varier les mouvements
+- Mouvements et effets visuels
+  - Traînées d’étoiles avec dégradés de couleurs configurables
+  - Météores à fréquence réglable et couleurs personnalisables pour la tête et la queue
+  - Nuages de nébuleuse dérivant lentement derrière les étoiles, avec nombre, opacité et mouvement réglables
+- Arrière-plan
+  - Couleur d’arrière-plan personnalisée
+  - Dégradé radial facultatif qui s’étend depuis une couleur centrale
+- Interaction avec l’écran et les capteurs
+  - Suivez le balayage entre les écrans d’accueil avec une intensité réglable
+  - Restaurez automatiquement la direction vers l’avant au retour à l’écran principal
+  - Mouvement par inclinaison contrôlé par gyroscope, avec intensité réglable
+  - Option de réduction de la vitesse lorsque la batterie est faible
+- Performances et commandes avancées
+  - Fréquence d’images (FPS) réglable pour optimiser les performances
+  - Réglage de la profondeur de champ pour contrôler l’effet 3D perçu
+- Facilité d’utilisation
+  - Sélecteurs de couleur pour les étoiles, traînées, météores, nébuleuse et arrière-plan
+  - Paramètres conservés et option de restauration des valeurs par défaut

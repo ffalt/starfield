@@ -1,0 +1,26 @@
+Iompaigh do scáileán baile ina thuras tríd an spás! Is cúlpháipéar beo mín, éadrom é Starfield a chuireann tú ag eitilt trí réimse álainn réaltaí ar do ghléas féin.
+
+Gnéithe:
+
+- Réimse réaltaí is féidir a chumrú go mion
+  - Coigeartaigh líon, méid agus dath na réaltaí
+  - Roghnaigh cruth cruinn nó cearnógach do na réaltaí
+  - Rialuithe ar leith don luas íosta agus uasta chun gluaiseacht éagsúil a chruthú
+- Gluaiseacht agus maisíochtaí amhairc
+  - Rianta réaltaí le dathanna grádáin inoiriúnaithe
+  - Meitéar le minicíocht inchoigeartaithe agus dathanna saincheaptha dá gceann agus dá n-eireaball
+  - Scamaill réaltnéile a ghluaiseann go mall taobh thiar de na réaltaí; is féidir a líon, a dteimhneacht agus a ngluaiseacht a athrú
+- Cúlra
+  - Dath cúlra saincheaptha
+  - Grádán gathach roghnach a chumascann dath lárnach amach
+- Idirghníomhú scáileáin agus braiteoirí
+  - Lean svaidhpeáil idir scáileáin bhaile le déine inchoigeartaithe
+  - Athchóirigh an treo chun tosaigh go huathoibríoch nuair a fhilleann tú ar an bpríomhscáileán
+  - Gluaiseacht claonta bunaithe ar an ngíreascóp le déine inchoigeartaithe
+  - Rogha chun an luas a laghdú nuair atá an ceallra íseal
+- Feidhmíocht agus ardrialuithe
+  - Ráta fráma (FPS) inchoigeartaithe chun feidhmíocht a mhionchoigeartú
+  - Socrú do dhoimhneacht an réimse chun an éifeacht 3T a rialú
+- Éasca le húsáid
+  - Roghnóirí dathanna do réaltaí, rianta, meitéar, réaltnéal agus cúlra
+  - Socruithe marthanacha agus rogha chun na luachanna réamhshocraithe a athchóiriú

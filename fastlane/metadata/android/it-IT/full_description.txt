@@ -1,0 +1,26 @@
+Trasforma la schermata Home in un viaggio nello spazio! Starfield è uno sfondo animato fluido e leggero che ti porta a volare attraverso un magnifico campo stellare, direttamente sul tuo dispositivo.
+
+Funzionalità:
+
+- Campo stellare altamente configurabile
+  - Regola il numero, le dimensioni e il colore delle stelle
+  - Scegli stelle rotonde o quadrate
+  - Controlli separati per la velocità minima e massima, per variare il movimento
+- Movimento ed effetti visivi
+  - Scie stellari con colori del gradiente configurabili
+  - Meteore con frequenza regolabile e colori personalizzabili per testa e coda
+  - Nubi di nebulosa che fluttuano lentamente dietro le stelle, con quantità, opacità e movimento regolabili
+- Sfondo
+  - Colore dello sfondo personalizzabile
+  - Gradiente radiale opzionale che si espande da un colore centrale
+- Interazione con schermo e sensori
+  - Segui lo scorrimento tra le schermate Home con intensità regolabile
+  - Ripristino automatico della direzione in avanti quando torni alla schermata principale
+  - Movimento inclinato controllato dal giroscopio con intensità regolabile
+  - Opzione per ridurre la velocità quando la batteria è scarica
+- Prestazioni e controlli avanzati
+  - Frequenza dei fotogrammi (FPS) regolabile per ottimizzare le prestazioni
+  - Impostazione della profondità di campo per controllare l'effetto 3D percepito
+- Facilità d'uso
+  - Selettori di colore per stelle, scie, meteore, nebulosa e sfondo
+  - Impostazioni persistenti e possibilità di ripristinare i valori predefiniti

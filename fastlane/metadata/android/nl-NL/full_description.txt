@@ -1,0 +1,26 @@
+Verander je startscherm in een reis door de ruimte! Starfield is een vloeiende, lichte live-achtergrond waarmee je op je apparaat door een prachtig sterrenveld vliegt.
+
+Functies:
+
+- Sterrenveld uitgebreid aanpasbaar
+  - Pas het aantal, de grootte en de kleur van sterren aan
+  - Kies ronde of vierkante sterren
+  - Stel de minimum- en maximumsnelheid afzonderlijk in voor gevarieerde beweging
+- Beweging en visuele effecten
+  - Sterrensporen met instelbare kleurverlopen
+  - Meteoren met instelbare frequentie en aanpasbare kleuren voor kop en staart
+  - Nevelwolken die langzaam achter de sterren drijven, met instelbaar aantal, dekking en beweging
+- Achtergrond
+  - Aangepaste achtergrondkleur
+  - Optioneel radiaal kleurverloop dat vanuit een middelkleur naar buiten loopt
+- Interactie met scherm en sensoren
+  - Volg het vegen tussen startschermen met instelbare intensiteit
+  - Herstel automatisch de voorwaartse richting wanneer je terugkeert naar het hoofdscherm
+  - Kantelbeweging via de gyroscoop met instelbare intensiteit
+  - Optie om de snelheid te verlagen wanneer de batterij bijna leeg is
+- Prestaties en geavanceerde bediening
+  - Stel de beeldsnelheid (FPS) in om de prestaties te optimaliseren
+  - Met scherptediepte bepaal je het waargenomen 3D-effect
+- Gebruiksgemak
+  - Kleurkiezers voor sterren, sporen, meteoren, nevel en achtergrond
+  - Instellingen worden bewaard en kunnen worden teruggezet naar de standaardwaarden

@@ -1,0 +1,26 @@
+Ana ekranınızı uzayda bir yolculuğa dönüştürün! Starfield, cihazınızda güzel bir yıldız alanının içinden akıcı ve hafif bir şekilde geçmenizi sağlayan canlı bir duvar kâğıdıdır.
+
+Özellikler:
+
+- Geniş ölçüde özelleştirilebilir yıldız alanı
+  - Yıldız sayısını, boyutunu ve rengini ayarlayın
+  - Yuvarlak veya kare yıldız şekillerini seçin
+  - Farklı hareketler için minimum ve maksimum hızları ayrı ayrı kontrol edin
+- Hareket ve görsel efektler
+  - Renk geçişleri özelleştirilebilen yıldız izleri
+  - Sıklığı ayarlanabilen meteorlar ve özelleştirilebilir baş ve kuyruk renkleri
+  - Yıldızların arkasında yavaşça süzülen bulutsu bulutları; bulut sayısını, opaklığı ve hareketi ayarlayın
+- Arka plan
+  - Özelleştirilebilir arka plan rengi
+  - Merkezden dışarı doğru yayılan isteğe bağlı radyal renk geçişi
+- Ekran ve sensör etkileşimi
+  - Ayarlanabilir yoğunlukla ana ekranlar arasında kaydırmayı takip etme
+  - Ana ekrana dönüldüğünde ileri yönü otomatik olarak geri yükleme
+  - Ayarlanabilir yoğunlukta, jiroskopla kontrol edilen eğme hareketi
+  - Pil azaldığında hızı düşürme seçeneği
+- Performans ve gelişmiş kontroller
+  - Performansı ayarlamak için kare hızını (FPS) değiştirme
+  - Algılanan 3D efektini kontrol etmek için alan derinliği ayarı
+- Kullanım kolaylığı
+  - Yıldızlar, izler, meteorlar, bulutsu ve arka plan için renk seçiciler
+  - Kalıcı ayarlar ve varsayılan değerleri geri yükleme seçeneği
